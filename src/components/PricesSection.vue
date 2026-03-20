@@ -40,7 +40,7 @@
 
           <div class="price-card__price">
             <span class="price-card__amount">{{ plan.price }}</span>
-            <span class="price-card__unit">{{ plan.unit }}</span>
+            <!-- <span class="price-card__unit">{{ plan.unit }}</span> -->
           </div>
 
           <ul class="price-card__features" :aria-label="t.prices.featuresAria">
@@ -74,12 +74,11 @@
       </div>
 
       <p class="prices__note">
-        * Цены уточняются при записи — возможны скидки для групп, детей и
-        постоянных клиентов. Звоните:
+        {{ t.prices.note }}
         <a :href="`tel:${PHONE1_RAW}`" @click="handlePriceCall('footer')">{{
           PHONE1_DISPLAY
         }}</a>
-        или
+        {{ t.prices.noteOr }}
         <a :href="`tel:${PHONE2_RAW}`" @click="handlePriceCall('footer2')">{{
           PHONE2_DISPLAY
         }}</a>
@@ -121,7 +120,7 @@ const planIcons = [
      <path d="M19 17c4 0 7 3 7 7"/>
      <path d="M10 24c0-2.76 1.79-5 4-5s4 2.24 4 5"/>
    </svg>`,
-  `<svg viewBox="0 0 28 28" fill="none" stroke="#162B5B" stroke-width="1.8" width="28" height="28">
+  `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28">
      <path d="M4 18 Q9 8 14 14 Q19 20 24 10"/>
      <line x1="4" y1="22" x2="24" y2="22"/>
      <line x1="9" y1="22" x2="9" y2="18"/>
@@ -129,7 +128,7 @@ const planIcons = [
    </svg>`,
 ];
 
-const planFeatured = [false, true, false, false];
+const planFeatured = [false, true, false, true];
 
 const schedule = computed(() => t.value.prices.schedule);
 
@@ -322,14 +321,19 @@ const plans = computed(() =>
 
 .prices__note {
   text-align: center;
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  padding: 0 16px;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  padding: 16px 24px;
+  margin-top: 8px;
+  background: var(--cream);
+  border: 1.5px solid var(--cream-dark);
+  border-radius: var(--radius-lg);
+  line-height: 1.6;
 }
 
 .prices__note a {
   color: var(--navy);
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
 }

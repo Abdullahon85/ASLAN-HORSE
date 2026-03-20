@@ -143,65 +143,62 @@
             novalidate
             :aria-label="t.form.ariaLabel"
           >
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="f-name"
-                  >{{ t.form.labelName }}
-                  <span aria-hidden="true">*</span></label
-                >
-                <input
-                  id="f-name"
-                  v-model.trim="form.full_name"
-                  type="text"
-                  class="form-input"
-                  :class="{ 'is-error': errors.full_name }"
-                  :placeholder="t.form.placeholderName"
-                  autocomplete="name"
-                  required
-                  aria-required="true"
-                  :aria-describedby="errors.full_name ? 'err-name' : undefined"
-                />
-                <span
-                  v-if="errors.full_name"
-                  role="alert"
-                  id="err-name"
-                  class="form-error"
-                  >{{ errors.full_name }}</span
-                >
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="f-phone"
-                  >{{ t.form.labelPhone }}
-                  <span aria-hidden="true">*</span></label
-                >
-                <input
-                  id="f-phone"
-                  v-model.trim="form.phone"
-                  type="tel"
-                  class="form-input"
-                  :class="{ 'is-error': errors.phone }"
-                  :placeholder="t.form.placeholderPhone"
-                  autocomplete="tel"
-                  required
-                  aria-required="true"
-                  :aria-describedby="errors.phone ? 'err-phone' : undefined"
-                />
-                <span
-                  v-if="errors.phone"
-                  role="alert"
-                  id="err-phone"
-                  class="form-error"
-                  >{{ errors.phone }}</span
-                >
-              </div>
+            <div class="form-group">
+              <input
+                id="f-name"
+                v-model.trim="form.full_name"
+                type="text"
+                class="form-input"
+                :class="{ 'is-error': errors.full_name }"
+                :placeholder="t.form.placeholderName"
+                autocomplete="name"
+                required
+                aria-required="true"
+                :aria-describedby="errors.full_name ? 'err-name' : undefined"
+              />
+              <span
+                v-if="errors.full_name"
+                role="alert"
+                id="err-name"
+                class="form-error"
+                >{{ errors.full_name }}</span
+              >
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="f-service"
-                >{{ t.form.labelService }}
-                <span aria-hidden="true">*</span></label
+              <input
+                id="f-telegram"
+                v-model.trim="form.telegram"
+                type="text"
+                class="form-input"
+                placeholder="@telegram user"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="form-group">
+              <input
+                id="f-phone"
+                v-model.trim="form.phone"
+                type="tel"
+                class="form-input"
+                :class="{ 'is-error': errors.phone }"
+                :placeholder="t.form.placeholderPhone"
+                autocomplete="tel"
+                required
+                aria-required="true"
+                :aria-describedby="errors.phone ? 'err-phone' : undefined"
+              />
+              <span
+                v-if="errors.phone"
+                role="alert"
+                id="err-phone"
+                class="form-error"
+                >{{ errors.phone }}</span
               >
+            </div>
+
+            <div class="form-group">
               <select
                 id="f-service"
                 v-model="form.service"
@@ -231,68 +228,19 @@
               >
             </div>
 
-            <div class="form-group">
-              <label class="form-label" for="f-date">{{
-                t.form.labelDate
-              }}</label>
-              <input
-                id="f-date"
-                v-model="form.preferred_date"
-                type="date"
-                class="form-input"
-                :min="minDate"
-              />
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="f-message">{{
-                t.form.labelComment
-              }}</label>
-              <textarea
-                id="f-message"
-                v-model.trim="form.message"
-                class="form-textarea"
-                :placeholder="t.form.placeholderComment"
-                maxlength="300"
-                rows="3"
-              >
-              </textarea>
-              <span class="char-count">{{ form.message.length }}/300</span>
-            </div>
-
-            <div class="form-group">
-              <label
-                class="form-checkbox"
-                :class="{ 'is-error': errors.consent }"
-              >
-                <input
-                  type="checkbox"
-                  v-model="form.consent"
-                  required
-                  aria-required="true"
-                  :aria-describedby="errors.consent ? 'err-consent' : undefined"
-                />
-                <span class="form-checkbox-label">
-                  {{ t.form.consent }}
-                </span>
-              </label>
-              <span
-                v-if="errors.consent"
-                role="alert"
-                id="err-consent"
-                class="form-error"
-                >{{ errors.consent }}</span
-              >
-            </div>
-
             <button
               type="submit"
-              class="btn btn--primary btn--full btn--lg"
+              class="btn btn--primary btn--full btn--lg btn--submit"
               :disabled="submitting"
             >
               <span v-if="!submitting">{{ t.form.btnSubmit }}</span>
               <span v-else>{{ t.form.btnSubmitting }}</span>
             </button>
+
+            <p class="form-consent-note">
+              {{ t.form.consentNote }}
+              <a href="#" @click.prevent>{{ t.form.consentLink }}</a>
+            </p>
           </form>
         </div>
       </div>
@@ -301,7 +249,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive } from "vue";
 import { useAnalytics } from "@/composables/useAnalytics.js";
 import { useI18n } from "@/composables/useI18n.js";
 
@@ -319,21 +267,16 @@ const submitting = ref(false);
 
 const form = reactive({
   full_name: "",
+  telegram: "",
   phone: "",
   service: "",
-  preferred_date: "",
-  message: "",
-  consent: false,
 });
 
 const errors = reactive({
   full_name: "",
   phone: "",
   service: "",
-  consent: "",
 });
-
-const minDate = computed(() => new Date().toISOString().split("T")[0]);
 
 // Phone validation — international format
 const PHONE_RE = /^[+]?[(]?[0-9]{1,4}[)]?[-\s./0-9]{6,14}$/;
@@ -343,7 +286,6 @@ const validate = () => {
   errors.full_name = "";
   errors.phone = "";
   errors.service = "";
-  errors.consent = "";
 
   if (!form.full_name || form.full_name.length < 2) {
     errors.full_name = t.value.form.errName;
@@ -357,11 +299,6 @@ const validate = () => {
 
   if (!form.service) {
     errors.service = t.value.form.errService;
-    valid = false;
-  }
-
-  if (!form.consent) {
-    errors.consent = t.value.form.errConsent;
     valid = false;
   }
 
@@ -461,18 +398,60 @@ const submitForm = async () => {
   box-shadow: var(--shadow-lg);
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.char-count {
-  display: block;
-  text-align: right;
-  font-size: 0.75rem;
-  color: var(--text-muted);
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.btn--submit {
   margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.9375rem;
+}
+
+.form-consent-note {
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+.form-consent-note a {
+  color: var(--navy);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* proweb-style inputs — lighter bg, larger border-radius */
+.booking-form :deep(.form-input),
+.booking-form :deep(.form-select) {
+  background: #f0f2f5;
+  border-color: transparent;
+  border-radius: 10px;
+  padding: 15px 16px;
+  font-size: 0.9375rem;
+  color: var(--text-dark);
+}
+
+.booking-form :deep(.form-input::placeholder),
+.booking-form :deep(.form-select) option:first-child {
+  color: #a0a8b8;
+}
+
+.booking-form :deep(.form-input:focus),
+.booking-form :deep(.form-select:focus) {
+  background: #fff;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(200, 150, 46, 0.15);
 }
 
 /* Success state */

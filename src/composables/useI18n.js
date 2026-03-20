@@ -1,6 +1,11 @@
 import { ref, computed } from "vue";
 
-const lang = ref(localStorage.getItem("aslan_lang") || "ru");
+// Guard for SSG/SSR build environment where localStorage is unavailable
+const lang = ref(
+  typeof localStorage !== "undefined"
+    ? localStorage.getItem("aslan_lang") || "ru"
+    : "ru",
+);
 
 export function useI18n() {
   const setLang = (l) => {
@@ -254,7 +259,7 @@ const translations = {
           desc: "Подготовка к турнирам — работа на трассе и отработка прыжков.",
           price: "По запросу",
           unit: "· 1 занятие",
-          badge: "",
+          badge: "Популярно",
           features: [
             "Трасса препятствий",
             "Работа с тренером по конкуру",
@@ -357,13 +362,13 @@ const translations = {
       successText:
         "Мы свяжемся с вами в течение 1 рабочего часа. Если нужно срочно — позвоните прямо сейчас:",
       ariaLabel: "Форма записи на занятие",
-      labelName: "Имя и фамилия",
+      labelName: "Имя",
       labelPhone: "Телефон",
+      labelTelegram: "Telegram",
       labelService: "Услуга",
-      labelDate: "Предпочтительная дата (необязательно)",
-      labelComment: "Комментарий (необязательно)",
       placeholderName: "Имя Фамилия",
-      placeholderPhone: "+998 XX XXX-XX-XX",
+      placeholderPhone: "+998 90 999 99 99",
+      placeholderTelegram: "@telegram user",
       placeholderComment: "Расскажите о себе, уровне подготовки, пожеланиях...",
       selectPlaceholder: "Выберите услугу...",
       serviceOptions: [
@@ -375,8 +380,10 @@ const translations = {
       ],
       consent:
         "Согласен(а) на обработку персональных данных согласно политике конфиденциальности",
-      btnSubmit: "Отправить заявку",
+      btnSubmit: "Оставить заявку",
       btnSubmitting: "Отправляем...",
+      consentNote: "Нажимая на кнопку, я соглашаюсь на",
+      consentLink: "обработку персональных данных",
       errName: "Введите имя (минимум 2 символа)",
       errPhone: "Введите корректный номер телефона",
       errService: "Выберите услугу",
@@ -674,7 +681,7 @@ const translations = {
           desc: "Tournament preparation — course work and jump technique.",
           price: "On request",
           unit: "· per lesson",
-          badge: "",
+          badge: "Popular",
           features: [
             "Obstacle course",
             "Work with jumping trainer",
@@ -771,15 +778,13 @@ const translations = {
       successText:
         "We'll contact you within 1 working hour. If urgent — call right now:",
       ariaLabel: "Lesson booking form",
-      labelName: "Full name",
+      labelName: "Name",
       labelPhone: "Phone",
+      labelTelegram: "Telegram",
       labelService: "Service",
-      labelDate: "Preferred date (optional)",
-      labelComment: "Comment (optional)",
       placeholderName: "First Last",
-      placeholderPhone: "+998 XX XXX-XX-XX",
-      placeholderComment:
-        "Tell us about yourself, your experience level, preferences...",
+      placeholderPhone: "+998 90 999 99 99",
+      placeholderTelegram: "@telegram user",
       selectPlaceholder: "Select a service...",
       serviceOptions: [
         "Trial lesson",
@@ -792,6 +797,8 @@ const translations = {
         "I agree to the processing of personal data in accordance with the privacy policy",
       btnSubmit: "Send request",
       btnSubmitting: "Sending...",
+      consentNote: "By clicking the button, I agree to the",
+      consentLink: "processing of personal data",
       errName: "Please enter your name (min. 2 characters)",
       errPhone: "Please enter a valid phone number",
       errService: "Please select a service",
@@ -1087,7 +1094,7 @@ const translations = {
           desc: "Turnir tayyorligi — kurs ishlash va sakrash texnikasi.",
           price: "So'rov asosida",
           unit: "· 1 mashg'ulot",
-          badge: "",
+          badge: "Mashhur",
           features: [
             "To'siqlar kurasi",
             "Konkur murabbiysi bilan ishlash",
@@ -1184,15 +1191,13 @@ const translations = {
       successText:
         "1 ish soati ichida siz bilan bog'lanamiz. Shoshilinch bo'lsa — hozir qo'ng'iroq qiling:",
       ariaLabel: "Mashg'ulotga yozilish formasi",
-      labelName: "Ism va familiya",
+      labelName: "Ism",
       labelPhone: "Telefon",
+      labelTelegram: "Telegram",
       labelService: "Xizmat",
-      labelDate: "Afzal ko'rilgan sana (ixtiyoriy)",
-      labelComment: "Izoh (ixtiyoriy)",
       placeholderName: "Ism Familiya",
-      placeholderPhone: "+998 XX XXX-XX-XX",
-      placeholderComment:
-        "O'zingiz, tayyorgarlik darajangiz, xohishlaringiz haqida gapirib bering...",
+      placeholderPhone: "+998 90 999 99 99",
+      placeholderTelegram: "@telegram user",
       selectPlaceholder: "Xizmatni tanlang...",
       serviceOptions: [
         "Sinov darsi",
@@ -1205,6 +1210,8 @@ const translations = {
         "Maxfiylik siyosatiga muvofiq shaxsiy ma'lumotlarni qayta ishlashga roziman",
       btnSubmit: "Ariza yuborish",
       btnSubmitting: "Yuborilmoqda...",
+      consentNote: "Tugmani bosib, men rozilik beraman",
+      consentLink: "shaxsiy ma'lumotlarni qayta ishlashga",
       errName: "Ismingizni kiriting (kamida 2 ta belgi)",
       errPhone: "To'g'ri telefon raqamini kiriting",
       errService: "Xizmatni tanlang",

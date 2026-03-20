@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Запрещаем индексацию служебных путей Vite
+Disallow: /src/
+Disallow: /@vite/
+Disallow: /@id/
+Disallow: /node_modules/
+
+Sitemap: https://aslan-horse-club.netlify.app/sitemap.xml

@@ -21,11 +21,23 @@
       content="конный клуб ташкент, уроки верховой езды чиланзар, тренировки по конкуру ташкент, фотосессия с лошадьми ташкент, конный клуб чиланзар, верховая езда ташкент"
     />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://aslan-horse.uz/" />
+    <link rel="canonical" href="https://aslan-horse-club.netlify.app/" />
+
+    <!-- hreflang: один URL, три языка (язык переключается через localStorage) -->
+    <link rel="alternate" hreflang="ru" href="https://aslan-horse-club.netlify.app/" />
+    <link rel="alternate" hreflang="en" href="https://aslan-horse-club.netlify.app/" />
+    <link rel="alternate" hreflang="uz" href="https://aslan-horse-club.netlify.app/" />
+    <link rel="alternate" hreflang="x-default" href="https://aslan-horse-club.netlify.app/" />
+
+    <!-- Google Search Console — вставьте код верификации из GSC Dashboard -->
+    <meta
+      name="google-site-verification"
+      content="REPLACE_WITH_YOUR_GSC_CODE"
+    />
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://aslan-horse.uz/" />
+    <meta property="og:url" content="https://aslan-horse-club.netlify.app/" />
     <meta
       property="og:title"
       content="ASLAN | Конный клуб Ташкент — уроки верховой езды"
@@ -36,7 +48,7 @@
     />
     <meta
       property="og:image"
-      content="https://aslan-horse.uz/images/og-cover.jpg"
+      content="https://aslan-horse-club.netlify.app/images/og-cover.jpg"
     />
     <meta property="og:locale" content="ru_UZ" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -57,9 +69,9 @@
         "name": "ASLAN Конный клуб",
         "alternateName": "Конный клуб ASLAN",
         "description": "Тренировки по конкуру, индивидуальные и групповые уроки верховой езды, прогулки и фотосессии с лошадьми. Расположены рядом с Чиланзарским ипподромом, Ташкент.",
-        "url": "https://aslan-horse.uz",
-        "logo": "https://aslan-horse.uz/images/logo.png",
-        "image": "https://aslan-horse.uz/images/og-cover.jpg",
+        "url": "https://aslan-horse-club.netlify.app",
+        "logo": "https://aslan-horse-club.netlify.app/images/logo.png",
+        "image": "https://aslan-horse-club.netlify.app/images/og-cover.jpg",
         "telephone": ["+998882586565", "+998959090875"],
         "email": "info@aslan-horse.uz",
         "priceRange": "$$",
@@ -94,15 +106,66 @@
             "closes": "20:00"
           }
         ],
-        "hasMap": "https://maps.google.com/?q=Чиланзарский+ипподром+Ташкент",
-        "sameAs": []
+        "hasMap": "https://maps.google.com/?q=41.2995,69.2401",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Услуги конного клуба ASLAN",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Пробный урок верховой езды",
+                "description": "Первое занятие для новичков под руководством профессионального тренера"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Индивидуальные уроки верховой езды",
+                "description": "Персональные тренировки для детей и взрослых любого уровня подготовки"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Тренировки по конкуру",
+                "description": "Профессиональные тренировки для подготовки к соревнованиям по конкуру"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Фотосессия с лошадьми",
+                "description": "Профессиональные фотосессии с лошадьми на территории клуба у ипподрома"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Групповые занятия верховой ездой",
+                "description": "Групповые уроки верховой езды для детей и взрослых"
+              }
+            }
+          ]
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Ташкент"
+        },
+        "sameAs": ["https://t.me/+998882586565"]
       }
     </script>
 
-    <!-- Google Analytics 4 — замените G-XXXXXXXXXX на реальный Measurement ID -->
+    <!-- Google Analytics 4 — ID берётся из .env файла: VITE_GA_ID=G-XXXXXXXX -->
+    <!-- В Netlify: Site Settings → Environment Variables → добавьте VITE_GA_ID -->
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+      src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_ID%"
     ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -110,11 +173,48 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-      gtag("config", "G-XXXXXXXXXX", { send_page_view: true });
+      gtag("config", "%VITE_GA_ID%", { send_page_view: true });
     </script>
   </head>
   <body>
     <div id="app"></div>
+    <!-- noscript: контент для Googlebot и пользователей без JavaScript -->
+    <noscript>
+      <div
+        style="
+          font-family: sans-serif;
+          max-width: 640px;
+          margin: 40px auto;
+          padding: 20px;
+          line-height: 1.6;
+        "
+      >
+        <h1>ASLAN — Конный клуб Ташкент</h1>
+        <p>
+          Профессиональный конный клуб в Чиланзаре, Ташкент. Тренировки по
+          конкуру, индивидуальные и групповые уроки верховой езды, прогулки и
+          фотосессии с лошадьми.
+        </p>
+        <p>
+          <strong>Адрес:</strong> проспект Бунийодкор, Чиланзар, Ташкент.
+          Ориентир: Чиланзарский ипподром / АЗС LUKOIL.
+        </p>
+        <p>
+          <strong>Телефон:</strong>
+          <a href="tel:+998882586565">+998 88 258-65-65</a> ·
+          <a href="tel:+998959090875">+998 95 909-08-75</a>
+        </p>
+        <p>
+          <strong>Telegram:</strong>
+          <a href="https://t.me/+998882586565">Написать в Telegram</a>
+        </p>
+        <p><strong>Режим работы:</strong> Ежедневно с 07:00 до 20:00</p>
+        <p>
+          <strong>Услуги:</strong> Пробный урок · Индивидуальные занятия ·
+          Групповые занятия · Тренировки по конкуру · Фотосессия с лошадьми
+        </p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
