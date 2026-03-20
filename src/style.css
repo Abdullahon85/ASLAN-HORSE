@@ -1,0 +1,440 @@
+/* ═══════════════════════════════════════════
+   ASLAN Horse Club — Global CSS
+   ═══════════════════════════════════════════ */
+
+/* ── CSS Variables ─────────────────────────── */
+:root {
+  /* Brand Colors */
+  --navy: #0d1b3e;
+  --navy-mid: #162b5b;
+  --navy-light: #1e3a73;
+  --gold: #c8962e;
+  --gold-light: #e4ae4a;
+  --gold-pale: #f5e6c0;
+  --cream: #faf6ef;
+  --cream-dark: #f0ebe0;
+  --white: #ffffff;
+
+  /* Text */
+  --text-dark: #12152a;
+  --text-mid: #3d4465;
+  --text-muted: #7a7f9a;
+  --text-on-dark: rgba(255, 255, 255, 0.88);
+
+  /* Semantic */
+  --success: #27a96b;
+  --error: #e53e3e;
+
+  /* Typography */
+  --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif;
+
+  /* Layout */
+  --header-height: 76px;
+  --mobile-bar-height: 68px;
+  --container: 1200px;
+  --section-py: 96px;
+  --section-py-sm: 56px;
+
+  /* Effects */
+  --shadow-sm: 0 2px 8px rgba(13, 27, 62, 0.06);
+  --shadow-md: 0 4px 24px rgba(13, 27, 62, 0.1);
+  --shadow-lg: 0 8px 40px rgba(13, 27, 62, 0.16);
+  --shadow-gold: 0 4px 24px rgba(200, 150, 46, 0.32);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  --transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.15s ease;
+}
+
+/* ── Reset ──────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* Space for sticky mobile bar on phones */
+  padding-bottom: 0;
+}
+
+/* On mobile add padding-bottom for sticky bar */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: var(--mobile-bar-height);
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  color: var(--text-dark);
+}
+
+/* ── Utility Classes ────────────────────────── */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+.section {
+  padding: var(--section-py) 0;
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: var(--section-py-sm) 0;
+  }
+}
+
+.section--navy {
+  background: var(--navy);
+}
+.section--cream {
+  background: var(--cream);
+}
+.section--dark {
+  background: var(--navy-mid);
+}
+.section--white {
+  background: var(--white);
+}
+
+.section__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.section__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.18;
+  margin-bottom: 16px;
+}
+
+.section__subtitle {
+  font-size: 1.0625rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.section__header {
+  margin-bottom: 56px;
+}
+
+.section__header--center {
+  text-align: center;
+}
+
+.section__header--center .section__subtitle {
+  margin: 0 auto;
+}
+
+/* ── Buttons ────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition);
+  white-space: nowrap;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.btn--primary {
+  background: var(--gold);
+  color: var(--white);
+  border-color: var(--gold);
+}
+
+.btn--primary:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-1px);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn--outline:hover {
+  border-color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn--outline-navy {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--navy);
+}
+
+.btn--outline-navy:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.btn--telegram {
+  background: #229ed9;
+  color: var(--white);
+  border-color: #229ed9;
+}
+
+.btn--telegram:hover {
+  background: #1a8bbf;
+  border-color: #1a8bbf;
+  box-shadow: 0 4px 20px rgba(34, 158, 217, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn--lg {
+  padding: 18px 36px;
+  font-size: 1rem;
+}
+
+.btn--sm {
+  padding: 10px 20px;
+  font-size: 0.875rem;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.btn svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Cards ──────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 32px;
+  transition:
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+/* ── Gold Divider ───────────────────────────── */
+.divider-gold {
+  width: 48px;
+  height: 3px;
+  background: var(
+    --gradient-gold,
+    linear-gradient(90deg, var(--gold), var(--gold-light))
+  );
+  border-radius: var(--radius-full);
+  margin-bottom: 24px;
+}
+
+/* On dark bg, label text changes */
+.on-dark .section__label {
+  color: var(--gold-light);
+}
+.on-dark .section__title {
+  color: var(--white);
+}
+.on-dark .section__subtitle {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── Form ───────────────────────────────────── */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  margin-bottom: 6px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 13px 16px;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--text-dark);
+  background: var(--white);
+  border: 1.5px solid #d0cec9;
+  border-radius: var(--radius-sm);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(200, 150, 46, 0.15);
+}
+
+.form-input.is-error,
+.form-select.is-error,
+.form-textarea.is-error {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.12);
+}
+
+.form-error {
+  font-size: 0.8125rem;
+  color: var(--error);
+  margin-top: 5px;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237A7F9A' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.form-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--gold);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.form-checkbox-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Tag / Badge ────────────────────────────── */
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.tag--gold {
+  background: var(--gold-pale);
+  color: #8a5d0a;
+}
+
+/* ── Tooltip helper ─────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Stars ──────────────────────────────────── */
+.stars {
+  display: flex;
+  gap: 2px;
+  color: var(--gold);
+}
