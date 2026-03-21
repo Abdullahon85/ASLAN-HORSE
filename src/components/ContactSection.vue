@@ -171,7 +171,7 @@ const PHONE2_RAW = "+998959090875";
 const PHONE2_DISPLAY = "+998 95 909-08-75";
 const TELEGRAM_URL = "https://t.me/+998882586565";
 const MAPS_URL =
-  "https://maps.google.com/?q=Чиланзарский+ипподром+Ташкент+Узбекистан";
+  "https://yandex.uz/maps/-/CPRFa060";
 
 const { trackCall, trackWhatsApp } = useAnalytics();
 const { t } = useI18n();

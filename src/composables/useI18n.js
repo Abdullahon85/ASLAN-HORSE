@@ -1,1279 +1,1280 @@
-import { ref, computed } from "vue";
-
-// Guard for SSG/SSR build environment where localStorage is unavailable
-const lang = ref(
-  typeof localStorage !== "undefined"
-    ? localStorage.getItem("aslan_lang") || "ru"
-    : "ru",
-);
-
-export function useI18n() {
-  const setLang = (l) => {
-    lang.value = l;
-    localStorage.setItem("aslan_lang", l);
-    document.documentElement.lang = l;
-  };
-
-  const t = computed(() => translations[lang.value] || translations.ru);
-
-  return { lang, setLang, t };
-}
-
-const translations = {
-  ru: {
-    // SiteHeader
-    header: {
-      logoSub: "Конный клуб",
-      logoAria: "ASLAN Конный клуб — главная",
-      nav: {
-        services: "Услуги",
-        about: "О нас",
-        prices: "Цены",
-        gallery: "Галерея",
-        faq: "FAQ",
-        contacts: "Контакты",
-      },
-      callAria: "Позвонить нам",
-      waAria: "Написать в Telegram",
-      book: "Записаться",
-      menuAria: "Открыть меню",
-      mobileNavAria: "Мобильная навигация",
-      callBtn: "Позвонить",
-    },
-    // StickyMobileBar
-    sticky: {
-      aria: "Быстрый контакт",
-      callAria: "Позвонить нам",
-      call: "Позвонить",
-      waAria: "Написать в Telegram",
-    },
-    // HeroSection
-    hero: {
-      aria: "Главный баннер",
-      imgAlt: "Занятия в конном клубе ASLAN, Чиланзар, Ташкент",
-      scrollAria: "Прокрутить вниз",
-      callAria: "Позвонить и записаться",
-      chip1: "Работаем с 07:00",
-      chip2: "500+ учеников",
-      chip3: "Безопасно для детей",
-      label: "Чиланзар, Ташкент · у ипподрома",
-      h1: "Конный клуб",
-      h1em: "в Чиланзаре",
-      sub1: "Уроки верховой езды у ипподрома — для детей от 6 лет и взрослых. Тренировки по конкуру, прогулки и фотосессии с лошадьми.",
-      sub2strong: "Пробный урок",
-      sub2rest: " — по записи через звонок или Telegram.",
-      btnCall: "Позвонить сейчас",
-      btnWa: "Написать в Telegram",
-      or: "Или",
-      leaveApp: "оставьте заявку",
-      callback: " — перезвоним в течение 1 часа",
-    },
-    // BenefitsSection
-    benefits: {
-      label: "Почему выбирают нас",
-      title: "4 причины заниматься в ASLAN",
-      subtitle:
-        "Профессиональный конный клуб у ипподрома — безопасно, удобно, результативно.",
-      ctaText: "Готовы попробовать? Первый урок — без обязательств.",
-      ctaBtn: "Записаться на пробный урок",
-      items: [
-        {
-          title: "Опытные тренеры",
-          text: "Подготовка от чемпионов — индивидуальный план, работа над посадкой и техникой управления.",
-        },
-        {
-          title: "Удобное расположение",
-          text: "Чиланзар, рядом с ипподромом — парковка у клуба, удобный подъезд из любой части города.",
-        },
-        {
-          title: "Безопасность",
-          text: "Сертифицированное снаряжение, инструктаж для новичков, детское оборудование и постоянный присмотр.",
-        },
-        {
-          title: "Фотосессии",
-          text: "Организуем профессиональные фото и видео с лошадьми для любого события — результат уже на следующий день.",
-        },
-      ],
-    },
-    // ServicesSection
-    services: {
-      label: "Что мы предлагаем",
-      title: "Услуги клуба ASLAN",
-      subtitle:
-        "Для детей от 6 лет и взрослых любого уровня — от первого урока до соревнований.",
-      cta: "Уточнить цену и время",
-      btnWa: "Задать вопрос в Telegram",
-      btnBook: "Оставить заявку онлайн",
-      items: [
-        {
-          name: "Индивидуальные занятия",
-          text: "Работа один на один с тренером — техника езды, посадка, управление лошадью. Оптимально для быстрого прогресса.",
-          tag: "Популярно",
-        },
-        {
-          name: "Групповые уроки",
-          text: "Небольшие группы для детей и взрослых — весело, мотивирующе и доступно по цене.",
-          tag: "",
-        },
-        {
-          name: "Пробный урок",
-          text: "Безопасная вводная программа для новичков — знакомство с лошадью, основы посадки, первые шаги в седле.",
-          tag: "Для новичков",
-        },
-        {
-          name: "Тренировки по конкуру",
-          text: "Подготовка к соревнованиям — работа на корде, прыжки, техника на трассе препятствий.",
-          tag: "Для спортсменов",
-        },
-        {
-          name: "Фотосессии с лошадьми",
-          text: "Организуем профессиональные фото и видео — дни рождения, свидания, семейные сессии и fashion-съёмки.",
-          tag: "",
-        },
-      ],
-    },
-    // TestimonialsSection
-    testimonials: {
-      label: "Отзывы клиентов",
-      title: "Что говорят наши ученики",
-      subtitle:
-        "Реальные истории семей, спортсменов и фотографов, которые уже занимаются в ASLAN.",
-      starsAria: "5 звёзд",
-      reviews: [
-        {
-          text: "Записали дочку на пробный урок — она в восторге! Тренер терпеливый, объясняет понятно. Записались сразу на месяц. Рекомендую всем семьям с детьми в Чиланзаре.",
-          name: "Дилноза М.",
-          role: "Мама ученицы, 8 лет",
-          date: "Февраль 2026",
-        },
-        {
-          text: "Заказывали фотосессию с лошадьми для годовщины свадьбы. Всё прошло отлично — лошади спокойные, место красивое. Фото получились невероятные. Спасибо команде ASLAN!",
-          name: "Камила и Акбар",
-          role: "Фотосессия на годовщину",
-          date: "Январь 2026",
-        },
-        {
-          text: "Тренируюсь по конкуру уже 4 месяца. Изначально был на нулевом уровне, сейчас готовлюсь к первым соревнованиям. Тренер профессиональный, видно, что любит своё дело.",
-          name: "Тимур Р.",
-          role: "Спортсмен, конкур",
-          date: "Декабрь 2025",
-        },
-        {
-          text: "Отличное место для детей! Безопасно, лошади добрые, персонал внимательный. Сын ждёт каждой субботы как праздника.",
-          name: "Шахло Х.",
-          role: "Мама ученика, 10 лет",
-          date: "Ноябрь 2025",
-        },
-      ],
-      stats: [
-        { number: "500+", label: "учеников прошли обучение" },
-        { number: "5+", label: "лет клуб работает в Ташкенте" },
-        { number: "4.9★", label: "средняя оценка клиентов" },
-        { number: "30+", label: "фотосессий проведено" },
-      ],
-    },
-    // AboutSection
-    about: {
-      imgAlt: "Команда тренеров конного клуба ASLAN",
-      imgPlaceholder: "Фото команды",
-      chip1: "Опыт 5+ лет",
-      chip2: "Сертифицированные тренеры",
-      chip3: "Безопасность для детей от 6 лет",
-      label: "О клубе",
-      title: "Команда ASLAN — тренеры и инфраструктура",
-      lead: "Конный клуб ASLAN расположен у Чиланзарского ипподрома — одного из лучших площадок для верховой езды в Ташкенте. Мы работаем для тех, кто делает первые шаги в седле, и для тех, кто готовится к соревнованиям по конкуру.",
-      btnContact: "Связаться с тренером",
-      btnPrices: "Посмотреть цены",
-      features: [
-        {
-          title: "Профессиональные тренеры",
-          text: "Наши инструкторы — участники соревнований по конкуру с многолетним опытом преподавания для детей и взрослых.",
-        },
-        {
-          title: "Инфраструктура ипподрома",
-          text: "Крытый и открытый манежи, конные трассы, трасса препятствий для конкура, современное снаряжение.",
-        },
-        {
-          title: "Безопасность — приоритет",
-          text: "Обязательный инструктаж, сертифицированные сёдла, шлемы для всех всадников, постоянное присутствие инструктора.",
-        },
-      ],
-    },
-    // PricesSection
-    prices: {
-      label: "Цены и расписание",
-      title: "Расписание и стоимость занятий",
-      subtitle:
-        "Работаем ежедневно с 07:00. Точные цены — по запросу (возможны групповые скидки).",
-      featuresAria: "Что включено",
-      btn: "Записаться по телефону",
-      note: "* Цены уточняются при записи — возможны скидки для групп, детей и постоянных клиентов. Звоните:",
-      noteOr: "или",
-      schedule: [
-        { days: "Пн – Пт", hours: "07:00 – 20:00" },
-        { days: "Суббота", hours: "07:00 – 19:00" },
-        { days: "Воскресенье", hours: "08:00 – 18:00" },
-      ],
-      plans: [
-        {
-          name: "Пробный урок",
-          desc: "Идеально для начинающих — 45 минут с инструктором.",
-          price: "По запросу",
-          unit: "· 1 занятие",
-          badge: "",
-          features: [
-            "45 мин с инструктором",
-            "Проверенное снаряжение",
-            "Инструктаж по безопасности",
-            "Без предоплаты",
-          ],
-        },
-        {
-          name: "Индивидуальные занятия",
-          desc: "Персональная программа с тренером — самый быстрый прогресс.",
-          price: "По запросу",
-          unit: "· 1 занятие",
-          badge: "Популярно",
-          features: [
-            "1 на 1 с тренером",
-            "Индивидуальный план",
-            "Гибкое расписание",
-            "Видео разбор по запросу",
-          ],
-        },
-        {
-          name: "Групповые занятия",
-          desc: "Для детей и взрослых — веселее и доступнее по стоимости.",
-          price: "По запросу",
-          unit: "· 1 занятие",
-          badge: "",
-          features: [
-            "До 5 человек в группе",
-            "Подходит для детей от 6 лет",
-            "Фиксированное расписание",
-            "Скидка при абонементе",
-          ],
-        },
-        {
-          name: "Конкур / Соревнования",
-          desc: "Подготовка к турнирам — работа на трассе и отработка прыжков.",
-          price: "По запросу",
-          unit: "· 1 занятие",
-          badge: "Популярно",
-          features: [
-            "Трасса препятствий",
-            "Работа с тренером по конкуру",
-            "Оценка и разбор техники",
-            "Подготовка к чемпионатам",
-          ],
-        },
-      ],
-    },
-    // GallerySection
-    gallery: {
-      label: "Фотогалерея",
-      title: "Наши занятия и соревнования",
-      subtitle:
-        "Тренировки, конкур, фотосессии и праздники в конном клубе ASLAN.",
-      filterAria: "Фильтр галереи",
-      btnWa: "Заказать фотосессию",
-      btnWaSub: "Быстрый ответ в Telegram",
-      closeLightbox: "Закрыть",
-      prevPhoto: "Предыдущее фото",
-      nextPhoto: "Следующее фото",
-      tabs: [
-        { id: "all", label: "Все" },
-        { id: "training", label: "Тренировки" },
-        { id: "competition", label: "Соревнования" },
-        { id: "photo", label: "Фотосессии" },
-      ],
-      items: [
-        {
-          label: "Тренировка",
-          alt: "Индивидуальная тренировка по верховой езде",
-        },
-        { label: "Конкур", alt: "Соревнования по конкуру в ASLAN" },
-        { label: "Фотосессия", alt: "Профессиональная фотосессия с лошадьми" },
-        { label: "Группа", alt: "Групповые уроки верховой езды для детей" },
-        { label: "Прыжок", alt: "Прыжки на соревнованиях" },
-        { label: "Пара", alt: "Романтическая фотосессия с лошадью" },
-        { label: "Корда", alt: "Работа на корде с тренером" },
-        { label: "Победа", alt: "Награждение победителей конкура" },
-        { label: "Дети", alt: "Детская фотосессия с лошадьми" },
-        { label: "Новичок", alt: "Пробный урок для новичков" },
-        { label: "Чемпионат", alt: "Чемпионат по конкуру" },
-        { label: "Свадьба", alt: "Свадебная фотосессия с лошадьми" },
-      ],
-    },
-    // FAQSection
-    faq: {
-      label: "FAQ",
-      title: "Частые вопросы",
-      subtitle:
-        "Не нашли ответ? Позвоните или напишите — ответим за несколько минут.",
-      ctaTitle: "Остались вопросы?",
-      ctaText: "Позвоните или напишите — ответим быстро.",
-      btnCall: "Позвонить",
-      items: [
-        {
-          q: "Как записаться на пробный урок?",
-          a: "Позвоните по номеру +998 88 258-65-65 или напишите в Telegram — менеджер подтвердит удобное время в течение нескольких минут. Также можно оставить заявку через форму на сайте.",
-        },
-        {
-          q: "С какого возраста можно заниматься верховой ездой?",
-          a: "У нас занимаются дети от 6 лет. Для малышей предусмотрено специальное детское снаряжение, шлемы и постоянное присутствие инструктора. Взрослый возрастной порог — нет: начать можно в любом возрасте.",
-        },
-        {
-          q: "Что взять на первый урок?",
-          a: "Достаточно прийти в удобной одежде: закрытые брюки (джинсы или леггинсы), закрытая обувь на небольшом каблуке (кроссовки без платформы или ботинки). Шлем выдаём на прокат бесплатно, если нет своего.",
-        },
-        {
-          q: "Есть ли прокат лошадей для прогулок?",
-          a: "Да — предоставляем лошадей для прогулок на территории клуба. Стоимость и продолжительность уточняйте при записи по телефону или Telegram.",
-        },
-        {
-          q: "Как организовать фотосессию с лошадьми?",
-          a: "Напишите нам в Telegram или позвоните — обсудим дату, время, пожелания по формату (на природе/в манеже). Работаем также с приглашёнными фотографами по согласованию.",
-        },
-        {
-          q: "Есть ли групповые занятия для детей?",
-          a: "Да, групповые занятия доступны для детей и взрослых. Группы небольшие — до 5 человек, чтобы тренер мог уделить внимание каждому. Занятия по фиксированному расписанию.",
-        },
-        {
-          q: "Где именно расположен клуб?",
-          a: "Мы находимся в Чиланзарском районе Ташкента, рядом с ипподромом. Ориентир — АЗС LUKOIL на проспекте Бунийодкор. Есть удобная парковка для автомобилей.",
-        },
-        {
-          q: "Как подготовиться к соревнованиям по конкуру?",
-          a: "Запишитесь на тренировки по конкуру с нашим специализированным тренером. Составим индивидуальный план подготовки: базовая техника, работа на корде, отработка прыжков на трассе препятствий.",
-        },
-      ],
-    },
-    // LeadFormSection
-    form: {
-      label: "Запись онлайн",
-      title: "Оставьте заявку — мы перезвоним",
-      desc1: "Заполните форму и менеджер свяжется с вами в течение ",
-      desc1strong: "1 рабочего часа",
-      desc2:
-        ", чтобы подтвердить дату и время, ответить на вопросы и помочь с выбором услуги.",
-      orContact: "Или свяжитесь сразу:",
-      successTitle: "Заявка принята!",
-      successText:
-        "Мы свяжемся с вами в течение 1 рабочего часа. Если нужно срочно — позвоните прямо сейчас:",
-      ariaLabel: "Форма записи на занятие",
-      labelName: "Имя",
-      labelPhone: "Телефон",
-      labelTelegram: "Telegram",
-      labelService: "Услуга",
-      placeholderName: "Имя Фамилия",
-      placeholderPhone: "+998 90 999 99 99",
-      placeholderTelegram: "@telegram user",
-      placeholderComment: "Расскажите о себе, уровне подготовки, пожеланиях...",
-      selectPlaceholder: "Выберите услугу...",
-      serviceOptions: [
-        "Пробный урок",
-        "Индивидуальные занятия",
-        "Групповые занятия",
-        "Фотосессия с лошадьми",
-        "Тренировки по конкуру",
-      ],
-      consent:
-        "Согласен(а) на обработку персональных данных согласно политике конфиденциальности",
-      btnSubmit: "Оставить заявку",
-      btnSubmitting: "Отправляем...",
-      consentNote: "Нажимая на кнопку, я соглашаюсь на",
-      consentLink: "обработку персональных данных",
-      errName: "Введите имя (минимум 2 символа)",
-      errPhone: "Введите корректный номер телефона",
-      errService: "Выберите услугу",
-      errConsent: "Необходимо согласие на обработку данных",
-    },
-    // ContactSection
-    contact: {
-      label: "Как нас найти",
-      title: "Контакты и как добраться",
-      subtitle:
-        "Мы в Чиланзаре — рядом с ипподромом. Удобная парковка, работаем каждый день с 07:00.",
-      btnCall: "Позвонить:",
-      btnWa: "Написать в Telegram",
-      mapAria: "Карта расположения конного клуба ASLAN",
-      mapAddress: "пр-т Бунийодкор, Чиланзар",
-      mapLandmark: "Ориентир: Чиланзарский ипподром / АЗС LUKOIL",
-      mapsBtn: "Открыть в Google Maps",
-      cards: [
-        { label: "Телефон (основной)" },
-        { label: "Телефон (дополнительный)" },
-        {
-          label: "Адрес",
-          value: "пр-т Бунийодкор, Чиланзар, Ташкент",
-          sub: "Ориентир: Чиланзарский ипподром / АЗС LUKOIL",
-        },
-        {
-          label: "Режим работы",
-          value: "Ежедневно с 07:00 до 20:00",
-          sub: "В воскресенье до 18:00",
-        },
-      ],
-    },
-    // SiteFooter
-    footer: {
-      logoAria: "ASLAN — к началу страницы",
-      brandDesc:
-        "Профессиональный конный клуб в Чиланзаре, Ташкент. Уроки верховой езды, конкур, фотосессии с лошадьми.",
-      hours: "Ежедневно с 07:00 до 20:00",
-      ctaTitle: "Готовы начать? Позвоните прямо сейчас",
-      ctaSub: "Первый пробный урок — просто позвоните или напишите в Telegram.",
-      navTitle: "Навигация",
-      servicesTitle: "Услуги",
-      contactTitle: "Контакты",
-      copyright: "ASLAN Конный клуб. Все права защищены.",
-      seo: "Конный клуб Ташкент · Уроки верховой езды Чиланзар · Тренировки по конкуру",
-      navLinks: [
-        "Главная",
-        "Услуги",
-        "О нас",
-        "Цены",
-        "Галерея",
-        "FAQ",
-        "Контакты",
-        "Записаться",
-      ],
-      serviceLinks: [
-        "Пробный урок",
-        "Индивидуальные занятия",
-        "Групповые занятия",
-        "Тренировки по конкуру",
-        "Фотосессии с лошадьми",
-      ],
-      address: "пр-т Бунийодкор, Чиланзар",
-    },
-  },
-
-  en: {
-    header: {
-      logoSub: "Horse Club",
-      logoAria: "ASLAN Horse Club — home",
-      nav: {
-        services: "Services",
-        about: "About",
-        prices: "Prices",
-        gallery: "Gallery",
-        faq: "FAQ",
-        contacts: "Contacts",
-      },
-      callAria: "Call us",
-      waAria: "Write on Telegram",
-      book: "Book now",
-      menuAria: "Open menu",
-      mobileNavAria: "Mobile navigation",
-      callBtn: "Call",
-    },
-    sticky: {
-      aria: "Quick contact",
-      callAria: "Call us",
-      call: "Call",
-      waAria: "Write on Telegram",
-    },
-    hero: {
-      aria: "Main banner",
-      imgAlt: "Riding lessons at ASLAN Horse Club, Chilanzar, Tashkent",
-      scrollAria: "Scroll down",
-      callAria: "Call and book",
-      chip1: "Open from 07:00",
-      chip2: "500+ students",
-      chip3: "Safe for children",
-      label: "Chilanzar, Tashkent · near the hippodrome",
-      h1: "Horse Club",
-      h1em: "in Chilanzar",
-      sub1: "Horse riding lessons by the hippodrome — for children from age 6 and adults. Show jumping training, rides and photo sessions with horses.",
-      sub2strong: "Trial lesson",
-      sub2rest: " — bookable by phone or Telegram.",
-      btnCall: "Call now",
-      btnWa: "Write on Telegram",
-      or: "Or",
-      leaveApp: "leave a request",
-      callback: " — we'll call back within 1 hour",
-    },
-    benefits: {
-      label: "Why choose us",
-      title: "4 reasons to train at ASLAN",
-      subtitle:
-        "Professional horse club by the hippodrome — safe, convenient, effective.",
-      ctaText: "Ready to try? First lesson — no commitments.",
-      ctaBtn: "Book a trial lesson",
-      items: [
-        {
-          title: "Experienced trainers",
-          text: "Coaching by champions — individual plan, work on seat and control technique.",
-        },
-        {
-          title: "Great location",
-          text: "Chilanzar, next to the hippodrome — parking on site, easy access from anywhere in the city.",
-        },
-        {
-          title: "Safety",
-          text: "Certified equipment, briefing for beginners, children's gear and constant supervision.",
-        },
-        {
-          title: "Photo sessions",
-          text: "We organise professional photo and video sessions with horses for any occasion — results ready the next day.",
-        },
-      ],
-    },
-    services: {
-      label: "What we offer",
-      title: "ASLAN Club Services",
-      subtitle:
-        "For children from age 6 and adults of any level — from first lesson to competitions.",
-      cta: "Check price & schedule",
-      btnWa: "Ask a question on Telegram",
-      btnBook: "Leave a request online",
-      items: [
-        {
-          name: "Individual lessons",
-          text: "One-on-one with a trainer — riding technique, seat, horse control. Best for rapid progress.",
-          tag: "Popular",
-        },
-        {
-          name: "Group lessons",
-          text: "Small groups for children and adults — fun, motivating and affordable.",
-          tag: "",
-        },
-        {
-          name: "Trial lesson",
-          text: "Safe intro programme for beginners — meet the horse, basic seat, first steps in the saddle.",
-          tag: "For beginners",
-        },
-        {
-          name: "Show jumping training",
-          text: "Competition preparation — lunge work, jumps, technique on the obstacle course.",
-          tag: "For athletes",
-        },
-        {
-          name: "Photo sessions with horses",
-          text: "We organise professional photo & video — birthdays, dates, family sessions and fashion shoots.",
-          tag: "",
-        },
-      ],
-    },
-    testimonials: {
-      label: "Client reviews",
-      title: "What our students say",
-      subtitle:
-        "Real stories from families, athletes and photographers who already train at ASLAN.",
-      starsAria: "5 stars",
-      reviews: [
-        {
-          text: "We signed our daughter up for a trial lesson — she's thrilled! The trainer is patient and explains everything clearly. We signed up for a full month right away. Highly recommend to all families in Chilanzar.",
-          name: "Dilnoza M.",
-          role: "Mother of student, age 8",
-          date: "February 2026",
-        },
-        {
-          text: "We ordered a photo session with horses for our wedding anniversary. Everything went perfectly — the horses were calm, the setting was beautiful. The photos came out incredible. Thank you ASLAN team!",
-          name: "Kamila & Akbar",
-          role: "Anniversary photo session",
-          date: "January 2026",
-        },
-        {
-          text: "I've been training in show jumping for 4 months. I started from zero and now I'm preparing for my first competition. The trainer is professional and clearly loves what he does.",
-          name: "Timur R.",
-          role: "Athlete, show jumping",
-          date: "December 2025",
-        },
-        {
-          text: "A great place for children! Safe, the horses are gentle, the staff is attentive. My son looks forward to every Saturday like a holiday.",
-          name: "Shahlo Kh.",
-          role: "Mother of student, age 10",
-          date: "November 2025",
-        },
-      ],
-      stats: [
-        { number: "500+", label: "students trained" },
-        { number: "5+", label: "years operating in Tashkent" },
-        { number: "4.9★", label: "average client rating" },
-        { number: "30+", label: "photo sessions held" },
-      ],
-    },
-    about: {
-      imgAlt: "ASLAN Horse Club trainer team",
-      imgPlaceholder: "Team photo",
-      chip1: "5+ years experience",
-      chip2: "Certified trainers",
-      chip3: "Safe for children from age 6",
-      label: "About the club",
-      title: "ASLAN Team — trainers and facilities",
-      lead: "ASLAN Horse Club is located at the Chilanzar Hippodrome — one of the best equestrian venues in Tashkent. We serve both beginners taking their first steps in the saddle and athletes preparing for show jumping competitions.",
-      btnContact: "Contact a trainer",
-      btnPrices: "View prices",
-      features: [
-        {
-          title: "Professional trainers",
-          text: "Our instructors are show jumping competitors with years of teaching experience for children and adults.",
-        },
-        {
-          title: "Hippodrome facilities",
-          text: "Indoor and outdoor arenas, riding tracks, a show jumping obstacle course, modern equipment.",
-        },
-        {
-          title: "Safety first",
-          text: "Mandatory briefing, certified saddles, helmets for all riders, constant instructor presence.",
-        },
-      ],
-    },
-    prices: {
-      label: "Prices & schedule",
-      title: "Schedule and lesson prices",
-      subtitle:
-        "Open daily from 07:00. Exact prices on request (group discounts available).",
-      featuresAria: "What's included",
-      btn: "Book by phone",
-      note: "* Prices confirmed at booking — discounts available for groups, children and regular clients. Call:",
-      noteOr: "or",
-      schedule: [
-        { days: "Mon – Fri", hours: "07:00 – 20:00" },
-        { days: "Saturday", hours: "07:00 – 19:00" },
-        { days: "Sunday", hours: "08:00 – 18:00" },
-      ],
-      plans: [
-        {
-          name: "Trial lesson",
-          desc: "Perfect for beginners — 45 minutes with an instructor.",
-          price: "On request",
-          unit: "· per lesson",
-          badge: "",
-          features: [
-            "45 min with instructor",
-            "Verified equipment",
-            "Safety briefing",
-            "No prepayment",
-          ],
-        },
-        {
-          name: "Individual lessons",
-          desc: "Personal programme with a trainer — fastest progress.",
-          price: "On request",
-          unit: "· per lesson",
-          badge: "Popular",
-          features: [
-            "1-on-1 with trainer",
-            "Individual plan",
-            "Flexible schedule",
-            "Video review on request",
-          ],
-        },
-        {
-          name: "Group lessons",
-          desc: "For children and adults — more fun and affordable.",
-          price: "On request",
-          unit: "· per lesson",
-          badge: "",
-          features: [
-            "Up to 5 per group",
-            "Suitable for children 6+",
-            "Fixed schedule",
-            "Subscription discount",
-          ],
-        },
-        {
-          name: "Show jumping / Competitions",
-          desc: "Tournament preparation — course work and jump technique.",
-          price: "On request",
-          unit: "· per lesson",
-          badge: "Popular",
-          features: [
-            "Obstacle course",
-            "Work with jumping trainer",
-            "Technique review",
-            "Championship prep",
-          ],
-        },
-      ],
-    },
-    gallery: {
-      label: "Photo gallery",
-      title: "Our lessons and competitions",
-      subtitle:
-        "Training, show jumping, photo sessions and celebrations at ASLAN Horse Club.",
-      filterAria: "Gallery filter",
-      btnWa: "Order a photo session",
-      btnWaSub: "Quick reply on Telegram",
-      closeLightbox: "Close",
-      prevPhoto: "Previous photo",
-      nextPhoto: "Next photo",
-      tabs: [
-        { id: "all", label: "All" },
-        { id: "training", label: "Training" },
-        { id: "competition", label: "Competitions" },
-        { id: "photo", label: "Photo sessions" },
-      ],
-      items: [
-        { label: "Training", alt: "Individual horse riding lesson" },
-        { label: "Jumping", alt: "Show jumping competition at ASLAN" },
-        { label: "Photo", alt: "Professional photo session with horses" },
-        { label: "Group", alt: "Group riding lessons for children" },
-        { label: "Jump", alt: "Jumping at competition" },
-        { label: "Couple", alt: "Romantic photo session with a horse" },
-        { label: "Lunge", alt: "Lunge work with trainer" },
-        { label: "Victory", alt: "Show jumping award ceremony" },
-        { label: "Kids", alt: "Children's photo session with horses" },
-        { label: "Beginner", alt: "Trial lesson for beginners" },
-        { label: "Championship", alt: "Show jumping championship" },
-        { label: "Wedding", alt: "Wedding photo session with horses" },
-      ],
-    },
-    faq: {
-      label: "FAQ",
-      title: "Frequently asked questions",
-      subtitle:
-        "Didn't find an answer? Call or write — we reply within minutes.",
-      ctaTitle: "Still have questions?",
-      ctaText: "Call or write — we reply quickly.",
-      btnCall: "Call",
-      items: [
-        {
-          q: "How do I book a trial lesson?",
-          a: "Call +998 88 258-65-65 or write on Telegram — a manager will confirm a convenient time within minutes. You can also leave a request via the form on the website.",
-        },
-        {
-          q: "From what age can children take riding lessons?",
-          a: "We teach children from age 6. Younger riders have dedicated children's equipment, helmets and constant instructor supervision. There is no upper age limit — you can start at any age.",
-        },
-        {
-          q: "What should I bring to my first lesson?",
-          a: "Just come in comfortable clothes: full-length trousers (jeans or leggings) and closed shoes with a small heel (trainers without platform soles or boots). Helmets are available for free if you don't have your own.",
-        },
-        {
-          q: "Is there horse rental for leisure rides?",
-          a: "Yes — we provide horses for rides within the club grounds. Contact us by phone or Telegram for pricing and duration.",
-        },
-        {
-          q: "How do I organise a photo session with horses?",
-          a: "Write to us on Telegram or call — we'll discuss the date, time and your preferences (outdoor / indoor arena). We also work with invited photographers by arrangement.",
-        },
-        {
-          q: "Are there group lessons for children?",
-          a: "Yes, group lessons are available for children and adults. Groups are kept small — up to 5 people — so the trainer can give everyone individual attention. Lessons follow a fixed schedule.",
-        },
-        {
-          q: "Where exactly is the club located?",
-          a: "We are in the Chilanzar district of Tashkent, next to the hippodrome. Landmark — LUKOIL filling station on Bunyodkor Avenue. Convenient parking is available.",
-        },
-        {
-          q: "How do I prepare for show jumping competitions?",
-          a: "Sign up for show jumping training with our specialist trainer. We'll build an individual preparation plan: basic technique, lunge work, jump practice on the obstacle course.",
-        },
-      ],
-    },
-    form: {
-      label: "Book online",
-      title: "Leave a request — we'll call back",
-      desc1: "Fill in the form and a manager will contact you within ",
-      desc1strong: "1 working hour",
-      desc2:
-        " to confirm the date and time, answer questions and help choose a service.",
-      orContact: "Or contact us directly:",
-      successTitle: "Request received!",
-      successText:
-        "We'll contact you within 1 working hour. If urgent — call right now:",
-      ariaLabel: "Lesson booking form",
-      labelName: "Name",
-      labelPhone: "Phone",
-      labelTelegram: "Telegram",
-      labelService: "Service",
-      placeholderName: "First Last",
-      placeholderPhone: "+998 90 999 99 99",
-      placeholderTelegram: "@telegram user",
-      selectPlaceholder: "Select a service...",
-      serviceOptions: [
-        "Trial lesson",
-        "Individual lessons",
-        "Group lessons",
-        "Photo session with horses",
-        "Show jumping training",
-      ],
-      consent:
-        "I agree to the processing of personal data in accordance with the privacy policy",
-      btnSubmit: "Send request",
-      btnSubmitting: "Sending...",
-      consentNote: "By clicking the button, I agree to the",
-      consentLink: "processing of personal data",
-      errName: "Please enter your name (min. 2 characters)",
-      errPhone: "Please enter a valid phone number",
-      errService: "Please select a service",
-      errConsent: "Consent to data processing is required",
-    },
-    contact: {
-      label: "Find us",
-      title: "Contacts and directions",
-      subtitle:
-        "We're in Chilanzar — next to the hippodrome. Easy parking, open every day from 07:00.",
-      btnCall: "Call:",
-      btnWa: "Write on Telegram",
-      mapAria: "Map of ASLAN Horse Club location",
-      mapAddress: "Bunyodkor Ave, Chilanzar",
-      mapLandmark: "Landmark: Chilanzar Hippodrome / LUKOIL station",
-      mapsBtn: "Open in Google Maps",
-      cards: [
-        { label: "Main phone" },
-        { label: "Additional phone" },
-        {
-          label: "Address",
-          value: "Bunyodkor Ave, Chilanzar, Tashkent",
-          sub: "Landmark: Chilanzar Hippodrome / LUKOIL station",
-        },
-        {
-          label: "Working hours",
-          value: "Daily 07:00 – 20:00",
-          sub: "Sunday until 18:00",
-        },
-      ],
-    },
-    footer: {
-      logoAria: "ASLAN — back to top",
-      brandDesc:
-        "Professional horse club in Chilanzar, Tashkent. Riding lessons, show jumping, photo sessions with horses.",
-      hours: "Daily 07:00 – 20:00",
-      ctaTitle: "Ready to start? Call us now",
-      ctaSub: "First trial lesson — just call or write on Telegram.",
-      navTitle: "Navigation",
-      servicesTitle: "Services",
-      contactTitle: "Contacts",
-      copyright: "ASLAN Horse Club. All rights reserved.",
-      seo: "Horse Club Tashkent · Riding lessons Chilanzar · Show jumping training",
-      navLinks: [
-        "Home",
-        "Services",
-        "About",
-        "Prices",
-        "Gallery",
-        "FAQ",
-        "Contacts",
-        "Book now",
-      ],
-      serviceLinks: [
-        "Trial lesson",
-        "Individual lessons",
-        "Group lessons",
-        "Show jumping training",
-        "Photo sessions with horses",
-      ],
-      address: "Bunyodkor Ave, Chilanzar",
-    },
-  },
-
-  uz: {
-    header: {
-      logoSub: "Ot klubi",
-      logoAria: "ASLAN Ot klubi — bosh sahifa",
-      nav: {
-        services: "Xizmatlar",
-        about: "Biz haqimizda",
-        prices: "Narxlar",
-        gallery: "Galereya",
-        faq: "FAQ",
-        contacts: "Kontaktlar",
-      },
-      callAria: "Bizga qo'ng'iroq qiling",
-      waAria: "Telegram da yozing",
-      book: "Yozilish",
-      menuAria: "Menyuni ochish",
-      mobileNavAria: "Mobil navigatsiya",
-      callBtn: "Qo'ng'iroq",
-    },
-    sticky: {
-      aria: "Tezkor aloqa",
-      callAria: "Bizga qo'ng'iroq qiling",
-      call: "Qo'ng'iroq",
-      waAria: "Telegram da yozing",
-    },
-    hero: {
-      aria: "Asosiy banner",
-      imgAlt: "ASLAN ot klubida mashg'ulotlar, Chilonzor, Toshkent",
-      scrollAria: "Pastga aylantiring",
-      callAria: "Qo'ng'iroq qiling va yoziling",
-      chip1: "07:00 dan ishlaymiz",
-      chip2: "500+ o'quvchi",
-      chip3: "Bolalar uchun xavfsiz",
-      label: "Chilonzor, Toshkent · gippodrom yonida",
-      h1: "Ot klubi",
-      h1em: "Chilonzorda",
-      sub1: "Gippodrom yonida chavandozlik darslari — 6 yoshdan bolalar va kattalar uchun. Konkur bo'yicha trenirovkalar, sayrlar va otlar bilan fotosessiyalar.",
-      sub2strong: "Sinov darsi",
-      sub2rest: " — telefon yoki Telegram orqali yozilish.",
-      btnCall: "Hozir qo'ng'iroq qiling",
-      btnWa: "Telegram da yozing",
-      or: "Yoki",
-      leaveApp: "ariza qoldiring",
-      callback: " — 1 soat ichida qayta qo'ng'iroq qilamiz",
-    },
-    benefits: {
-      label: "Nima uchun bizni tanlashadi",
-      title: "ASLAN da mashg'ulot qilishning 4 sababi",
-      subtitle:
-        "Gippodrom yonidagi professional ot klubi — xavfsiz, qulay, samarali.",
-      ctaText: "Sinab ko'rishga tayyormisiz? Birinchi dars — majburiyatsiz.",
-      ctaBtn: "Sinov darsiga yozilish",
-      items: [
-        {
-          title: "Tajribali murabbiylar",
-          text: "Chempionlar tayyorlovi — individual reja, o'tirish va boshqaruv texnikasi ustida ishlash.",
-        },
-        {
-          title: "Qulay joylashuv",
-          text: "Chilonzor, gippodrom yonida — klub oldida avtoturargoh, shaharning istalgan nuqtasidan qulay kirish.",
-        },
-        {
-          title: "Xavfsizlik",
-          text: "Sertifikatlangan jihozlar, yangi boshlovchilar uchun yo'riqnoma, bolalar uskunalari va doimiy nazorat.",
-        },
-        {
-          title: "Fotosessiyalar",
-          text: "Istalgan tadbir uchun otlar bilan professional foto va video tashkil qilamiz — natija ertasi kun tayyor.",
-        },
-      ],
-    },
-    services: {
-      label: "Nima taklif qilamiz",
-      title: "ASLAN klubi xizmatlari",
-      subtitle:
-        "6 yoshdan bolalar va har qanday darajadagi kattalar uchun — birinchi darsdan musobaqalargacha.",
-      cta: "Narx va vaqtni aniqlang",
-      btnWa: "Telegram da savol bering",
-      btnBook: "Onlayn ariza qoldirish",
-      items: [
-        {
-          name: "Individual darslar",
-          text: "Murabbiy bilan bittama-bitta — chavandozlik texnikasi, o'tirish, otni boshqarish. Tez rivojlanish uchun eng yaxshisi.",
-          tag: "Mashhur",
-        },
-        {
-          name: "Guruh darslari",
-          text: "Bolalar va kattalar uchun kichik guruhlar — qiziqarli, rag'batlantiruvchi va hamyonbop.",
-          tag: "",
-        },
-        {
-          name: "Sinov darsi",
-          text: "Yangi boshlovchilar uchun xavfsiz kirish dasturi — ot bilan tanishish, o'tirishning asoslari, egarda birinchi qadamlar.",
-          tag: "Yangi boshlovchilar uchun",
-        },
-        {
-          name: "Konkur bo'yicha trenirovkalar",
-          text: "Musobaqa tayyorligi — korda ishlash, sakrashlar, to'siqlar kursasida texnika.",
-          tag: "Sportchilar uchun",
-        },
-        {
-          name: "Otlar bilan fotosessiyalar",
-          text: "Professional foto va video tashkil qilamiz — tug'ilgan kunlar, uchrashuvlar, oilaviy sessiyalar va fashion suratlar.",
-          tag: "",
-        },
-      ],
-    },
-    testimonials: {
-      label: "Mijozlar sharhlari",
-      title: "O'quvchilarimiz nima deydi",
-      subtitle:
-        "ASLAN da allaqachon mashg'ulot qilayotgan oilalar, sportchilar va fotogrflarning haqiqiy hikoyalari.",
-      starsAria: "5 yulduz",
-      reviews: [
-        {
-          text: "Qizimizni sinov darsiga yozib oldik — u hayratda! Murabbiy sabr-toqatli, aniq tushuntiradi. Darhol bir oyga yozildik. Chilonzordagi barcha oilalarga tavsiya qilaman.",
-          name: "Dilnoza M.",
-          role: "O'quvchining onasi, 8 yosh",
-          date: "2026 yil Fevral",
-        },
-        {
-          text: "To'y yilligimiz uchun otlar bilan fotosessiya buyurtma qildik. Hammasi zo'r o'tdi — otlar sokin, joy chiroyli. Rasmlar ajoyib chiqdi. ASLAN jamoasiga rahmat!",
-          name: "Kamila va Akbar",
-          role: "Yillik fotosessiya",
-          date: "2026 yil Yanvar",
-        },
-        {
-          text: "4 oydan beri konkur bo'yicha mashg'ulot qilaman. Avvaliga noldan boshlagan edim, hozir birinchi musobaqaga tayyorlanmoqdaman. Murabbiy professional, ishini sevishi seziladi.",
-          name: "Timur R.",
-          role: "Sportchi, konkur",
-          date: "2025 yil Dekabr",
-        },
-        {
-          text: "Bolalar uchun ajoyib joy! Xavfsiz, otlar muloyim, xodimlar diqqatli. O'g'lim har shanba kunini bayram kabi kutadi.",
-          name: "Shahlo X.",
-          role: "O'quvchining onasi, 10 yosh",
-          date: "2025 yil Noyabr",
-        },
-      ],
-      stats: [
-        { number: "500+", label: "o'quvchi o'qitildi" },
-        { number: "5+", label: "yil Toshkentda ishlamoqda" },
-        { number: "4.9★", label: "o'rtacha mijozlar bahosi" },
-        { number: "30+", label: "fotosessiya o'tkazildi" },
-      ],
-    },
-    about: {
-      imgAlt: "ASLAN ot klubi murabbiylar jamoasi",
-      imgPlaceholder: "Jamoa fotosi",
-      chip1: "5+ yil tajriba",
-      chip2: "Sertifikatlangan murabbiylar",
-      chip3: "6 yoshdan bolalar uchun xavfsiz",
-      label: "Klub haqida",
-      title: "ASLAN jamoasi — murabbiylar va infratuzilma",
-      lead: "ASLAN ot klubi Chilonzor gippodromi yonida joylashgan — Toshkentdagi eng yaxshi chavandozlik maydonlaridan biri. Biz egarda birinchi qadamlarini qo'yayotganlar uchun ham, konkur musobaqalariga tayyorlanayotganlar uchun ham ishlaydi.",
-      btnContact: "Murabbiy bilan bog'lanish",
-      btnPrices: "Narxlarni ko'rish",
-      features: [
-        {
-          title: "Professional murabbiylar",
-          text: "Instruktorlarimiz bolalar va kattalar uchun ko'p yillik o'qitish tajribasiga ega konkur musobaqa ishtirokchilari.",
-        },
-        {
-          title: "Gippodrom infratuzilmasi",
-          text: "Yopiq va ochiq manejlar, chavandozlik treklari, konkur to'siqlar kurasi, zamonaviy jihozlar.",
-        },
-        {
-          title: "Xavfsizlik — ustuvor",
-          text: "Majburiy yo'riqnoma, sertifikatlangan egarlar, barcha chavandozlar uchun dubulg'alar, instruktorning doimiy mavjudligi.",
-        },
-      ],
-    },
-    prices: {
-      label: "Narxlar va jadval",
-      title: "Mashg'ulotlar jadvali va narxi",
-      subtitle:
-        "Har kuni 07:00 dan ishlaymiz. Aniq narxlar so'rov asosida (guruh chegirmalari mavjud).",
-      featuresAria: "Nima kiritilgan",
-      btn: "Telefon orqali yozilish",
-      note: "* Narxlar yozilishda aniqlanadi — guruhlar, bolalar va doimiy mijozlar uchun chegirmalar mavjud. Qo'ng'iroq qiling:",
-      noteOr: "yoki",
-      schedule: [
-        { days: "Du – Ju", hours: "07:00 – 20:00" },
-        { days: "Shanba", hours: "07:00 – 19:00" },
-        { days: "Yakshanba", hours: "08:00 – 18:00" },
-      ],
-      plans: [
-        {
-          name: "Sinov darsi",
-          desc: "Yangi boshlovchilar uchun ideal — instruktor bilan 45 daqiqa.",
-          price: "So'rov asosida",
-          unit: "· 1 mashg'ulot",
-          badge: "",
-          features: [
-            "Instruktor bilan 45 daqiqa",
-            "Tekshirilgan jihozlar",
-            "Xavfsizlik yo'riqnomasi",
-            "Oldindan to'lovsiz",
-          ],
-        },
-        {
-          name: "Individual darslar",
-          desc: "Murabbiy bilan shaxsiy dastur — eng tez taraqqiyot.",
-          price: "So'rov asosida",
-          unit: "· 1 mashg'ulot",
-          badge: "Mashhur",
-          features: [
-            "Murabbiy bilan 1-ga-1",
-            "Individual reja",
-            "Moslashuvchan jadval",
-            "So'rov bo'yicha video tahlil",
-          ],
-        },
-        {
-          name: "Guruh darslari",
-          desc: "Bolalar va kattalar uchun — qiziqarliroq va hamyonbop.",
-          price: "So'rov asosida",
-          unit: "· 1 mashg'ulot",
-          badge: "",
-          features: [
-            "Guruhda 5 kishigacha",
-            "6 yoshdan bolalarga mos",
-            "Belgilangan jadval",
-            "Obuna chegirmasi",
-          ],
-        },
-        {
-          name: "Konkur / Musobaqalar",
-          desc: "Turnir tayyorligi — kurs ishlash va sakrash texnikasi.",
-          price: "So'rov asosida",
-          unit: "· 1 mashg'ulot",
-          badge: "Mashhur",
-          features: [
-            "To'siqlar kurasi",
-            "Konkur murabbiysi bilan ishlash",
-            "Texnikani baholash va tahlil",
-            "Chempionatlarga tayyorlik",
-          ],
-        },
-      ],
-    },
-    gallery: {
-      label: "Fotogalereya",
-      title: "Mashg'ulotlarimiz va musobaqalar",
-      subtitle:
-        "ASLAN ot klubida trenirovkalar, konkur, fotosessiyalar va bayramlar.",
-      filterAria: "Galereya filtri",
-      btnWa: "Fotosessiya buyurtma qilish",
-      btnWaSub: "Telegram da tezkor javob",
-      closeLightbox: "Yopish",
-      prevPhoto: "Oldingi foto",
-      nextPhoto: "Keyingi foto",
-      tabs: [
-        { id: "all", label: "Hammasi" },
-        { id: "training", label: "Trenirovkalar" },
-        { id: "competition", label: "Musobaqalar" },
-        { id: "photo", label: "Fotosessiyalar" },
-      ],
-      items: [
-        { label: "Trenirovka", alt: "Individual chavandozlik darsi" },
-        { label: "Konkur", alt: "ASLAN da konkur musobaqasi" },
-        { label: "Fotosessiya", alt: "Otlar bilan professional fotosessiya" },
-        { label: "Guruh", alt: "Bolalar uchun guruh chavandozlik darslari" },
-        { label: "Sakrash", alt: "Musobaqada sakrashlar" },
-        { label: "Juft", alt: "Ot bilan romantik fotosessiya" },
-        { label: "Korda", alt: "Murabbiy bilan korda ishlash" },
-        { label: "G'alaba", alt: "Konkur g'oliblarini taqdirlaш" },
-        { label: "Bolalar", alt: "Otlar bilan bolalar fotosessiyasi" },
-        { label: "Yangi", alt: "Yangi boshlovchilar uchun sinov darsi" },
-        { label: "Chempionat", alt: "Konkur chempionati" },
-        { label: "To'y", alt: "Otlar bilan to'y fotosessiyasi" },
-      ],
-    },
-    faq: {
-      label: "FAQ",
-      title: "Ko'p so'raladigan savollar",
-      subtitle:
-        "Javob topa olmadingizmi? Qo'ng'iroq qiling yoki yozing — bir necha daqiqada javob beramiz.",
-      ctaTitle: "Savollar qoldimi?",
-      ctaText: "Qo'ng'iroq qiling yoki yozing — tez javob beramiz.",
-      btnCall: "Qo'ng'iroq",
-      items: [
-        {
-          q: "Sinov darsiga qanday yozilish mumkin?",
-          a: "+998 88 258-65-65 raqamiga qo'ng'iroq qiling yoki Telegram da yozing — menejer bir necha daqiqa ichida qulay vaqtni tasdiqlaydi. Shuningdek, saytdagi forma orqali ariza qoldirishingiz mumkin.",
-        },
-        {
-          q: "Necha yoshdan chavandozlik bilан shug'ullanish mumkin?",
-          a: "Bizda 6 yoshdan bolalar mashg'ulot qiladi. Kichkintoylar uchun maxsus bolalar jihozlari, dubulg'alar va instruktorning doimiy mavjudligi ta'minlangan. Yuqori yosh chegarasi yo'q — istalgan yoshda boshlash mumkin.",
-        },
-        {
-          q: "Birinchi darsga nima olib kelish kerak?",
-          a: "Qulay kiyimda kelish kifoya: yopiq shimlar (jinsi yoki leggings), kichik poshnali yopiq oyoq kiyimi (platformasiz krossovka yoki etik). Agar o'zingiznikini olib kelmagan bo'lsangiz, dubulg'a bepul beriladi.",
-        },
-        {
-          q: "Sayr uchun ot ijarasi bormi?",
-          a: "Ha — klub hududida sayr uchun otlar taqdim etamiz. Narx va davomiyligi haqida telefon yoki Telegram orqali yozilishda so'rang.",
-        },
-        {
-          q: "Otlar bilan fotosessiyani qanday tashkil qilish mumkin?",
-          a: "Telegram da yozing yoki qo'ng'iroq qiling — sana, vaqt va format bo'yicha (tabiatda/manejda) istaklarni muhokama qilamiz. Kelishilgan holda taklif etilgan fotogrflar bilan ham ishlaymiz.",
-        },
-        {
-          q: "Bolalar uchun guruh darslari bormi?",
-          a: "Ha, guruh darslari bolalar va kattalar uchun mavjud. Guruhlar kichik — 5 kishigacha, shunda murabbiy har biriga e'tibor bera oladi. Darslar belgilangan jadval bo'yicha.",
-        },
-        {
-          q: "Klub qayerda joylashgan?",
-          a: "Biz Toshkentning Chilonzor tumanida, gippodrom yonida joylashganmiz. Mo'ljal — Bunyodkor prospektidagi LUKOIL AZS. Avtomobillar uchun qulay to'xtash joyi mavjud.",
-        },
-        {
-          q: "Konkur musobaqalariga qanday tayyorlanish mumkin?",
-          a: "Ixtisoslashgan murabbiyimiz bilan konkur bo'yicha trenirovkalarga yoziling. Individual tayyorgarlik rejasini tuzamiz: asosiy texnika, korda ishlash, to'siqlar kursasida sakrashlarni mashq qilish.",
-        },
-      ],
-    },
-    form: {
-      label: "Onlayn yozilish",
-      title: "Ariza qoldiring — qayta qo'ng'iroq qilamiz",
-      desc1: "Formani to'ldiring va menejer ",
-      desc1strong: "1 ish soati",
-      desc2:
-        " ichida siz bilan bog'lanadi — sanani va vaqtni tasdiqlash, savollarga javob berish va xizmatni tanlashda yordam berish uchun.",
-      orContact: "Yoki bevosita bog'laning:",
-      successTitle: "Ariza qabul qilindi!",
-      successText:
-        "1 ish soati ichida siz bilan bog'lanamiz. Shoshilinch bo'lsa — hozir qo'ng'iroq qiling:",
-      ariaLabel: "Mashg'ulotga yozilish formasi",
-      labelName: "Ism",
-      labelPhone: "Telefon",
-      labelTelegram: "Telegram",
-      labelService: "Xizmat",
-      placeholderName: "Ism Familiya",
-      placeholderPhone: "+998 90 999 99 99",
-      placeholderTelegram: "@telegram user",
-      selectPlaceholder: "Xizmatni tanlang...",
-      serviceOptions: [
-        "Sinov darsi",
-        "Individual darslar",
-        "Guruh darslari",
-        "Otlar bilan fotosessiya",
-        "Konkur bo'yicha trenirovkalar",
-      ],
-      consent:
-        "Maxfiylik siyosatiga muvofiq shaxsiy ma'lumotlarni qayta ishlashga roziman",
-      btnSubmit: "Ariza yuborish",
-      btnSubmitting: "Yuborilmoqda...",
-      consentNote: "Tugmani bosib, men rozilik beraman",
-      consentLink: "shaxsiy ma'lumotlarni qayta ishlashga",
-      errName: "Ismingizni kiriting (kamida 2 ta belgi)",
-      errPhone: "To'g'ri telefon raqamini kiriting",
-      errService: "Xizmatni tanlang",
-      errConsent: "Ma'lumotlarni qayta ishlashga rozilik talab qilinadi",
-    },
-    contact: {
-      label: "Bizni qayerdan topish mumkin",
-      title: "Kontaktlar va qanday borish",
-      subtitle:
-        "Biz Chilonzordamiz — gippodrom yonida. Qulay to'xtash joyi, har kuni 07:00 dan ishlaymiz.",
-      btnCall: "Qo'ng'iroq:",
-      btnWa: "Telegram da yozing",
-      mapAria: "ASLAN ot klubi joylashuv xaritasi",
-      mapAddress: "Bunyodkor pr-ti, Chilonzor",
-      mapLandmark: "Mo'ljal: Chilonzor gippodromi / LUKOIL AZS",
-      mapsBtn: "Google Maps da ochish",
-      cards: [
-        { label: "Asosiy telefon" },
-        { label: "Qo'shimcha telefon" },
-        {
-          label: "Manzil",
-          value: "Bunyodkor pr-ti, Chilonzor, Toshkent",
-          sub: "Mo'ljal: Chilonzor gippodromi / LUKOIL AZS",
-        },
-        {
-          label: "Ish vaqti",
-          value: "Har kuni 07:00 dan 20:00 gacha",
-          sub: "Yakshanbada 18:00 gacha",
-        },
-      ],
-    },
-    footer: {
-      logoAria: "ASLAN — sahifa boshiga",
-      brandDesc:
-        "Chilonzor, Toshkentdagi professional ot klubi. Chavandozlik darslari, konkur, otlar bilan fotosessiyalar.",
-      hours: "Har kuni 07:00 dan 20:00 gacha",
-      ctaTitle: "Boshlashga tayyormisiz? Hozir qo'ng'iroq qiling",
-      ctaSub:
-        "Birinchi sinov darsi — shunchaki qo'ng'iroq qiling yoki Telegram da yozing.",
-      navTitle: "Navigatsiya",
-      servicesTitle: "Xizmatlar",
-      contactTitle: "Kontaktlar",
-      copyright: "ASLAN Ot klubi. Barcha huquqlar himoyalangan.",
-      seo: "Ot klubi Toshkent · Chavandozlik darslari Chilonzor · Konkur trenirovkalari",
-      navLinks: [
-        "Bosh sahifa",
-        "Xizmatlar",
-        "Biz haqimizda",
-        "Narxlar",
-        "Galereya",
-        "FAQ",
-        "Kontaktlar",
-        "Yozilish",
-      ],
-      serviceLinks: [
-        "Sinov darsi",
-        "Individual darslar",
-        "Guruh darslari",
-        "Konkur bo'yicha trenirovkalar",
-        "Otlar bilan fotosessiyalar",
-      ],
-      address: "Bunyodkor pr-ti, Chilonzor",
-    },
-  },
-};
+﻿-i-m-p-o-r-t- -{- -r-e-f-,- -c-o-m-p-u-t-e-d- -}- -f-r-o-m- -"-v-u-e-"-;--
+--
+-/-/- -G-u-a-r-d- -f-o-r- -S-S-G-/-S-S-R- -b-u-i-l-d- -e-n-v-i-r-o-n-m-e-n-t- -w-h-e-r-e- -l-o-c-a-l-S-t-o-r-a-g-e- -i-s- -u-n-a-v-a-i-l-a-b-l-e--
+-c-o-n-s-t- -l-a-n-g- -=- -r-e-f-(--
+- - -t-y-p-e-o-f- -l-o-c-a-l-S-t-o-r-a-g-e- -!-=-=- -"-u-n-d-e-f-i-n-e-d-"--
+- - - - -?- -l-o-c-a-l-S-t-o-r-a-g-e-.-g-e-t-I-t-e-m-(-"-a-s-l-a-n-_-l-a-n-g-"-)- -|-|- -"-r-u-"--
+- - - - -:- -"-r-u-"-,--
+-)-;--
+--
+-e-x-p-o-r-t- -f-u-n-c-t-i-o-n- -u-s-e-I-1-8-n-(-)- -{--
+- - -c-o-n-s-t- -s-e-t-L-a-n-g- -=- -(-l-)- -=->- -{--
+- - - - -l-a-n-g-.-v-a-l-u-e- -=- -l-;--
+- - - - -l-o-c-a-l-S-t-o-r-a-g-e-.-s-e-t-I-t-e-m-(-"-a-s-l-a-n-_-l-a-n-g-"-,- -l-)-;--
+- - - - -d-o-c-u-m-e-n-t-.-d-o-c-u-m-e-n-t-E-l-e-m-e-n-t-.-l-a-n-g- -=- -l-;--
+- - -}-;--
+--
+- - -c-o-n-s-t- -t- -=- -c-o-m-p-u-t-e-d-(-(-)- -=->- -t-r-a-n-s-l-a-t-i-o-n-s-[-l-a-n-g-.-v-a-l-u-e-]- -|-|- -t-r-a-n-s-l-a-t-i-o-n-s-.-r-u-)-;--
+--
+- - -r-e-t-u-r-n- -{- -l-a-n-g-,- -s-e-t-L-a-n-g-,- -t- -}-;--
+-}--
+--
+-c-o-n-s-t- -t-r-a-n-s-l-a-t-i-o-n-s- -=- -{--
+- - -r-u-:- -{--
+- - - - -/-/- -S-i-t-e-H-e-a-d-e-r--
+- - - - -h-e-a-d-e-r-:- -{--
+- - - - - - -l-o-g-o-S-u-b-:- -"-К-о-н-н-ы-й- -к-л-у-б-"-,--
+- - - - - - -l-o-g-o-A-r-i-a-:- -"-A-S-L-A-N- -К-о-н-н-ы-й- -к-л-у-б- -—- -г-л-а-в-н-а-я-"-,--
+- - - - - - -n-a-v-:- -{--
+- - - - - - - - -s-e-r-v-i-c-e-s-:- -"-У-с-л-у-г-и-"-,--
+- - - - - - - - -a-b-o-u-t-:- -"-О- -н-а-с-"-,--
+- - - - - - - - -p-r-i-c-e-s-:- -"-Ц-е-н-ы-"-,--
+- - - - - - - - -g-a-l-l-e-r-y-:- -"-Г-а-л-е-р-е-я-"-,--
+- - - - - - - - -f-a-q-:- -"-F-A-Q-"-,--
+- - - - - - - - -c-o-n-t-a-c-t-s-:- -"-К-о-н-т-а-к-т-ы-"-,--
+- - - - - - -}-,--
+- - - - - - -c-a-l-l-A-r-i-a-:- -"-П-о-з-в-о-н-и-т-ь- -н-а-м-"-,--
+- - - - - - -w-a-A-r-i-a-:- -"-Н-а-п-и-с-а-т-ь- -в- -T-e-l-e-g-r-a-m-"-,--
+- - - - - - -b-o-o-k-:- -"-З-а-п-и-с-а-т-ь-с-я-"-,--
+- - - - - - -m-e-n-u-A-r-i-a-:- -"-О-т-к-р-ы-т-ь- -м-е-н-ю-"-,--
+- - - - - - -m-o-b-i-l-e-N-a-v-A-r-i-a-:- -"-М-о-б-и-л-ь-н-а-я- -н-а-в-и-г-а-ц-и-я-"-,--
+- - - - - - -c-a-l-l-B-t-n-:- -"-П-о-з-в-о-н-и-т-ь-"-,--
+- - - - -}-,--
+- - - - -/-/- -S-t-i-c-k-y-M-o-b-i-l-e-B-a-r--
+- - - - -s-t-i-c-k-y-:- -{--
+- - - - - - -a-r-i-a-:- -"-Б-ы-с-т-р-ы-й- -к-о-н-т-а-к-т-"-,--
+- - - - - - -c-a-l-l-A-r-i-a-:- -"-П-о-з-в-о-н-и-т-ь- -н-а-м-"-,--
+- - - - - - -c-a-l-l-:- -"-П-о-з-в-о-н-и-т-ь-"-,--
+- - - - - - -w-a-A-r-i-a-:- -"-Н-а-п-и-с-а-т-ь- -в- -T-e-l-e-g-r-a-m-"-,--
+- - - - -}-,--
+- - - - -/-/- -H-e-r-o-S-e-c-t-i-o-n--
+- - - - -h-e-r-o-:- -{--
+- - - - - - -a-r-i-a-:- -"-Г-л-а-в-н-ы-й- -б-а-н-н-е-р-"-,--
+- - - - - - -i-m-g-A-l-t-:- -"-З-а-н-я-т-и-я- -в- -к-о-н-н-о-м- -к-л-у-б-е- -A-S-L-A-N-,- -Ч-и-л-а-н-з-а-р-,- -Т-а-ш-к-е-н-т-"-,--
+- - - - - - -s-c-r-o-l-l-A-r-i-a-:- -"-П-р-о-к-р-у-т-и-т-ь- -в-н-и-з-"-,--
+- - - - - - -c-a-l-l-A-r-i-a-:- -"-П-о-з-в-о-н-и-т-ь- -и- -з-а-п-и-с-а-т-ь-с-я-"-,--
+- - - - - - -c-h-i-p-1-:- -"-Р-а-б-о-т-а-е-м- -с- -0-7-:-0-0-"-,--
+- - - - - - -c-h-i-p-2-:- -"-5-0-0-+- -у-ч-е-н-и-к-о-в-"-,--
+- - - - - - -c-h-i-p-3-:- -"-Б-е-з-о-п-а-с-н-о- -д-л-я- -д-е-т-е-й-"-,--
+- - - - - - -l-a-b-e-l-:- -"-Ч-и-л-а-н-з-а-р-,- -Т-а-ш-к-е-н-т- -·- -у- -и-п-п-о-д-р-о-м-а-"-,--
+- - - - - - -h-1-:- -"-К-о-н-н-ы-й- -к-л-у-б-"-,--
+- - - - - - -h-1-e-m-:- -"-в- -Ч-и-л-а-н-з-а-р-е-"-,--
+- - - - - - -s-u-b-1-:- -"-У-р-о-к-и- -в-е-р-х-о-в-о-й- -е-з-д-ы- -у- -и-п-п-о-д-р-о-м-а- -—- -д-л-я- -д-е-т-е-й- -о-т- -6- -л-е-т- -и- -в-з-р-о-с-л-ы-х-.- -Т-р-е-н-и-р-о-в-к-и- -п-о- -к-о-н-к-у-р-у-,- -п-р-о-г-у-л-к-и- -и- -ф-о-т-о-с-е-с-с-и-и- -с- -л-о-ш-а-д-ь-м-и-.-"-,--
+- - - - - - -s-u-b-2-s-t-r-o-n-g-:- -"-П-р-о-б-н-ы-й- -у-р-о-к-"-,--
+- - - - - - -s-u-b-2-r-e-s-t-:- -"- -—- -п-о- -з-а-п-и-с-и- -ч-е-р-е-з- -з-в-о-н-о-к- -и-л-и- -T-e-l-e-g-r-a-m-.-"-,--
+- - - - - - -b-t-n-C-a-l-l-:- -"-П-о-з-в-о-н-и-т-ь- -с-е-й-ч-а-с-"-,--
+- - - - - - -b-t-n-W-a-:- -"-Н-а-п-и-с-а-т-ь- -в- -T-e-l-e-g-r-a-m-"-,--
+- - - - - - -o-r-:- -"-И-л-и-"-,--
+- - - - - - -l-e-a-v-e-A-p-p-:- -"-о-с-т-а-в-ь-т-е- -з-а-я-в-к-у-"-,--
+- - - - - - -c-a-l-l-b-a-c-k-:- -"- -—- -п-е-р-е-з-в-о-н-и-м- -в- -т-е-ч-е-н-и-е- -1- -ч-а-с-а-"-,--
+- - - - -}-,--
+- - - - -/-/- -B-e-n-e-f-i-t-s-S-e-c-t-i-o-n--
+- - - - -b-e-n-e-f-i-t-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-П-о-ч-е-м-у- -в-ы-б-и-р-а-ю-т- -н-а-с-"-,--
+- - - - - - -t-i-t-l-e-:- -"-4- -п-р-и-ч-и-н-ы- -з-а-н-и-м-а-т-ь-с-я- -в- -A-S-L-A-N-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-П-р-о-ф-е-с-с-и-о-н-а-л-ь-н-ы-й- -к-о-н-н-ы-й- -к-л-у-б- -у- -и-п-п-о-д-р-о-м-а- -—- -б-е-з-о-п-а-с-н-о-,- -у-д-о-б-н-о-,- -р-е-з-у-л-ь-т-а-т-и-в-н-о-.-"-,--
+- - - - - - -c-t-a-T-e-x-t-:- -"-Г-о-т-о-в-ы- -п-о-п-р-о-б-о-в-а-т-ь-?- -П-е-р-в-ы-й- -у-р-о-к- -—- -б-е-з- -о-б-я-з-а-т-е-л-ь-с-т-в-.-"-,--
+- - - - - - -c-t-a-B-t-n-:- -"-З-а-п-и-с-а-т-ь-с-я- -н-а- -п-р-о-б-н-ы-й- -у-р-о-к-"-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-О-п-ы-т-н-ы-е- -т-р-е-н-е-р-ы-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-П-о-д-г-о-т-о-в-к-а- -о-т- -ч-е-м-п-и-о-н-о-в- -—- -и-н-д-и-в-и-д-у-а-л-ь-н-ы-й- -п-л-а-н-,- -р-а-б-о-т-а- -н-а-д- -п-о-с-а-д-к-о-й- -и- -т-е-х-н-и-к-о-й- -у-п-р-а-в-л-е-н-и-я-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-У-д-о-б-н-о-е- -р-а-с-п-о-л-о-ж-е-н-и-е-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-Ч-и-л-а-н-з-а-р-,- -р-я-д-о-м- -с- -и-п-п-о-д-р-о-м-о-м- -—- -п-а-р-к-о-в-к-а- -у- -к-л-у-б-а-,- -у-д-о-б-н-ы-й- -п-о-д-ъ-е-з-д- -и-з- -л-ю-б-о-й- -ч-а-с-т-и- -г-о-р-о-д-а-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-Б-е-з-о-п-а-с-н-о-с-т-ь-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-С-е-р-т-и-ф-и-ц-и-р-о-в-а-н-н-о-е- -с-н-а-р-я-ж-е-н-и-е-,- -и-н-с-т-р-у-к-т-а-ж- -д-л-я- -н-о-в-и-ч-к-о-в-,- -д-е-т-с-к-о-е- -о-б-о-р-у-д-о-в-а-н-и-е- -и- -п-о-с-т-о-я-н-н-ы-й- -п-р-и-с-м-о-т-р-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-Ф-о-т-о-с-е-с-с-и-и-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-О-р-г-а-н-и-з-у-е-м- -п-р-о-ф-е-с-с-и-о-н-а-л-ь-н-ы-е- -ф-о-т-о- -и- -в-и-д-е-о- -с- -л-о-ш-а-д-ь-м-и- -д-л-я- -л-ю-б-о-г-о- -с-о-б-ы-т-и-я- -—- -р-е-з-у-л-ь-т-а-т- -у-ж-е- -н-а- -с-л-е-д-у-ю-щ-и-й- -д-е-н-ь-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -/-/- -S-e-r-v-i-c-e-s-S-e-c-t-i-o-n--
+- - - - -s-e-r-v-i-c-e-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-Ч-т-о- -м-ы- -п-р-е-д-л-а-г-а-е-м-"-,--
+- - - - - - -t-i-t-l-e-:- -"-У-с-л-у-г-и- -к-л-у-б-а- -A-S-L-A-N-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-Д-л-я- -д-е-т-е-й- -о-т- -6- -л-е-т- -и- -в-з-р-о-с-л-ы-х- -л-ю-б-о-г-о- -у-р-о-в-н-я- -—- -о-т- -п-е-р-в-о-г-о- -у-р-о-к-а- -д-о- -с-о-р-е-в-н-о-в-а-н-и-й-.-"-,--
+- - - - - - -c-t-a-:- -"-У-т-о-ч-н-и-т-ь- -ц-е-н-у- -и- -в-р-е-м-я-"-,--
+- - - - - - -b-t-n-W-a-:- -"-З-а-д-а-т-ь- -в-о-п-р-о-с- -в- -T-e-l-e-g-r-a-m-"-,--
+- - - - - - -b-t-n-B-o-o-k-:- -"-О-с-т-а-в-и-т-ь- -з-а-я-в-к-у- -о-н-л-а-й-н-"-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-И-н-д-и-в-и-д-у-а-л-ь-н-ы-е- -з-а-н-я-т-и-я-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-Р-а-б-о-т-а- -о-д-и-н- -н-а- -о-д-и-н- -с- -т-р-е-н-е-р-о-м- -—- -т-е-х-н-и-к-а- -е-з-д-ы-,- -п-о-с-а-д-к-а-,- -у-п-р-а-в-л-е-н-и-е- -л-о-ш-а-д-ь-ю-.- -О-п-т-и-м-а-л-ь-н-о- -д-л-я- -б-ы-с-т-р-о-г-о- -п-р-о-г-р-е-с-с-а-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-П-о-п-у-л-я-р-н-о-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-Г-р-у-п-п-о-в-ы-е- -у-р-о-к-и-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-Н-е-б-о-л-ь-ш-и-е- -г-р-у-п-п-ы- -д-л-я- -д-е-т-е-й- -и- -в-з-р-о-с-л-ы-х- -—- -в-е-с-е-л-о-,- -м-о-т-и-в-и-р-у-ю-щ-е- -и- -д-о-с-т-у-п-н-о- -п-о- -ц-е-н-е-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-П-р-о-б-н-ы-й- -у-р-о-к-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-Б-е-з-о-п-а-с-н-а-я- -в-в-о-д-н-а-я- -п-р-о-г-р-а-м-м-а- -д-л-я- -н-о-в-и-ч-к-о-в- -—- -з-н-а-к-о-м-с-т-в-о- -с- -л-о-ш-а-д-ь-ю-,- -о-с-н-о-в-ы- -п-о-с-а-д-к-и-,- -п-е-р-в-ы-е- -ш-а-г-и- -в- -с-е-д-л-е-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-Д-л-я- -н-о-в-и-ч-к-о-в-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-Т-р-е-н-и-р-о-в-к-и- -п-о- -к-о-н-к-у-р-у-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-П-о-д-г-о-т-о-в-к-а- -к- -с-о-р-е-в-н-о-в-а-н-и-я-м- -—- -р-а-б-о-т-а- -н-а- -к-о-р-д-е-,- -п-р-ы-ж-к-и-,- -т-е-х-н-и-к-а- -н-а- -т-р-а-с-с-е- -п-р-е-п-я-т-с-т-в-и-й-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-Д-л-я- -с-п-о-р-т-с-м-е-н-о-в-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-Ф-о-т-о-с-е-с-с-и-и- -с- -л-о-ш-а-д-ь-м-и-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-О-р-г-а-н-и-з-у-е-м- -п-р-о-ф-е-с-с-и-о-н-а-л-ь-н-ы-е- -ф-о-т-о- -и- -в-и-д-е-о- -—- -д-н-и- -р-о-ж-д-е-н-и-я-,- -с-в-и-д-а-н-и-я-,- -с-е-м-е-й-н-ы-е- -с-е-с-с-и-и- -и- -f-a-s-h-i-o-n---с-ъ-ё-м-к-и-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -/-/- -T-e-s-t-i-m-o-n-i-a-l-s-S-e-c-t-i-o-n--
+- - - - -t-e-s-t-i-m-o-n-i-a-l-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-О-т-з-ы-в-ы- -к-л-и-е-н-т-о-в-"-,--
+- - - - - - -t-i-t-l-e-:- -"-Ч-т-о- -г-о-в-о-р-я-т- -н-а-ш-и- -у-ч-е-н-и-к-и-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-Р-е-а-л-ь-н-ы-е- -и-с-т-о-р-и-и- -с-е-м-е-й-,- -с-п-о-р-т-с-м-е-н-о-в- -и- -ф-о-т-о-г-р-а-ф-о-в-,- -к-о-т-о-р-ы-е- -у-ж-е- -з-а-н-и-м-а-ю-т-с-я- -в- -A-S-L-A-N-.-"-,--
+- - - - - - -s-t-a-r-s-A-r-i-a-:- -"-5- -з-в-ё-з-д-"-,--
+- - - - - - -r-e-v-i-e-w-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-З-а-п-и-с-а-л-и- -д-о-ч-к-у- -н-а- -п-р-о-б-н-ы-й- -у-р-о-к- -—- -о-н-а- -в- -в-о-с-т-о-р-г-е-!- -Т-р-е-н-е-р- -т-е-р-п-е-л-и-в-ы-й-,- -о-б-ъ-я-с-н-я-е-т- -п-о-н-я-т-н-о-.- -З-а-п-и-с-а-л-и-с-ь- -с-р-а-з-у- -н-а- -м-е-с-я-ц-.- -Р-е-к-о-м-е-н-д-у-ю- -в-с-е-м- -с-е-м-ь-я-м- -с- -д-е-т-ь-м-и- -в- -Ч-и-л-а-н-з-а-р-е-.-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-Д-и-л-н-о-з-а- -М-.-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-М-а-м-а- -у-ч-е-н-и-ц-ы-,- -8- -л-е-т-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-Ф-е-в-р-а-л-ь- -2-0-2-6-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-З-а-к-а-з-ы-в-а-л-и- -ф-о-т-о-с-е-с-с-и-ю- -с- -л-о-ш-а-д-ь-м-и- -д-л-я- -г-о-д-о-в-щ-и-н-ы- -с-в-а-д-ь-б-ы-.- -В-с-ё- -п-р-о-ш-л-о- -о-т-л-и-ч-н-о- -—- -л-о-ш-а-д-и- -с-п-о-к-о-й-н-ы-е-,- -м-е-с-т-о- -к-р-а-с-и-в-о-е-.- -Ф-о-т-о- -п-о-л-у-ч-и-л-и-с-ь- -н-е-в-е-р-о-я-т-н-ы-е-.- -С-п-а-с-и-б-о- -к-о-м-а-н-д-е- -A-S-L-A-N-!-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-К-а-м-и-л-а- -и- -А-к-б-а-р-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-Ф-о-т-о-с-е-с-с-и-я- -н-а- -г-о-д-о-в-щ-и-н-у-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-Я-н-в-а-р-ь- -2-0-2-6-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-Т-р-е-н-и-р-у-ю-с-ь- -п-о- -к-о-н-к-у-р-у- -у-ж-е- -4- -м-е-с-я-ц-а-.- -И-з-н-а-ч-а-л-ь-н-о- -б-ы-л- -н-а- -н-у-л-е-в-о-м- -у-р-о-в-н-е-,- -с-е-й-ч-а-с- -г-о-т-о-в-л-ю-с-ь- -к- -п-е-р-в-ы-м- -с-о-р-е-в-н-о-в-а-н-и-я-м-.- -Т-р-е-н-е-р- -п-р-о-ф-е-с-с-и-о-н-а-л-ь-н-ы-й-,- -в-и-д-н-о-,- -ч-т-о- -л-ю-б-и-т- -с-в-о-ё- -д-е-л-о-.-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-Т-и-м-у-р- -Р-.-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-С-п-о-р-т-с-м-е-н-,- -к-о-н-к-у-р-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-Д-е-к-а-б-р-ь- -2-0-2-5-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-О-т-л-и-ч-н-о-е- -м-е-с-т-о- -д-л-я- -д-е-т-е-й-!- -Б-е-з-о-п-а-с-н-о-,- -л-о-ш-а-д-и- -д-о-б-р-ы-е-,- -п-е-р-с-о-н-а-л- -в-н-и-м-а-т-е-л-ь-н-ы-й-.- -С-ы-н- -ж-д-ё-т- -к-а-ж-д-о-й- -с-у-б-б-о-т-ы- -к-а-к- -п-р-а-з-д-н-и-к-а-.-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-Ш-а-х-л-о- -Х-.-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-М-а-м-а- -у-ч-е-н-и-к-а-,- -1-0- -л-е-т-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-Н-о-я-б-р-ь- -2-0-2-5-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - - - -s-t-a-t-s-:- -[--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-5-0-0-+-"-,- -l-a-b-e-l-:- -"-у-ч-е-н-и-к-о-в- -п-р-о-ш-л-и- -о-б-у-ч-е-н-и-е-"- -}-,--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-5-+-"-,- -l-a-b-e-l-:- -"-л-е-т- -к-л-у-б- -р-а-б-о-т-а-е-т- -в- -Т-а-ш-к-е-н-т-е-"- -}-,--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-4-.-9-★-"-,- -l-a-b-e-l-:- -"-с-р-е-д-н-я-я- -о-ц-е-н-к-а- -к-л-и-е-н-т-о-в-"- -}-,--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-3-0-+-"-,- -l-a-b-e-l-:- -"-ф-о-т-о-с-е-с-с-и-й- -п-р-о-в-е-д-е-н-о-"- -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -/-/- -A-b-o-u-t-S-e-c-t-i-o-n--
+- - - - -a-b-o-u-t-:- -{--
+- - - - - - -i-m-g-A-l-t-:- -"-К-о-м-а-н-д-а- -т-р-е-н-е-р-о-в- -к-о-н-н-о-г-о- -к-л-у-б-а- -A-S-L-A-N-"-,--
+- - - - - - -i-m-g-P-l-a-c-e-h-o-l-d-e-r-:- -"-Ф-о-т-о- -к-о-м-а-н-д-ы-"-,--
+- - - - - - -c-h-i-p-1-:- -"-О-п-ы-т- -5-+- -л-е-т-"-,--
+- - - - - - -c-h-i-p-2-:- -"-С-е-р-т-и-ф-и-ц-и-р-о-в-а-н-н-ы-е- -т-р-е-н-е-р-ы-"-,--
+- - - - - - -c-h-i-p-3-:- -"-Б-е-з-о-п-а-с-н-о-с-т-ь- -д-л-я- -д-е-т-е-й- -о-т- -6- -л-е-т-"-,--
+- - - - - - -l-a-b-e-l-:- -"-О- -к-л-у-б-е-"-,--
+- - - - - - -t-i-t-l-e-:- -"-К-о-м-а-н-д-а- -A-S-L-A-N- -—- -т-р-е-н-е-р-ы- -и- -и-н-ф-р-а-с-т-р-у-к-т-у-р-а-"-,--
+- - - - - - -l-e-a-d-:- -"-К-о-н-н-ы-й- -к-л-у-б- -A-S-L-A-N- -р-а-с-п-о-л-о-ж-е-н- -у- -Ч-и-л-а-н-з-а-р-с-к-о-г-о- -и-п-п-о-д-р-о-м-а- -—- -о-д-н-о-г-о- -и-з- -л-у-ч-ш-и-х- -п-л-о-щ-а-д-о-к- -д-л-я- -в-е-р-х-о-в-о-й- -е-з-д-ы- -в- -Т-а-ш-к-е-н-т-е-.- -М-ы- -р-а-б-о-т-а-е-м- -д-л-я- -т-е-х-,- -к-т-о- -д-е-л-а-е-т- -п-е-р-в-ы-е- -ш-а-г-и- -в- -с-е-д-л-е-,- -и- -д-л-я- -т-е-х-,- -к-т-о- -г-о-т-о-в-и-т-с-я- -к- -с-о-р-е-в-н-о-в-а-н-и-я-м- -п-о- -к-о-н-к-у-р-у-.-"-,--
+- - - - - - -b-t-n-C-o-n-t-a-c-t-:- -"-С-в-я-з-а-т-ь-с-я- -с- -т-р-е-н-е-р-о-м-"-,--
+- - - - - - -b-t-n-P-r-i-c-e-s-:- -"-П-о-с-м-о-т-р-е-т-ь- -ц-е-н-ы-"-,--
+- - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-П-р-о-ф-е-с-с-и-о-н-а-л-ь-н-ы-е- -т-р-е-н-е-р-ы-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-Н-а-ш-и- -и-н-с-т-р-у-к-т-о-р-ы- -—- -у-ч-а-с-т-н-и-к-и- -с-о-р-е-в-н-о-в-а-н-и-й- -п-о- -к-о-н-к-у-р-у- -с- -м-н-о-г-о-л-е-т-н-и-м- -о-п-ы-т-о-м- -п-р-е-п-о-д-а-в-а-н-и-я- -д-л-я- -д-е-т-е-й- -и- -в-з-р-о-с-л-ы-х-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-И-н-ф-р-а-с-т-р-у-к-т-у-р-а- -и-п-п-о-д-р-о-м-а-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-К-р-ы-т-ы-й- -и- -о-т-к-р-ы-т-ы-й- -м-а-н-е-ж-и-,- -к-о-н-н-ы-е- -т-р-а-с-с-ы-,- -т-р-а-с-с-а- -п-р-е-п-я-т-с-т-в-и-й- -д-л-я- -к-о-н-к-у-р-а-,- -с-о-в-р-е-м-е-н-н-о-е- -с-н-а-р-я-ж-е-н-и-е-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-Б-е-з-о-п-а-с-н-о-с-т-ь- -—- -п-р-и-о-р-и-т-е-т-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-О-б-я-з-а-т-е-л-ь-н-ы-й- -и-н-с-т-р-у-к-т-а-ж-,- -с-е-р-т-и-ф-и-ц-и-р-о-в-а-н-н-ы-е- -с-ё-д-л-а-,- -ш-л-е-м-ы- -д-л-я- -в-с-е-х- -в-с-а-д-н-и-к-о-в-,- -п-о-с-т-о-я-н-н-о-е- -п-р-и-с-у-т-с-т-в-и-е- -и-н-с-т-р-у-к-т-о-р-а-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -/-/- -P-r-i-c-e-s-S-e-c-t-i-o-n--
+- - - - -p-r-i-c-e-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-Ц-е-н-ы- -и- -р-а-с-п-и-с-а-н-и-е-"-,--
+- - - - - - -t-i-t-l-e-:- -"-Р-а-с-п-и-с-а-н-и-е- -и- -с-т-о-и-м-о-с-т-ь- -з-а-н-я-т-и-й-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-Р-а-б-о-т-а-е-м- -е-ж-е-д-н-е-в-н-о- -с- -0-7-:-0-0-.- -Т-о-ч-н-ы-е- -ц-е-н-ы- -—- -п-о- -з-а-п-р-о-с-у- -(-в-о-з-м-о-ж-н-ы- -г-р-у-п-п-о-в-ы-е- -с-к-и-д-к-и-)-.-"-,--
+- - - - - - -f-e-a-t-u-r-e-s-A-r-i-a-:- -"-Ч-т-о- -в-к-л-ю-ч-е-н-о-"-,--
+- - - - - - -b-t-n-:- -"-З-а-п-и-с-а-т-ь-с-я- -п-о- -т-е-л-е-ф-о-н-у-"-,--
+- - - - - - -n-o-t-e-:- -"-*- -Ц-е-н-ы- -у-т-о-ч-н-я-ю-т-с-я- -п-р-и- -з-а-п-и-с-и- -—- -в-о-з-м-о-ж-н-ы- -с-к-и-д-к-и- -д-л-я- -г-р-у-п-п-,- -д-е-т-е-й- -и- -п-о-с-т-о-я-н-н-ы-х- -к-л-и-е-н-т-о-в-.- -З-в-о-н-и-т-е-:-"-,--
+- - - - - - -n-o-t-e-O-r-:- -"-и-л-и-"-,--
+- - - - - - -s-c-h-e-d-u-l-e-:- -[--
+- - - - - - - - -{- -d-a-y-s-:- -"-П-н- -–- -П-т-"-,- -h-o-u-r-s-:- -"-0-7-:-0-0- -–- -2-0-:-0-0-"- -}-,--
+- - - - - - - - -{- -d-a-y-s-:- -"-С-у-б-б-о-т-а-"-,- -h-o-u-r-s-:- -"-0-7-:-0-0- -–- -1-9-:-0-0-"- -}-,--
+- - - - - - - - -{- -d-a-y-s-:- -"-В-о-с-к-р-е-с-е-н-ь-е-"-,- -h-o-u-r-s-:- -"-0-8-:-0-0- -–- -1-8-:-0-0-"- -}-,--
+- - - - - - -]-,--
+- - - - - - -p-l-a-n-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-П-р-о-б-н-ы-й- -у-р-о-к-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-И-д-е-а-л-ь-н-о- -д-л-я- -н-а-ч-и-н-а-ю-щ-и-х- -—- -4-5- -м-и-н-у-т- -с- -и-н-с-т-р-у-к-т-о-р-о-м-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-П-о- -з-а-п-р-о-с-у-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -1- -з-а-н-я-т-и-е-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-4-5- -м-и-н- -с- -и-н-с-т-р-у-к-т-о-р-о-м-"-,--
+- - - - - - - - - - - - -"-П-р-о-в-е-р-е-н-н-о-е- -с-н-а-р-я-ж-е-н-и-е-"-,--
+- - - - - - - - - - - - -"-И-н-с-т-р-у-к-т-а-ж- -п-о- -б-е-з-о-п-а-с-н-о-с-т-и-"-,--
+- - - - - - - - - - - - -"-Б-е-з- -п-р-е-д-о-п-л-а-т-ы-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-И-н-д-и-в-и-д-у-а-л-ь-н-ы-е- -з-а-н-я-т-и-я-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-П-е-р-с-о-н-а-л-ь-н-а-я- -п-р-о-г-р-а-м-м-а- -с- -т-р-е-н-е-р-о-м- -—- -с-а-м-ы-й- -б-ы-с-т-р-ы-й- -п-р-о-г-р-е-с-с-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-П-о- -з-а-п-р-о-с-у-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -1- -з-а-н-я-т-и-е-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-П-о-п-у-л-я-р-н-о-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-1- -н-а- -1- -с- -т-р-е-н-е-р-о-м-"-,--
+- - - - - - - - - - - - -"-И-н-д-и-в-и-д-у-а-л-ь-н-ы-й- -п-л-а-н-"-,--
+- - - - - - - - - - - - -"-Г-и-б-к-о-е- -р-а-с-п-и-с-а-н-и-е-"-,--
+- - - - - - - - - - - - -"-В-и-д-е-о- -р-а-з-б-о-р- -п-о- -з-а-п-р-о-с-у-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-Г-р-у-п-п-о-в-ы-е- -з-а-н-я-т-и-я-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-Д-л-я- -д-е-т-е-й- -и- -в-з-р-о-с-л-ы-х- -—- -в-е-с-е-л-е-е- -и- -д-о-с-т-у-п-н-е-е- -п-о- -с-т-о-и-м-о-с-т-и-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-П-о- -з-а-п-р-о-с-у-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -1- -з-а-н-я-т-и-е-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-Д-о- -5- -ч-е-л-о-в-е-к- -в- -г-р-у-п-п-е-"-,--
+- - - - - - - - - - - - -"-П-о-д-х-о-д-и-т- -д-л-я- -д-е-т-е-й- -о-т- -6- -л-е-т-"-,--
+- - - - - - - - - - - - -"-Ф-и-к-с-и-р-о-в-а-н-н-о-е- -р-а-с-п-и-с-а-н-и-е-"-,--
+- - - - - - - - - - - - -"-С-к-и-д-к-а- -п-р-и- -а-б-о-н-е-м-е-н-т-е-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-К-о-н-к-у-р- -/- -С-о-р-е-в-н-о-в-а-н-и-я-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-П-о-д-г-о-т-о-в-к-а- -к- -т-у-р-н-и-р-а-м- -—- -р-а-б-о-т-а- -н-а- -т-р-а-с-с-е- -и- -о-т-р-а-б-о-т-к-а- -п-р-ы-ж-к-о-в-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-П-о- -з-а-п-р-о-с-у-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -1- -з-а-н-я-т-и-е-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-П-о-п-у-л-я-р-н-о-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-Т-р-а-с-с-а- -п-р-е-п-я-т-с-т-в-и-й-"-,--
+- - - - - - - - - - - - -"-Р-а-б-о-т-а- -с- -т-р-е-н-е-р-о-м- -п-о- -к-о-н-к-у-р-у-"-,--
+- - - - - - - - - - - - -"-О-ц-е-н-к-а- -и- -р-а-з-б-о-р- -т-е-х-н-и-к-и-"-,--
+- - - - - - - - - - - - -"-П-о-д-г-о-т-о-в-к-а- -к- -ч-е-м-п-и-о-н-а-т-а-м-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -/-/- -G-a-l-l-e-r-y-S-e-c-t-i-o-n--
+- - - - -g-a-l-l-e-r-y-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-Ф-о-т-о-г-а-л-е-р-е-я-"-,--
+- - - - - - -t-i-t-l-e-:- -"-Н-а-ш-и- -з-а-н-я-т-и-я- -и- -с-о-р-е-в-н-о-в-а-н-и-я-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-Т-р-е-н-и-р-о-в-к-и-,- -к-о-н-к-у-р-,- -ф-о-т-о-с-е-с-с-и-и- -и- -п-р-а-з-д-н-и-к-и- -в- -к-о-н-н-о-м- -к-л-у-б-е- -A-S-L-A-N-.-"-,--
+- - - - - - -f-i-l-t-e-r-A-r-i-a-:- -"-Ф-и-л-ь-т-р- -г-а-л-е-р-е-и-"-,--
+- - - - - - -b-t-n-W-a-:- -"-З-а-к-а-з-а-т-ь- -ф-о-т-о-с-е-с-с-и-ю-"-,--
+- - - - - - -b-t-n-W-a-S-u-b-:- -"-Б-ы-с-т-р-ы-й- -о-т-в-е-т- -в- -T-e-l-e-g-r-a-m-"-,--
+- - - - - - -c-l-o-s-e-L-i-g-h-t-b-o-x-:- -"-З-а-к-р-ы-т-ь-"-,--
+- - - - - - -p-r-e-v-P-h-o-t-o-:- -"-П-р-е-д-ы-д-у-щ-е-е- -ф-о-т-о-"-,--
+- - - - - - -n-e-x-t-P-h-o-t-o-:- -"-С-л-е-д-у-ю-щ-е-е- -ф-о-т-о-"-,--
+- - - - - - -t-a-b-s-:- -[--
+- - - - - - - - -{- -i-d-:- -"-a-l-l-"-,- -l-a-b-e-l-:- -"-В-с-е-"- -}-,--
+- - - - - - - - -{- -i-d-:- -"-t-r-a-i-n-i-n-g-"-,- -l-a-b-e-l-:- -"-Т-р-е-н-и-р-о-в-к-и-"- -}-,--
+- - - - - - - - -{- -i-d-:- -"-c-o-m-p-e-t-i-t-i-o-n-"-,- -l-a-b-e-l-:- -"-С-о-р-е-в-н-о-в-а-н-и-я-"- -}-,--
+- - - - - - - - -{- -i-d-:- -"-p-h-o-t-o-"-,- -l-a-b-e-l-:- -"-Ф-о-т-о-с-е-с-с-и-и-"- -}-,--
+- - - - - - -]-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -l-a-b-e-l-:- -"-Т-р-е-н-и-р-о-в-к-а-"-,--
+- - - - - - - - - - -a-l-t-:- -"-И-н-д-и-в-и-д-у-а-л-ь-н-а-я- -т-р-е-н-и-р-о-в-к-а- -п-о- -в-е-р-х-о-в-о-й- -е-з-д-е-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-К-о-н-к-у-р-"-,- -a-l-t-:- -"-С-о-р-е-в-н-о-в-а-н-и-я- -п-о- -к-о-н-к-у-р-у- -в- -A-S-L-A-N-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-Ф-о-т-о-с-е-с-с-и-я-"-,- -a-l-t-:- -"-П-р-о-ф-е-с-с-и-о-н-а-л-ь-н-а-я- -ф-о-т-о-с-е-с-с-и-я- -с- -л-о-ш-а-д-ь-м-и-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-Г-р-у-п-п-а-"-,- -a-l-t-:- -"-Г-р-у-п-п-о-в-ы-е- -у-р-о-к-и- -в-е-р-х-о-в-о-й- -е-з-д-ы- -д-л-я- -д-е-т-е-й-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-П-р-ы-ж-о-к-"-,- -a-l-t-:- -"-П-р-ы-ж-к-и- -н-а- -с-о-р-е-в-н-о-в-а-н-и-я-х-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-П-а-р-а-"-,- -a-l-t-:- -"-Р-о-м-а-н-т-и-ч-е-с-к-а-я- -ф-о-т-о-с-е-с-с-и-я- -с- -л-о-ш-а-д-ь-ю-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-К-о-р-д-а-"-,- -a-l-t-:- -"-Р-а-б-о-т-а- -н-а- -к-о-р-д-е- -с- -т-р-е-н-е-р-о-м-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-П-о-б-е-д-а-"-,- -a-l-t-:- -"-Н-а-г-р-а-ж-д-е-н-и-е- -п-о-б-е-д-и-т-е-л-е-й- -к-о-н-к-у-р-а-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-Д-е-т-и-"-,- -a-l-t-:- -"-Д-е-т-с-к-а-я- -ф-о-т-о-с-е-с-с-и-я- -с- -л-о-ш-а-д-ь-м-и-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-Н-о-в-и-ч-о-к-"-,- -a-l-t-:- -"-П-р-о-б-н-ы-й- -у-р-о-к- -д-л-я- -н-о-в-и-ч-к-о-в-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-Ч-е-м-п-и-о-н-а-т-"-,- -a-l-t-:- -"-Ч-е-м-п-и-о-н-а-т- -п-о- -к-о-н-к-у-р-у-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-С-в-а-д-ь-б-а-"-,- -a-l-t-:- -"-С-в-а-д-е-б-н-а-я- -ф-о-т-о-с-е-с-с-и-я- -с- -л-о-ш-а-д-ь-м-и-"- -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -/-/- -F-A-Q-S-e-c-t-i-o-n--
+- - - - -f-a-q-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-F-A-Q-"-,--
+- - - - - - -t-i-t-l-e-:- -"-Ч-а-с-т-ы-е- -в-о-п-р-о-с-ы-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-Н-е- -н-а-ш-л-и- -о-т-в-е-т-?- -П-о-з-в-о-н-и-т-е- -и-л-и- -н-а-п-и-ш-и-т-е- -—- -о-т-в-е-т-и-м- -з-а- -н-е-с-к-о-л-ь-к-о- -м-и-н-у-т-.-"-,--
+- - - - - - -c-t-a-T-i-t-l-e-:- -"-О-с-т-а-л-и-с-ь- -в-о-п-р-о-с-ы-?-"-,--
+- - - - - - -c-t-a-T-e-x-t-:- -"-П-о-з-в-о-н-и-т-е- -и-л-и- -н-а-п-и-ш-и-т-е- -—- -о-т-в-е-т-и-м- -б-ы-с-т-р-о-.-"-,--
+- - - - - - -b-t-n-C-a-l-l-:- -"-П-о-з-в-о-н-и-т-ь-"-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-К-а-к- -з-а-п-и-с-а-т-ь-с-я- -н-а- -п-р-о-б-н-ы-й- -у-р-о-к-?-"-,--
+- - - - - - - - - - -a-:- -"-П-о-з-в-о-н-и-т-е- -п-о- -н-о-м-е-р-у- -+-9-9-8- -8-8- -2-5-8---6-5---6-5- -и-л-и- -н-а-п-и-ш-и-т-е- -в- -T-e-l-e-g-r-a-m- -—- -м-е-н-е-д-ж-е-р- -п-о-д-т-в-е-р-д-и-т- -у-д-о-б-н-о-е- -в-р-е-м-я- -в- -т-е-ч-е-н-и-е- -н-е-с-к-о-л-ь-к-и-х- -м-и-н-у-т-.- -Т-а-к-ж-е- -м-о-ж-н-о- -о-с-т-а-в-и-т-ь- -з-а-я-в-к-у- -ч-е-р-е-з- -ф-о-р-м-у- -н-а- -с-а-й-т-е-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-С- -к-а-к-о-г-о- -в-о-з-р-а-с-т-а- -м-о-ж-н-о- -з-а-н-и-м-а-т-ь-с-я- -в-е-р-х-о-в-о-й- -е-з-д-о-й-?-"-,--
+- - - - - - - - - - -a-:- -"-У- -н-а-с- -з-а-н-и-м-а-ю-т-с-я- -д-е-т-и- -о-т- -6- -л-е-т-.- -Д-л-я- -м-а-л-ы-ш-е-й- -п-р-е-д-у-с-м-о-т-р-е-н-о- -с-п-е-ц-и-а-л-ь-н-о-е- -д-е-т-с-к-о-е- -с-н-а-р-я-ж-е-н-и-е-,- -ш-л-е-м-ы- -и- -п-о-с-т-о-я-н-н-о-е- -п-р-и-с-у-т-с-т-в-и-е- -и-н-с-т-р-у-к-т-о-р-а-.- -В-з-р-о-с-л-ы-й- -в-о-з-р-а-с-т-н-о-й- -п-о-р-о-г- -—- -н-е-т-:- -н-а-ч-а-т-ь- -м-о-ж-н-о- -в- -л-ю-б-о-м- -в-о-з-р-а-с-т-е-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-Ч-т-о- -в-з-я-т-ь- -н-а- -п-е-р-в-ы-й- -у-р-о-к-?-"-,--
+- - - - - - - - - - -a-:- -"-Д-о-с-т-а-т-о-ч-н-о- -п-р-и-й-т-и- -в- -у-д-о-б-н-о-й- -о-д-е-ж-д-е-:- -з-а-к-р-ы-т-ы-е- -б-р-ю-к-и- -(-д-ж-и-н-с-ы- -и-л-и- -л-е-г-г-и-н-с-ы-)-,- -з-а-к-р-ы-т-а-я- -о-б-у-в-ь- -н-а- -н-е-б-о-л-ь-ш-о-м- -к-а-б-л-у-к-е- -(-к-р-о-с-с-о-в-к-и- -б-е-з- -п-л-а-т-ф-о-р-м-ы- -и-л-и- -б-о-т-и-н-к-и-)-.- -Ш-л-е-м- -в-ы-д-а-ё-м- -н-а- -п-р-о-к-а-т- -б-е-с-п-л-а-т-н-о-,- -е-с-л-и- -н-е-т- -с-в-о-е-г-о-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-Е-с-т-ь- -л-и- -п-р-о-к-а-т- -л-о-ш-а-д-е-й- -д-л-я- -п-р-о-г-у-л-о-к-?-"-,--
+- - - - - - - - - - -a-:- -"-Д-а- -—- -п-р-е-д-о-с-т-а-в-л-я-е-м- -л-о-ш-а-д-е-й- -д-л-я- -п-р-о-г-у-л-о-к- -н-а- -т-е-р-р-и-т-о-р-и-и- -к-л-у-б-а-.- -С-т-о-и-м-о-с-т-ь- -и- -п-р-о-д-о-л-ж-и-т-е-л-ь-н-о-с-т-ь- -у-т-о-ч-н-я-й-т-е- -п-р-и- -з-а-п-и-с-и- -п-о- -т-е-л-е-ф-о-н-у- -и-л-и- -T-e-l-e-g-r-a-m-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-К-а-к- -о-р-г-а-н-и-з-о-в-а-т-ь- -ф-о-т-о-с-е-с-с-и-ю- -с- -л-о-ш-а-д-ь-м-и-?-"-,--
+- - - - - - - - - - -a-:- -"-Н-а-п-и-ш-и-т-е- -н-а-м- -в- -T-e-l-e-g-r-a-m- -и-л-и- -п-о-з-в-о-н-и-т-е- -—- -о-б-с-у-д-и-м- -д-а-т-у-,- -в-р-е-м-я-,- -п-о-ж-е-л-а-н-и-я- -п-о- -ф-о-р-м-а-т-у- -(-н-а- -п-р-и-р-о-д-е-/-в- -м-а-н-е-ж-е-)-.- -Р-а-б-о-т-а-е-м- -т-а-к-ж-е- -с- -п-р-и-г-л-а-ш-ё-н-н-ы-м-и- -ф-о-т-о-г-р-а-ф-а-м-и- -п-о- -с-о-г-л-а-с-о-в-а-н-и-ю-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-Е-с-т-ь- -л-и- -г-р-у-п-п-о-в-ы-е- -з-а-н-я-т-и-я- -д-л-я- -д-е-т-е-й-?-"-,--
+- - - - - - - - - - -a-:- -"-Д-а-,- -г-р-у-п-п-о-в-ы-е- -з-а-н-я-т-и-я- -д-о-с-т-у-п-н-ы- -д-л-я- -д-е-т-е-й- -и- -в-з-р-о-с-л-ы-х-.- -Г-р-у-п-п-ы- -н-е-б-о-л-ь-ш-и-е- -—- -д-о- -5- -ч-е-л-о-в-е-к-,- -ч-т-о-б-ы- -т-р-е-н-е-р- -м-о-г- -у-д-е-л-и-т-ь- -в-н-и-м-а-н-и-е- -к-а-ж-д-о-м-у-.- -З-а-н-я-т-и-я- -п-о- -ф-и-к-с-и-р-о-в-а-н-н-о-м-у- -р-а-с-п-и-с-а-н-и-ю-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-Г-д-е- -и-м-е-н-н-о- -р-а-с-п-о-л-о-ж-е-н- -к-л-у-б-?-"-,--
+- - - - - - - - - - -a-:- -"-М-ы- -н-а-х-о-д-и-м-с-я- -в- -Ч-и-л-а-н-з-а-р-с-к-о-м- -р-а-й-о-н-е- -Т-а-ш-к-е-н-т-а-,- -р-я-д-о-м- -с- -и-п-п-о-д-р-о-м-о-м-.- -О-р-и-е-н-т-и-р- -—- -А-З-С- -L-U-K-O-I-L- -н-а- -п-р-о-с-п-е-к-т-е- -Б-у-н-и-й-о-д-к-о-р-.- -Е-с-т-ь- -у-д-о-б-н-а-я- -п-а-р-к-о-в-к-а- -д-л-я- -а-в-т-о-м-о-б-и-л-е-й-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-К-а-к- -п-о-д-г-о-т-о-в-и-т-ь-с-я- -к- -с-о-р-е-в-н-о-в-а-н-и-я-м- -п-о- -к-о-н-к-у-р-у-?-"-,--
+- - - - - - - - - - -a-:- -"-З-а-п-и-ш-и-т-е-с-ь- -н-а- -т-р-е-н-и-р-о-в-к-и- -п-о- -к-о-н-к-у-р-у- -с- -н-а-ш-и-м- -с-п-е-ц-и-а-л-и-з-и-р-о-в-а-н-н-ы-м- -т-р-е-н-е-р-о-м-.- -С-о-с-т-а-в-и-м- -и-н-д-и-в-и-д-у-а-л-ь-н-ы-й- -п-л-а-н- -п-о-д-г-о-т-о-в-к-и-:- -б-а-з-о-в-а-я- -т-е-х-н-и-к-а-,- -р-а-б-о-т-а- -н-а- -к-о-р-д-е-,- -о-т-р-а-б-о-т-к-а- -п-р-ы-ж-к-о-в- -н-а- -т-р-а-с-с-е- -п-р-е-п-я-т-с-т-в-и-й-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -/-/- -L-e-a-d-F-o-r-m-S-e-c-t-i-o-n--
+- - - - -f-o-r-m-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-З-а-п-и-с-ь- -о-н-л-а-й-н-"-,--
+- - - - - - -t-i-t-l-e-:- -"-О-с-т-а-в-ь-т-е- -з-а-я-в-к-у- -—- -м-ы- -п-е-р-е-з-в-о-н-и-м-"-,--
+- - - - - - -d-e-s-c-1-:- -"-З-а-п-о-л-н-и-т-е- -ф-о-р-м-у- -и- -м-е-н-е-д-ж-е-р- -с-в-я-ж-е-т-с-я- -с- -в-а-м-и- -в- -т-е-ч-е-н-и-е- -"-,--
+- - - - - - -d-e-s-c-1-s-t-r-o-n-g-:- -"-1- -р-а-б-о-ч-е-г-о- -ч-а-с-а-"-,--
+- - - - - - -d-e-s-c-2-:--
+- - - - - - - - -"-,- -ч-т-о-б-ы- -п-о-д-т-в-е-р-д-и-т-ь- -д-а-т-у- -и- -в-р-е-м-я-,- -о-т-в-е-т-и-т-ь- -н-а- -в-о-п-р-о-с-ы- -и- -п-о-м-о-ч-ь- -с- -в-ы-б-о-р-о-м- -у-с-л-у-г-и-.-"-,--
+- - - - - - -o-r-C-o-n-t-a-c-t-:- -"-И-л-и- -с-в-я-ж-и-т-е-с-ь- -с-р-а-з-у-:-"-,--
+- - - - - - -s-u-c-c-e-s-s-T-i-t-l-e-:- -"-З-а-я-в-к-а- -п-р-и-н-я-т-а-!-"-,--
+- - - - - - -s-u-c-c-e-s-s-T-e-x-t-:--
+- - - - - - - - -"-М-ы- -с-в-я-ж-е-м-с-я- -с- -в-а-м-и- -в- -т-е-ч-е-н-и-е- -1- -р-а-б-о-ч-е-г-о- -ч-а-с-а-.- -Е-с-л-и- -н-у-ж-н-о- -с-р-о-ч-н-о- -—- -п-о-з-в-о-н-и-т-е- -п-р-я-м-о- -с-е-й-ч-а-с-:-"-,--
+- - - - - - -a-r-i-a-L-a-b-e-l-:- -"-Ф-о-р-м-а- -з-а-п-и-с-и- -н-а- -з-а-н-я-т-и-е-"-,--
+- - - - - - -l-a-b-e-l-N-a-m-e-:- -"-И-м-я-"-,--
+- - - - - - -l-a-b-e-l-P-h-o-n-e-:- -"-Т-е-л-е-ф-о-н-"-,--
+- - - - - - -l-a-b-e-l-T-e-l-e-g-r-a-m-:- -"-T-e-l-e-g-r-a-m-"-,--
+- - - - - - -l-a-b-e-l-S-e-r-v-i-c-e-:- -"-У-с-л-у-г-а-"-,--
+- - - - - - -p-l-a-c-e-h-o-l-d-e-r-N-a-m-e-:- -"-И-м-я- -Ф-а-м-и-л-и-я-"-,--
+- - - - - - -p-l-a-c-e-h-o-l-d-e-r-P-h-o-n-e-:- -"-+-9-9-8- -9-0- -9-9-9- -9-9- -9-9-"-,--
+- - - - - - -p-l-a-c-e-h-o-l-d-e-r-T-e-l-e-g-r-a-m-:- -"-@-t-e-l-e-g-r-a-m- -u-s-e-r-"-,--
+- - - - - - -p-l-a-c-e-h-o-l-d-e-r-C-o-m-m-e-n-t-:- -"-Р-а-с-с-к-а-ж-и-т-е- -о- -с-е-б-е-,- -у-р-о-в-н-е- -п-о-д-г-о-т-о-в-к-и-,- -п-о-ж-е-л-а-н-и-я-х-.-.-.-"-,--
+- - - - - - -s-e-l-e-c-t-P-l-a-c-e-h-o-l-d-e-r-:- -"-В-ы-б-е-р-и-т-е- -у-с-л-у-г-у-.-.-.-"-,--
+- - - - - - -s-e-r-v-i-c-e-O-p-t-i-o-n-s-:- -[--
+- - - - - - - - -"-П-р-о-б-н-ы-й- -у-р-о-к-"-,--
+- - - - - - - - -"-И-н-д-и-в-и-д-у-а-л-ь-н-ы-е- -з-а-н-я-т-и-я-"-,--
+- - - - - - - - -"-Г-р-у-п-п-о-в-ы-е- -з-а-н-я-т-и-я-"-,--
+- - - - - - - - -"-Ф-о-т-о-с-е-с-с-и-я- -с- -л-о-ш-а-д-ь-м-и-"-,--
+- - - - - - - - -"-Т-р-е-н-и-р-о-в-к-и- -п-о- -к-о-н-к-у-р-у-"-,--
+- - - - - - -]-,--
+- - - - - - -c-o-n-s-e-n-t-:--
+- - - - - - - - -"-С-о-г-л-а-с-е-н-(-а-)- -н-а- -о-б-р-а-б-о-т-к-у- -п-е-р-с-о-н-а-л-ь-н-ы-х- -д-а-н-н-ы-х- -с-о-г-л-а-с-н-о- -п-о-л-и-т-и-к-е- -к-о-н-ф-и-д-е-н-ц-и-а-л-ь-н-о-с-т-и-"-,--
+- - - - - - -b-t-n-S-u-b-m-i-t-:- -"-О-с-т-а-в-и-т-ь- -з-а-я-в-к-у-"-,--
+- - - - - - -b-t-n-S-u-b-m-i-t-t-i-n-g-:- -"-О-т-п-р-а-в-л-я-е-м-.-.-.-"-,--
+- - - - - - -c-o-n-s-e-n-t-N-o-t-e-:- -"-Н-а-ж-и-м-а-я- -н-а- -к-н-о-п-к-у-,- -я- -с-о-г-л-а-ш-а-ю-с-ь- -н-а-"-,--
+- - - - - - -c-o-n-s-e-n-t-L-i-n-k-:- -"-о-б-р-а-б-о-т-к-у- -п-е-р-с-о-н-а-л-ь-н-ы-х- -д-а-н-н-ы-х-"-,--
+- - - - - - -e-r-r-N-a-m-e-:- -"-В-в-е-д-и-т-е- -и-м-я- -(-м-и-н-и-м-у-м- -2- -с-и-м-в-о-л-а-)-"-,--
+- - - - - - -e-r-r-P-h-o-n-e-:- -"-В-в-е-д-и-т-е- -к-о-р-р-е-к-т-н-ы-й- -н-о-м-е-р- -т-е-л-е-ф-о-н-а-"-,--
+- - - - - - -e-r-r-S-e-r-v-i-c-e-:- -"-В-ы-б-е-р-и-т-е- -у-с-л-у-г-у-"-,--
+- - - - - - -e-r-r-C-o-n-s-e-n-t-:- -"-Н-е-о-б-х-о-д-и-м-о- -с-о-г-л-а-с-и-е- -н-а- -о-б-р-а-б-о-т-к-у- -д-а-н-н-ы-х-"-,--
+- - - - -}-,--
+- - - - -/-/- -C-o-n-t-a-c-t-S-e-c-t-i-o-n--
+- - - - -c-o-n-t-a-c-t-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-К-а-к- -н-а-с- -н-а-й-т-и-"-,--
+- - - - - - -t-i-t-l-e-:- -"-К-о-н-т-а-к-т-ы- -и- -к-а-к- -д-о-б-р-а-т-ь-с-я-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-М-ы- -в- -Ч-и-л-а-н-з-а-р-е- -—- -р-я-д-о-м- -с- -и-п-п-о-д-р-о-м-о-м-.- -У-д-о-б-н-а-я- -п-а-р-к-о-в-к-а-,- -р-а-б-о-т-а-е-м- -к-а-ж-д-ы-й- -д-е-н-ь- -с- -0-7-:-0-0-.-"-,--
+- - - - - - -b-t-n-C-a-l-l-:- -"-П-о-з-в-о-н-и-т-ь-:-"-,--
+- - - - - - -b-t-n-W-a-:- -"-Н-а-п-и-с-а-т-ь- -в- -T-e-l-e-g-r-a-m-"-,--
+- - - - - - -m-a-p-A-r-i-a-:- -"-К-а-р-т-а- -р-а-с-п-о-л-о-ж-е-н-и-я- -к-о-н-н-о-г-о- -к-л-у-б-а- -A-S-L-A-N-"-,--
+- - - - - - -m-a-p-A-d-d-r-e-s-s-:- -"-п-р---т- -Б-у-н-и-й-о-д-к-о-р-,- -Ч-и-л-а-н-з-а-р-"-,--
+- - - - - - -m-a-p-L-a-n-d-m-a-r-k-:- -"-О-р-и-е-н-т-и-р-:- -Ч-и-л-а-н-з-а-р-с-к-и-й- -и-п-п-о-д-р-о-м- -/- -А-З-С- -L-U-K-O-I-L-"-,--
+- - - - - - -m-a-p-s-B-t-n-:- -"-О-т-к-р-ы-т-ь- -в- -G-o-o-g-l-e- -M-a-p-s-"-,--
+- - - - - - -c-a-r-d-s-:- -[--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-Т-е-л-е-ф-о-н- -(-о-с-н-о-в-н-о-й-)-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-Т-е-л-е-ф-о-н- -(-д-о-п-о-л-н-и-т-е-л-ь-н-ы-й-)-"- -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -l-a-b-e-l-:- -"-А-д-р-е-с-"-,--
+- - - - - - - - - - -v-a-l-u-e-:- -"-п-р---т- -Б-у-н-и-й-о-д-к-о-р-,- -Ч-и-л-а-н-з-а-р-,- -Т-а-ш-к-е-н-т-"-,--
+- - - - - - - - - - -s-u-b-:- -"-О-р-и-е-н-т-и-р-:- -Ч-и-л-а-н-з-а-р-с-к-и-й- -и-п-п-о-д-р-о-м- -/- -А-З-С- -L-U-K-O-I-L-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -l-a-b-e-l-:- -"-Р-е-ж-и-м- -р-а-б-о-т-ы-"-,--
+- - - - - - - - - - -v-a-l-u-e-:- -"-Е-ж-е-д-н-е-в-н-о- -с- -0-7-:-0-0- -д-о- -2-0-:-0-0-"-,--
+- - - - - - - - - - -s-u-b-:- -"-В- -в-о-с-к-р-е-с-е-н-ь-е- -д-о- -1-8-:-0-0-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -/-/- -S-i-t-e-F-o-o-t-e-r--
+- - - - -f-o-o-t-e-r-:- -{--
+- - - - - - -l-o-g-o-A-r-i-a-:- -"-A-S-L-A-N- -—- -к- -н-а-ч-а-л-у- -с-т-р-а-н-и-ц-ы-"-,--
+- - - - - - -b-r-a-n-d-D-e-s-c-:--
+- - - - - - - - -"-П-р-о-ф-е-с-с-и-о-н-а-л-ь-н-ы-й- -к-о-н-н-ы-й- -к-л-у-б- -в- -Ч-и-л-а-н-з-а-р-е-,- -Т-а-ш-к-е-н-т-.- -У-р-о-к-и- -в-е-р-х-о-в-о-й- -е-з-д-ы-,- -к-о-н-к-у-р-,- -ф-о-т-о-с-е-с-с-и-и- -с- -л-о-ш-а-д-ь-м-и-.-"-,--
+- - - - - - -h-o-u-r-s-:- -"-Е-ж-е-д-н-е-в-н-о- -с- -0-7-:-0-0- -д-о- -2-0-:-0-0-"-,--
+- - - - - - -c-t-a-T-i-t-l-e-:- -"-Г-о-т-о-в-ы- -н-а-ч-а-т-ь-?- -П-о-з-в-о-н-и-т-е- -п-р-я-м-о- -с-е-й-ч-а-с-"-,--
+- - - - - - -c-t-a-S-u-b-:- -"-П-е-р-в-ы-й- -п-р-о-б-н-ы-й- -у-р-о-к- -—- -п-р-о-с-т-о- -п-о-з-в-о-н-и-т-е- -и-л-и- -н-а-п-и-ш-и-т-е- -в- -T-e-l-e-g-r-a-m-.-"-,--
+- - - - - - -n-a-v-T-i-t-l-e-:- -"-Н-а-в-и-г-а-ц-и-я-"-,--
+- - - - - - -s-e-r-v-i-c-e-s-T-i-t-l-e-:- -"-У-с-л-у-г-и-"-,--
+- - - - - - -c-o-n-t-a-c-t-T-i-t-l-e-:- -"-К-о-н-т-а-к-т-ы-"-,--
+- - - - - - -c-o-p-y-r-i-g-h-t-:- -"-A-S-L-A-N- -К-о-н-н-ы-й- -к-л-у-б-.- -В-с-е- -п-р-а-в-а- -з-а-щ-и-щ-е-н-ы-.-"-,--
+- - - - - - -s-e-o-:- -"-К-о-н-н-ы-й- -к-л-у-б- -Т-а-ш-к-е-н-т- -·- -У-р-о-к-и- -в-е-р-х-о-в-о-й- -е-з-д-ы- -Ч-и-л-а-н-з-а-р- -·- -Т-р-е-н-и-р-о-в-к-и- -п-о- -к-о-н-к-у-р-у-"-,--
+- - - - - - -n-a-v-L-i-n-k-s-:- -[--
+- - - - - - - - -"-Г-л-а-в-н-а-я-"-,--
+- - - - - - - - -"-У-с-л-у-г-и-"-,--
+- - - - - - - - -"-О- -н-а-с-"-,--
+- - - - - - - - -"-Ц-е-н-ы-"-,--
+- - - - - - - - -"-Г-а-л-е-р-е-я-"-,--
+- - - - - - - - -"-F-A-Q-"-,--
+- - - - - - - - -"-К-о-н-т-а-к-т-ы-"-,--
+- - - - - - - - -"-З-а-п-и-с-а-т-ь-с-я-"-,--
+- - - - - - -]-,--
+- - - - - - -s-e-r-v-i-c-e-L-i-n-k-s-:- -[--
+- - - - - - - - -"-П-р-о-б-н-ы-й- -у-р-о-к-"-,--
+- - - - - - - - -"-И-н-д-и-в-и-д-у-а-л-ь-н-ы-е- -з-а-н-я-т-и-я-"-,--
+- - - - - - - - -"-Г-р-у-п-п-о-в-ы-е- -з-а-н-я-т-и-я-"-,--
+- - - - - - - - -"-Т-р-е-н-и-р-о-в-к-и- -п-о- -к-о-н-к-у-р-у-"-,--
+- - - - - - - - -"-Ф-о-т-о-с-е-с-с-и-и- -с- -л-о-ш-а-д-ь-м-и-"-,--
+- - - - - - -]-,--
+- - - - - - -a-d-d-r-e-s-s-:- -"-п-р---т- -Б-у-н-и-й-о-д-к-о-р-,- -Ч-и-л-а-н-з-а-р-"-,--
+- - - - -}-,--
+- - -}-,--
+--
+- - -e-n-:- -{--
+- - - - -h-e-a-d-e-r-:- -{--
+- - - - - - -l-o-g-o-S-u-b-:- -"-H-o-r-s-e- -C-l-u-b-"-,--
+- - - - - - -l-o-g-o-A-r-i-a-:- -"-A-S-L-A-N- -H-o-r-s-e- -C-l-u-b- -—- -h-o-m-e-"-,--
+- - - - - - -n-a-v-:- -{--
+- - - - - - - - -s-e-r-v-i-c-e-s-:- -"-S-e-r-v-i-c-e-s-"-,--
+- - - - - - - - -a-b-o-u-t-:- -"-A-b-o-u-t-"-,--
+- - - - - - - - -p-r-i-c-e-s-:- -"-P-r-i-c-e-s-"-,--
+- - - - - - - - -g-a-l-l-e-r-y-:- -"-G-a-l-l-e-r-y-"-,--
+- - - - - - - - -f-a-q-:- -"-F-A-Q-"-,--
+- - - - - - - - -c-o-n-t-a-c-t-s-:- -"-C-o-n-t-a-c-t-s-"-,--
+- - - - - - -}-,--
+- - - - - - -c-a-l-l-A-r-i-a-:- -"-C-a-l-l- -u-s-"-,--
+- - - - - - -w-a-A-r-i-a-:- -"-W-r-i-t-e- -o-n- -T-e-l-e-g-r-a-m-"-,--
+- - - - - - -b-o-o-k-:- -"-B-o-o-k- -n-o-w-"-,--
+- - - - - - -m-e-n-u-A-r-i-a-:- -"-O-p-e-n- -m-e-n-u-"-,--
+- - - - - - -m-o-b-i-l-e-N-a-v-A-r-i-a-:- -"-M-o-b-i-l-e- -n-a-v-i-g-a-t-i-o-n-"-,--
+- - - - - - -c-a-l-l-B-t-n-:- -"-C-a-l-l-"-,--
+- - - - -}-,--
+- - - - -s-t-i-c-k-y-:- -{--
+- - - - - - -a-r-i-a-:- -"-Q-u-i-c-k- -c-o-n-t-a-c-t-"-,--
+- - - - - - -c-a-l-l-A-r-i-a-:- -"-C-a-l-l- -u-s-"-,--
+- - - - - - -c-a-l-l-:- -"-C-a-l-l-"-,--
+- - - - - - -w-a-A-r-i-a-:- -"-W-r-i-t-e- -o-n- -T-e-l-e-g-r-a-m-"-,--
+- - - - -}-,--
+- - - - -h-e-r-o-:- -{--
+- - - - - - -a-r-i-a-:- -"-M-a-i-n- -b-a-n-n-e-r-"-,--
+- - - - - - -i-m-g-A-l-t-:- -"-R-i-d-i-n-g- -l-e-s-s-o-n-s- -a-t- -A-S-L-A-N- -H-o-r-s-e- -C-l-u-b-,- -C-h-i-l-a-n-z-a-r-,- -T-a-s-h-k-e-n-t-"-,--
+- - - - - - -s-c-r-o-l-l-A-r-i-a-:- -"-S-c-r-o-l-l- -d-o-w-n-"-,--
+- - - - - - -c-a-l-l-A-r-i-a-:- -"-C-a-l-l- -a-n-d- -b-o-o-k-"-,--
+- - - - - - -c-h-i-p-1-:- -"-O-p-e-n- -f-r-o-m- -0-7-:-0-0-"-,--
+- - - - - - -c-h-i-p-2-:- -"-5-0-0-+- -s-t-u-d-e-n-t-s-"-,--
+- - - - - - -c-h-i-p-3-:- -"-S-a-f-e- -f-o-r- -c-h-i-l-d-r-e-n-"-,--
+- - - - - - -l-a-b-e-l-:- -"-C-h-i-l-a-n-z-a-r-,- -T-a-s-h-k-e-n-t- -·- -n-e-a-r- -t-h-e- -h-i-p-p-o-d-r-o-m-e-"-,--
+- - - - - - -h-1-:- -"-H-o-r-s-e- -C-l-u-b-"-,--
+- - - - - - -h-1-e-m-:- -"-i-n- -C-h-i-l-a-n-z-a-r-"-,--
+- - - - - - -s-u-b-1-:- -"-H-o-r-s-e- -r-i-d-i-n-g- -l-e-s-s-o-n-s- -b-y- -t-h-e- -h-i-p-p-o-d-r-o-m-e- -—- -f-o-r- -c-h-i-l-d-r-e-n- -f-r-o-m- -a-g-e- -6- -a-n-d- -a-d-u-l-t-s-.- -S-h-o-w- -j-u-m-p-i-n-g- -t-r-a-i-n-i-n-g-,- -r-i-d-e-s- -a-n-d- -p-h-o-t-o- -s-e-s-s-i-o-n-s- -w-i-t-h- -h-o-r-s-e-s-.-"-,--
+- - - - - - -s-u-b-2-s-t-r-o-n-g-:- -"-T-r-i-a-l- -l-e-s-s-o-n-"-,--
+- - - - - - -s-u-b-2-r-e-s-t-:- -"- -—- -b-o-o-k-a-b-l-e- -b-y- -p-h-o-n-e- -o-r- -T-e-l-e-g-r-a-m-.-"-,--
+- - - - - - -b-t-n-C-a-l-l-:- -"-C-a-l-l- -n-o-w-"-,--
+- - - - - - -b-t-n-W-a-:- -"-W-r-i-t-e- -o-n- -T-e-l-e-g-r-a-m-"-,--
+- - - - - - -o-r-:- -"-O-r-"-,--
+- - - - - - -l-e-a-v-e-A-p-p-:- -"-l-e-a-v-e- -a- -r-e-q-u-e-s-t-"-,--
+- - - - - - -c-a-l-l-b-a-c-k-:- -"- -—- -w-e-'-l-l- -c-a-l-l- -b-a-c-k- -w-i-t-h-i-n- -1- -h-o-u-r-"-,--
+- - - - -}-,--
+- - - - -b-e-n-e-f-i-t-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-W-h-y- -c-h-o-o-s-e- -u-s-"-,--
+- - - - - - -t-i-t-l-e-:- -"-4- -r-e-a-s-o-n-s- -t-o- -t-r-a-i-n- -a-t- -A-S-L-A-N-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-P-r-o-f-e-s-s-i-o-n-a-l- -h-o-r-s-e- -c-l-u-b- -b-y- -t-h-e- -h-i-p-p-o-d-r-o-m-e- -—- -s-a-f-e-,- -c-o-n-v-e-n-i-e-n-t-,- -e-f-f-e-c-t-i-v-e-.-"-,--
+- - - - - - -c-t-a-T-e-x-t-:- -"-R-e-a-d-y- -t-o- -t-r-y-?- -F-i-r-s-t- -l-e-s-s-o-n- -—- -n-o- -c-o-m-m-i-t-m-e-n-t-s-.-"-,--
+- - - - - - -c-t-a-B-t-n-:- -"-B-o-o-k- -a- -t-r-i-a-l- -l-e-s-s-o-n-"-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-E-x-p-e-r-i-e-n-c-e-d- -t-r-a-i-n-e-r-s-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-C-o-a-c-h-i-n-g- -b-y- -c-h-a-m-p-i-o-n-s- -—- -i-n-d-i-v-i-d-u-a-l- -p-l-a-n-,- -w-o-r-k- -o-n- -s-e-a-t- -a-n-d- -c-o-n-t-r-o-l- -t-e-c-h-n-i-q-u-e-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-G-r-e-a-t- -l-o-c-a-t-i-o-n-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-C-h-i-l-a-n-z-a-r-,- -n-e-x-t- -t-o- -t-h-e- -h-i-p-p-o-d-r-o-m-e- -—- -p-a-r-k-i-n-g- -o-n- -s-i-t-e-,- -e-a-s-y- -a-c-c-e-s-s- -f-r-o-m- -a-n-y-w-h-e-r-e- -i-n- -t-h-e- -c-i-t-y-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-S-a-f-e-t-y-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-C-e-r-t-i-f-i-e-d- -e-q-u-i-p-m-e-n-t-,- -b-r-i-e-f-i-n-g- -f-o-r- -b-e-g-i-n-n-e-r-s-,- -c-h-i-l-d-r-e-n-'-s- -g-e-a-r- -a-n-d- -c-o-n-s-t-a-n-t- -s-u-p-e-r-v-i-s-i-o-n-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-P-h-o-t-o- -s-e-s-s-i-o-n-s-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-W-e- -o-r-g-a-n-i-s-e- -p-r-o-f-e-s-s-i-o-n-a-l- -p-h-o-t-o- -a-n-d- -v-i-d-e-o- -s-e-s-s-i-o-n-s- -w-i-t-h- -h-o-r-s-e-s- -f-o-r- -a-n-y- -o-c-c-a-s-i-o-n- -—- -r-e-s-u-l-t-s- -r-e-a-d-y- -t-h-e- -n-e-x-t- -d-a-y-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -s-e-r-v-i-c-e-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-W-h-a-t- -w-e- -o-f-f-e-r-"-,--
+- - - - - - -t-i-t-l-e-:- -"-A-S-L-A-N- -C-l-u-b- -S-e-r-v-i-c-e-s-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-F-o-r- -c-h-i-l-d-r-e-n- -f-r-o-m- -a-g-e- -6- -a-n-d- -a-d-u-l-t-s- -o-f- -a-n-y- -l-e-v-e-l- -—- -f-r-o-m- -f-i-r-s-t- -l-e-s-s-o-n- -t-o- -c-o-m-p-e-t-i-t-i-o-n-s-.-"-,--
+- - - - - - -c-t-a-:- -"-C-h-e-c-k- -p-r-i-c-e- -&- -s-c-h-e-d-u-l-e-"-,--
+- - - - - - -b-t-n-W-a-:- -"-A-s-k- -a- -q-u-e-s-t-i-o-n- -o-n- -T-e-l-e-g-r-a-m-"-,--
+- - - - - - -b-t-n-B-o-o-k-:- -"-L-e-a-v-e- -a- -r-e-q-u-e-s-t- -o-n-l-i-n-e-"-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-I-n-d-i-v-i-d-u-a-l- -l-e-s-s-o-n-s-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-O-n-e---o-n---o-n-e- -w-i-t-h- -a- -t-r-a-i-n-e-r- -—- -r-i-d-i-n-g- -t-e-c-h-n-i-q-u-e-,- -s-e-a-t-,- -h-o-r-s-e- -c-o-n-t-r-o-l-.- -B-e-s-t- -f-o-r- -r-a-p-i-d- -p-r-o-g-r-e-s-s-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-P-o-p-u-l-a-r-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-G-r-o-u-p- -l-e-s-s-o-n-s-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-S-m-a-l-l- -g-r-o-u-p-s- -f-o-r- -c-h-i-l-d-r-e-n- -a-n-d- -a-d-u-l-t-s- -—- -f-u-n-,- -m-o-t-i-v-a-t-i-n-g- -a-n-d- -a-f-f-o-r-d-a-b-l-e-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-T-r-i-a-l- -l-e-s-s-o-n-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-S-a-f-e- -i-n-t-r-o- -p-r-o-g-r-a-m-m-e- -f-o-r- -b-e-g-i-n-n-e-r-s- -—- -m-e-e-t- -t-h-e- -h-o-r-s-e-,- -b-a-s-i-c- -s-e-a-t-,- -f-i-r-s-t- -s-t-e-p-s- -i-n- -t-h-e- -s-a-d-d-l-e-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-F-o-r- -b-e-g-i-n-n-e-r-s-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-S-h-o-w- -j-u-m-p-i-n-g- -t-r-a-i-n-i-n-g-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-C-o-m-p-e-t-i-t-i-o-n- -p-r-e-p-a-r-a-t-i-o-n- -—- -l-u-n-g-e- -w-o-r-k-,- -j-u-m-p-s-,- -t-e-c-h-n-i-q-u-e- -o-n- -t-h-e- -o-b-s-t-a-c-l-e- -c-o-u-r-s-e-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-F-o-r- -a-t-h-l-e-t-e-s-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-P-h-o-t-o- -s-e-s-s-i-o-n-s- -w-i-t-h- -h-o-r-s-e-s-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-W-e- -o-r-g-a-n-i-s-e- -p-r-o-f-e-s-s-i-o-n-a-l- -p-h-o-t-o- -&- -v-i-d-e-o- -—- -b-i-r-t-h-d-a-y-s-,- -d-a-t-e-s-,- -f-a-m-i-l-y- -s-e-s-s-i-o-n-s- -a-n-d- -f-a-s-h-i-o-n- -s-h-o-o-t-s-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -t-e-s-t-i-m-o-n-i-a-l-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-C-l-i-e-n-t- -r-e-v-i-e-w-s-"-,--
+- - - - - - -t-i-t-l-e-:- -"-W-h-a-t- -o-u-r- -s-t-u-d-e-n-t-s- -s-a-y-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-R-e-a-l- -s-t-o-r-i-e-s- -f-r-o-m- -f-a-m-i-l-i-e-s-,- -a-t-h-l-e-t-e-s- -a-n-d- -p-h-o-t-o-g-r-a-p-h-e-r-s- -w-h-o- -a-l-r-e-a-d-y- -t-r-a-i-n- -a-t- -A-S-L-A-N-.-"-,--
+- - - - - - -s-t-a-r-s-A-r-i-a-:- -"-5- -s-t-a-r-s-"-,--
+- - - - - - -r-e-v-i-e-w-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-W-e- -s-i-g-n-e-d- -o-u-r- -d-a-u-g-h-t-e-r- -u-p- -f-o-r- -a- -t-r-i-a-l- -l-e-s-s-o-n- -—- -s-h-e-'-s- -t-h-r-i-l-l-e-d-!- -T-h-e- -t-r-a-i-n-e-r- -i-s- -p-a-t-i-e-n-t- -a-n-d- -e-x-p-l-a-i-n-s- -e-v-e-r-y-t-h-i-n-g- -c-l-e-a-r-l-y-.- -W-e- -s-i-g-n-e-d- -u-p- -f-o-r- -a- -f-u-l-l- -m-o-n-t-h- -r-i-g-h-t- -a-w-a-y-.- -H-i-g-h-l-y- -r-e-c-o-m-m-e-n-d- -t-o- -a-l-l- -f-a-m-i-l-i-e-s- -i-n- -C-h-i-l-a-n-z-a-r-.-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-D-i-l-n-o-z-a- -M-.-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-M-o-t-h-e-r- -o-f- -s-t-u-d-e-n-t-,- -a-g-e- -8-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-F-e-b-r-u-a-r-y- -2-0-2-6-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-W-e- -o-r-d-e-r-e-d- -a- -p-h-o-t-o- -s-e-s-s-i-o-n- -w-i-t-h- -h-o-r-s-e-s- -f-o-r- -o-u-r- -w-e-d-d-i-n-g- -a-n-n-i-v-e-r-s-a-r-y-.- -E-v-e-r-y-t-h-i-n-g- -w-e-n-t- -p-e-r-f-e-c-t-l-y- -—- -t-h-e- -h-o-r-s-e-s- -w-e-r-e- -c-a-l-m-,- -t-h-e- -s-e-t-t-i-n-g- -w-a-s- -b-e-a-u-t-i-f-u-l-.- -T-h-e- -p-h-o-t-o-s- -c-a-m-e- -o-u-t- -i-n-c-r-e-d-i-b-l-e-.- -T-h-a-n-k- -y-o-u- -A-S-L-A-N- -t-e-a-m-!-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-K-a-m-i-l-a- -&- -A-k-b-a-r-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-A-n-n-i-v-e-r-s-a-r-y- -p-h-o-t-o- -s-e-s-s-i-o-n-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-J-a-n-u-a-r-y- -2-0-2-6-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-I-'-v-e- -b-e-e-n- -t-r-a-i-n-i-n-g- -i-n- -s-h-o-w- -j-u-m-p-i-n-g- -f-o-r- -4- -m-o-n-t-h-s-.- -I- -s-t-a-r-t-e-d- -f-r-o-m- -z-e-r-o- -a-n-d- -n-o-w- -I-'-m- -p-r-e-p-a-r-i-n-g- -f-o-r- -m-y- -f-i-r-s-t- -c-o-m-p-e-t-i-t-i-o-n-.- -T-h-e- -t-r-a-i-n-e-r- -i-s- -p-r-o-f-e-s-s-i-o-n-a-l- -a-n-d- -c-l-e-a-r-l-y- -l-o-v-e-s- -w-h-a-t- -h-e- -d-o-e-s-.-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-T-i-m-u-r- -R-.-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-A-t-h-l-e-t-e-,- -s-h-o-w- -j-u-m-p-i-n-g-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-D-e-c-e-m-b-e-r- -2-0-2-5-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-A- -g-r-e-a-t- -p-l-a-c-e- -f-o-r- -c-h-i-l-d-r-e-n-!- -S-a-f-e-,- -t-h-e- -h-o-r-s-e-s- -a-r-e- -g-e-n-t-l-e-,- -t-h-e- -s-t-a-f-f- -i-s- -a-t-t-e-n-t-i-v-e-.- -M-y- -s-o-n- -l-o-o-k-s- -f-o-r-w-a-r-d- -t-o- -e-v-e-r-y- -S-a-t-u-r-d-a-y- -l-i-k-e- -a- -h-o-l-i-d-a-y-.-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-S-h-a-h-l-o- -K-h-.-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-M-o-t-h-e-r- -o-f- -s-t-u-d-e-n-t-,- -a-g-e- -1-0-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-N-o-v-e-m-b-e-r- -2-0-2-5-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - - - -s-t-a-t-s-:- -[--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-5-0-0-+-"-,- -l-a-b-e-l-:- -"-s-t-u-d-e-n-t-s- -t-r-a-i-n-e-d-"- -}-,--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-5-+-"-,- -l-a-b-e-l-:- -"-y-e-a-r-s- -o-p-e-r-a-t-i-n-g- -i-n- -T-a-s-h-k-e-n-t-"- -}-,--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-4-.-9-★-"-,- -l-a-b-e-l-:- -"-a-v-e-r-a-g-e- -c-l-i-e-n-t- -r-a-t-i-n-g-"- -}-,--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-3-0-+-"-,- -l-a-b-e-l-:- -"-p-h-o-t-o- -s-e-s-s-i-o-n-s- -h-e-l-d-"- -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -a-b-o-u-t-:- -{--
+- - - - - - -i-m-g-A-l-t-:- -"-A-S-L-A-N- -H-o-r-s-e- -C-l-u-b- -t-r-a-i-n-e-r- -t-e-a-m-"-,--
+- - - - - - -i-m-g-P-l-a-c-e-h-o-l-d-e-r-:- -"-T-e-a-m- -p-h-o-t-o-"-,--
+- - - - - - -c-h-i-p-1-:- -"-5-+- -y-e-a-r-s- -e-x-p-e-r-i-e-n-c-e-"-,--
+- - - - - - -c-h-i-p-2-:- -"-C-e-r-t-i-f-i-e-d- -t-r-a-i-n-e-r-s-"-,--
+- - - - - - -c-h-i-p-3-:- -"-S-a-f-e- -f-o-r- -c-h-i-l-d-r-e-n- -f-r-o-m- -a-g-e- -6-"-,--
+- - - - - - -l-a-b-e-l-:- -"-A-b-o-u-t- -t-h-e- -c-l-u-b-"-,--
+- - - - - - -t-i-t-l-e-:- -"-A-S-L-A-N- -T-e-a-m- -—- -t-r-a-i-n-e-r-s- -a-n-d- -f-a-c-i-l-i-t-i-e-s-"-,--
+- - - - - - -l-e-a-d-:- -"-A-S-L-A-N- -H-o-r-s-e- -C-l-u-b- -i-s- -l-o-c-a-t-e-d- -a-t- -t-h-e- -C-h-i-l-a-n-z-a-r- -H-i-p-p-o-d-r-o-m-e- -—- -o-n-e- -o-f- -t-h-e- -b-e-s-t- -e-q-u-e-s-t-r-i-a-n- -v-e-n-u-e-s- -i-n- -T-a-s-h-k-e-n-t-.- -W-e- -s-e-r-v-e- -b-o-t-h- -b-e-g-i-n-n-e-r-s- -t-a-k-i-n-g- -t-h-e-i-r- -f-i-r-s-t- -s-t-e-p-s- -i-n- -t-h-e- -s-a-d-d-l-e- -a-n-d- -a-t-h-l-e-t-e-s- -p-r-e-p-a-r-i-n-g- -f-o-r- -s-h-o-w- -j-u-m-p-i-n-g- -c-o-m-p-e-t-i-t-i-o-n-s-.-"-,--
+- - - - - - -b-t-n-C-o-n-t-a-c-t-:- -"-C-o-n-t-a-c-t- -a- -t-r-a-i-n-e-r-"-,--
+- - - - - - -b-t-n-P-r-i-c-e-s-:- -"-V-i-e-w- -p-r-i-c-e-s-"-,--
+- - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-P-r-o-f-e-s-s-i-o-n-a-l- -t-r-a-i-n-e-r-s-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-O-u-r- -i-n-s-t-r-u-c-t-o-r-s- -a-r-e- -s-h-o-w- -j-u-m-p-i-n-g- -c-o-m-p-e-t-i-t-o-r-s- -w-i-t-h- -y-e-a-r-s- -o-f- -t-e-a-c-h-i-n-g- -e-x-p-e-r-i-e-n-c-e- -f-o-r- -c-h-i-l-d-r-e-n- -a-n-d- -a-d-u-l-t-s-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-H-i-p-p-o-d-r-o-m-e- -f-a-c-i-l-i-t-i-e-s-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-I-n-d-o-o-r- -a-n-d- -o-u-t-d-o-o-r- -a-r-e-n-a-s-,- -r-i-d-i-n-g- -t-r-a-c-k-s-,- -a- -s-h-o-w- -j-u-m-p-i-n-g- -o-b-s-t-a-c-l-e- -c-o-u-r-s-e-,- -m-o-d-e-r-n- -e-q-u-i-p-m-e-n-t-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-S-a-f-e-t-y- -f-i-r-s-t-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-M-a-n-d-a-t-o-r-y- -b-r-i-e-f-i-n-g-,- -c-e-r-t-i-f-i-e-d- -s-a-d-d-l-e-s-,- -h-e-l-m-e-t-s- -f-o-r- -a-l-l- -r-i-d-e-r-s-,- -c-o-n-s-t-a-n-t- -i-n-s-t-r-u-c-t-o-r- -p-r-e-s-e-n-c-e-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -p-r-i-c-e-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-P-r-i-c-e-s- -&- -s-c-h-e-d-u-l-e-"-,--
+- - - - - - -t-i-t-l-e-:- -"-S-c-h-e-d-u-l-e- -a-n-d- -l-e-s-s-o-n- -p-r-i-c-e-s-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-O-p-e-n- -d-a-i-l-y- -f-r-o-m- -0-7-:-0-0-.- -E-x-a-c-t- -p-r-i-c-e-s- -o-n- -r-e-q-u-e-s-t- -(-g-r-o-u-p- -d-i-s-c-o-u-n-t-s- -a-v-a-i-l-a-b-l-e-)-.-"-,--
+- - - - - - -f-e-a-t-u-r-e-s-A-r-i-a-:- -"-W-h-a-t-'-s- -i-n-c-l-u-d-e-d-"-,--
+- - - - - - -b-t-n-:- -"-B-o-o-k- -b-y- -p-h-o-n-e-"-,--
+- - - - - - -n-o-t-e-:- -"-*- -P-r-i-c-e-s- -c-o-n-f-i-r-m-e-d- -a-t- -b-o-o-k-i-n-g- -—- -d-i-s-c-o-u-n-t-s- -a-v-a-i-l-a-b-l-e- -f-o-r- -g-r-o-u-p-s-,- -c-h-i-l-d-r-e-n- -a-n-d- -r-e-g-u-l-a-r- -c-l-i-e-n-t-s-.- -C-a-l-l-:-"-,--
+- - - - - - -n-o-t-e-O-r-:- -"-o-r-"-,--
+- - - - - - -s-c-h-e-d-u-l-e-:- -[--
+- - - - - - - - -{- -d-a-y-s-:- -"-M-o-n- -–- -F-r-i-"-,- -h-o-u-r-s-:- -"-0-7-:-0-0- -–- -2-0-:-0-0-"- -}-,--
+- - - - - - - - -{- -d-a-y-s-:- -"-S-a-t-u-r-d-a-y-"-,- -h-o-u-r-s-:- -"-0-7-:-0-0- -–- -1-9-:-0-0-"- -}-,--
+- - - - - - - - -{- -d-a-y-s-:- -"-S-u-n-d-a-y-"-,- -h-o-u-r-s-:- -"-0-8-:-0-0- -–- -1-8-:-0-0-"- -}-,--
+- - - - - - -]-,--
+- - - - - - -p-l-a-n-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-T-r-i-a-l- -l-e-s-s-o-n-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-P-e-r-f-e-c-t- -f-o-r- -b-e-g-i-n-n-e-r-s- -—- -4-5- -m-i-n-u-t-e-s- -w-i-t-h- -a-n- -i-n-s-t-r-u-c-t-o-r-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-O-n- -r-e-q-u-e-s-t-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -p-e-r- -l-e-s-s-o-n-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-4-5- -m-i-n- -w-i-t-h- -i-n-s-t-r-u-c-t-o-r-"-,--
+- - - - - - - - - - - - -"-V-e-r-i-f-i-e-d- -e-q-u-i-p-m-e-n-t-"-,--
+- - - - - - - - - - - - -"-S-a-f-e-t-y- -b-r-i-e-f-i-n-g-"-,--
+- - - - - - - - - - - - -"-N-o- -p-r-e-p-a-y-m-e-n-t-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-I-n-d-i-v-i-d-u-a-l- -l-e-s-s-o-n-s-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-P-e-r-s-o-n-a-l- -p-r-o-g-r-a-m-m-e- -w-i-t-h- -a- -t-r-a-i-n-e-r- -—- -f-a-s-t-e-s-t- -p-r-o-g-r-e-s-s-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-O-n- -r-e-q-u-e-s-t-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -p-e-r- -l-e-s-s-o-n-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-P-o-p-u-l-a-r-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-1---o-n---1- -w-i-t-h- -t-r-a-i-n-e-r-"-,--
+- - - - - - - - - - - - -"-I-n-d-i-v-i-d-u-a-l- -p-l-a-n-"-,--
+- - - - - - - - - - - - -"-F-l-e-x-i-b-l-e- -s-c-h-e-d-u-l-e-"-,--
+- - - - - - - - - - - - -"-V-i-d-e-o- -r-e-v-i-e-w- -o-n- -r-e-q-u-e-s-t-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-G-r-o-u-p- -l-e-s-s-o-n-s-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-F-o-r- -c-h-i-l-d-r-e-n- -a-n-d- -a-d-u-l-t-s- -—- -m-o-r-e- -f-u-n- -a-n-d- -a-f-f-o-r-d-a-b-l-e-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-O-n- -r-e-q-u-e-s-t-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -p-e-r- -l-e-s-s-o-n-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-U-p- -t-o- -5- -p-e-r- -g-r-o-u-p-"-,--
+- - - - - - - - - - - - -"-S-u-i-t-a-b-l-e- -f-o-r- -c-h-i-l-d-r-e-n- -6-+-"-,--
+- - - - - - - - - - - - -"-F-i-x-e-d- -s-c-h-e-d-u-l-e-"-,--
+- - - - - - - - - - - - -"-S-u-b-s-c-r-i-p-t-i-o-n- -d-i-s-c-o-u-n-t-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-S-h-o-w- -j-u-m-p-i-n-g- -/- -C-o-m-p-e-t-i-t-i-o-n-s-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-T-o-u-r-n-a-m-e-n-t- -p-r-e-p-a-r-a-t-i-o-n- -—- -c-o-u-r-s-e- -w-o-r-k- -a-n-d- -j-u-m-p- -t-e-c-h-n-i-q-u-e-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-O-n- -r-e-q-u-e-s-t-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -p-e-r- -l-e-s-s-o-n-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-P-o-p-u-l-a-r-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-O-b-s-t-a-c-l-e- -c-o-u-r-s-e-"-,--
+- - - - - - - - - - - - -"-W-o-r-k- -w-i-t-h- -j-u-m-p-i-n-g- -t-r-a-i-n-e-r-"-,--
+- - - - - - - - - - - - -"-T-e-c-h-n-i-q-u-e- -r-e-v-i-e-w-"-,--
+- - - - - - - - - - - - -"-C-h-a-m-p-i-o-n-s-h-i-p- -p-r-e-p-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -g-a-l-l-e-r-y-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-P-h-o-t-o- -g-a-l-l-e-r-y-"-,--
+- - - - - - -t-i-t-l-e-:- -"-O-u-r- -l-e-s-s-o-n-s- -a-n-d- -c-o-m-p-e-t-i-t-i-o-n-s-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-T-r-a-i-n-i-n-g-,- -s-h-o-w- -j-u-m-p-i-n-g-,- -p-h-o-t-o- -s-e-s-s-i-o-n-s- -a-n-d- -c-e-l-e-b-r-a-t-i-o-n-s- -a-t- -A-S-L-A-N- -H-o-r-s-e- -C-l-u-b-.-"-,--
+- - - - - - -f-i-l-t-e-r-A-r-i-a-:- -"-G-a-l-l-e-r-y- -f-i-l-t-e-r-"-,--
+- - - - - - -b-t-n-W-a-:- -"-O-r-d-e-r- -a- -p-h-o-t-o- -s-e-s-s-i-o-n-"-,--
+- - - - - - -b-t-n-W-a-S-u-b-:- -"-Q-u-i-c-k- -r-e-p-l-y- -o-n- -T-e-l-e-g-r-a-m-"-,--
+- - - - - - -c-l-o-s-e-L-i-g-h-t-b-o-x-:- -"-C-l-o-s-e-"-,--
+- - - - - - -p-r-e-v-P-h-o-t-o-:- -"-P-r-e-v-i-o-u-s- -p-h-o-t-o-"-,--
+- - - - - - -n-e-x-t-P-h-o-t-o-:- -"-N-e-x-t- -p-h-o-t-o-"-,--
+- - - - - - -t-a-b-s-:- -[--
+- - - - - - - - -{- -i-d-:- -"-a-l-l-"-,- -l-a-b-e-l-:- -"-A-l-l-"- -}-,--
+- - - - - - - - -{- -i-d-:- -"-t-r-a-i-n-i-n-g-"-,- -l-a-b-e-l-:- -"-T-r-a-i-n-i-n-g-"- -}-,--
+- - - - - - - - -{- -i-d-:- -"-c-o-m-p-e-t-i-t-i-o-n-"-,- -l-a-b-e-l-:- -"-C-o-m-p-e-t-i-t-i-o-n-s-"- -}-,--
+- - - - - - - - -{- -i-d-:- -"-p-h-o-t-o-"-,- -l-a-b-e-l-:- -"-P-h-o-t-o- -s-e-s-s-i-o-n-s-"- -}-,--
+- - - - - - -]-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-T-r-a-i-n-i-n-g-"-,- -a-l-t-:- -"-I-n-d-i-v-i-d-u-a-l- -h-o-r-s-e- -r-i-d-i-n-g- -l-e-s-s-o-n-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-J-u-m-p-i-n-g-"-,- -a-l-t-:- -"-S-h-o-w- -j-u-m-p-i-n-g- -c-o-m-p-e-t-i-t-i-o-n- -a-t- -A-S-L-A-N-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-P-h-o-t-o-"-,- -a-l-t-:- -"-P-r-o-f-e-s-s-i-o-n-a-l- -p-h-o-t-o- -s-e-s-s-i-o-n- -w-i-t-h- -h-o-r-s-e-s-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-G-r-o-u-p-"-,- -a-l-t-:- -"-G-r-o-u-p- -r-i-d-i-n-g- -l-e-s-s-o-n-s- -f-o-r- -c-h-i-l-d-r-e-n-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-J-u-m-p-"-,- -a-l-t-:- -"-J-u-m-p-i-n-g- -a-t- -c-o-m-p-e-t-i-t-i-o-n-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-C-o-u-p-l-e-"-,- -a-l-t-:- -"-R-o-m-a-n-t-i-c- -p-h-o-t-o- -s-e-s-s-i-o-n- -w-i-t-h- -a- -h-o-r-s-e-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-L-u-n-g-e-"-,- -a-l-t-:- -"-L-u-n-g-e- -w-o-r-k- -w-i-t-h- -t-r-a-i-n-e-r-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-V-i-c-t-o-r-y-"-,- -a-l-t-:- -"-S-h-o-w- -j-u-m-p-i-n-g- -a-w-a-r-d- -c-e-r-e-m-o-n-y-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-K-i-d-s-"-,- -a-l-t-:- -"-C-h-i-l-d-r-e-n-'-s- -p-h-o-t-o- -s-e-s-s-i-o-n- -w-i-t-h- -h-o-r-s-e-s-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-B-e-g-i-n-n-e-r-"-,- -a-l-t-:- -"-T-r-i-a-l- -l-e-s-s-o-n- -f-o-r- -b-e-g-i-n-n-e-r-s-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-C-h-a-m-p-i-o-n-s-h-i-p-"-,- -a-l-t-:- -"-S-h-o-w- -j-u-m-p-i-n-g- -c-h-a-m-p-i-o-n-s-h-i-p-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-W-e-d-d-i-n-g-"-,- -a-l-t-:- -"-W-e-d-d-i-n-g- -p-h-o-t-o- -s-e-s-s-i-o-n- -w-i-t-h- -h-o-r-s-e-s-"- -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -f-a-q-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-F-A-Q-"-,--
+- - - - - - -t-i-t-l-e-:- -"-F-r-e-q-u-e-n-t-l-y- -a-s-k-e-d- -q-u-e-s-t-i-o-n-s-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-D-i-d-n-'-t- -f-i-n-d- -a-n- -a-n-s-w-e-r-?- -C-a-l-l- -o-r- -w-r-i-t-e- -—- -w-e- -r-e-p-l-y- -w-i-t-h-i-n- -m-i-n-u-t-e-s-.-"-,--
+- - - - - - -c-t-a-T-i-t-l-e-:- -"-S-t-i-l-l- -h-a-v-e- -q-u-e-s-t-i-o-n-s-?-"-,--
+- - - - - - -c-t-a-T-e-x-t-:- -"-C-a-l-l- -o-r- -w-r-i-t-e- -—- -w-e- -r-e-p-l-y- -q-u-i-c-k-l-y-.-"-,--
+- - - - - - -b-t-n-C-a-l-l-:- -"-C-a-l-l-"-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-H-o-w- -d-o- -I- -b-o-o-k- -a- -t-r-i-a-l- -l-e-s-s-o-n-?-"-,--
+- - - - - - - - - - -a-:- -"-C-a-l-l- -+-9-9-8- -8-8- -2-5-8---6-5---6-5- -o-r- -w-r-i-t-e- -o-n- -T-e-l-e-g-r-a-m- -—- -a- -m-a-n-a-g-e-r- -w-i-l-l- -c-o-n-f-i-r-m- -a- -c-o-n-v-e-n-i-e-n-t- -t-i-m-e- -w-i-t-h-i-n- -m-i-n-u-t-e-s-.- -Y-o-u- -c-a-n- -a-l-s-o- -l-e-a-v-e- -a- -r-e-q-u-e-s-t- -v-i-a- -t-h-e- -f-o-r-m- -o-n- -t-h-e- -w-e-b-s-i-t-e-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-F-r-o-m- -w-h-a-t- -a-g-e- -c-a-n- -c-h-i-l-d-r-e-n- -t-a-k-e- -r-i-d-i-n-g- -l-e-s-s-o-n-s-?-"-,--
+- - - - - - - - - - -a-:- -"-W-e- -t-e-a-c-h- -c-h-i-l-d-r-e-n- -f-r-o-m- -a-g-e- -6-.- -Y-o-u-n-g-e-r- -r-i-d-e-r-s- -h-a-v-e- -d-e-d-i-c-a-t-e-d- -c-h-i-l-d-r-e-n-'-s- -e-q-u-i-p-m-e-n-t-,- -h-e-l-m-e-t-s- -a-n-d- -c-o-n-s-t-a-n-t- -i-n-s-t-r-u-c-t-o-r- -s-u-p-e-r-v-i-s-i-o-n-.- -T-h-e-r-e- -i-s- -n-o- -u-p-p-e-r- -a-g-e- -l-i-m-i-t- -—- -y-o-u- -c-a-n- -s-t-a-r-t- -a-t- -a-n-y- -a-g-e-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-W-h-a-t- -s-h-o-u-l-d- -I- -b-r-i-n-g- -t-o- -m-y- -f-i-r-s-t- -l-e-s-s-o-n-?-"-,--
+- - - - - - - - - - -a-:- -"-J-u-s-t- -c-o-m-e- -i-n- -c-o-m-f-o-r-t-a-b-l-e- -c-l-o-t-h-e-s-:- -f-u-l-l---l-e-n-g-t-h- -t-r-o-u-s-e-r-s- -(-j-e-a-n-s- -o-r- -l-e-g-g-i-n-g-s-)- -a-n-d- -c-l-o-s-e-d- -s-h-o-e-s- -w-i-t-h- -a- -s-m-a-l-l- -h-e-e-l- -(-t-r-a-i-n-e-r-s- -w-i-t-h-o-u-t- -p-l-a-t-f-o-r-m- -s-o-l-e-s- -o-r- -b-o-o-t-s-)-.- -H-e-l-m-e-t-s- -a-r-e- -a-v-a-i-l-a-b-l-e- -f-o-r- -f-r-e-e- -i-f- -y-o-u- -d-o-n-'-t- -h-a-v-e- -y-o-u-r- -o-w-n-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-I-s- -t-h-e-r-e- -h-o-r-s-e- -r-e-n-t-a-l- -f-o-r- -l-e-i-s-u-r-e- -r-i-d-e-s-?-"-,--
+- - - - - - - - - - -a-:- -"-Y-e-s- -—- -w-e- -p-r-o-v-i-d-e- -h-o-r-s-e-s- -f-o-r- -r-i-d-e-s- -w-i-t-h-i-n- -t-h-e- -c-l-u-b- -g-r-o-u-n-d-s-.- -C-o-n-t-a-c-t- -u-s- -b-y- -p-h-o-n-e- -o-r- -T-e-l-e-g-r-a-m- -f-o-r- -p-r-i-c-i-n-g- -a-n-d- -d-u-r-a-t-i-o-n-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-H-o-w- -d-o- -I- -o-r-g-a-n-i-s-e- -a- -p-h-o-t-o- -s-e-s-s-i-o-n- -w-i-t-h- -h-o-r-s-e-s-?-"-,--
+- - - - - - - - - - -a-:- -"-W-r-i-t-e- -t-o- -u-s- -o-n- -T-e-l-e-g-r-a-m- -o-r- -c-a-l-l- -—- -w-e-'-l-l- -d-i-s-c-u-s-s- -t-h-e- -d-a-t-e-,- -t-i-m-e- -a-n-d- -y-o-u-r- -p-r-e-f-e-r-e-n-c-e-s- -(-o-u-t-d-o-o-r- -/- -i-n-d-o-o-r- -a-r-e-n-a-)-.- -W-e- -a-l-s-o- -w-o-r-k- -w-i-t-h- -i-n-v-i-t-e-d- -p-h-o-t-o-g-r-a-p-h-e-r-s- -b-y- -a-r-r-a-n-g-e-m-e-n-t-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-A-r-e- -t-h-e-r-e- -g-r-o-u-p- -l-e-s-s-o-n-s- -f-o-r- -c-h-i-l-d-r-e-n-?-"-,--
+- - - - - - - - - - -a-:- -"-Y-e-s-,- -g-r-o-u-p- -l-e-s-s-o-n-s- -a-r-e- -a-v-a-i-l-a-b-l-e- -f-o-r- -c-h-i-l-d-r-e-n- -a-n-d- -a-d-u-l-t-s-.- -G-r-o-u-p-s- -a-r-e- -k-e-p-t- -s-m-a-l-l- -—- -u-p- -t-o- -5- -p-e-o-p-l-e- -—- -s-o- -t-h-e- -t-r-a-i-n-e-r- -c-a-n- -g-i-v-e- -e-v-e-r-y-o-n-e- -i-n-d-i-v-i-d-u-a-l- -a-t-t-e-n-t-i-o-n-.- -L-e-s-s-o-n-s- -f-o-l-l-o-w- -a- -f-i-x-e-d- -s-c-h-e-d-u-l-e-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-W-h-e-r-e- -e-x-a-c-t-l-y- -i-s- -t-h-e- -c-l-u-b- -l-o-c-a-t-e-d-?-"-,--
+- - - - - - - - - - -a-:- -"-W-e- -a-r-e- -i-n- -t-h-e- -C-h-i-l-a-n-z-a-r- -d-i-s-t-r-i-c-t- -o-f- -T-a-s-h-k-e-n-t-,- -n-e-x-t- -t-o- -t-h-e- -h-i-p-p-o-d-r-o-m-e-.- -L-a-n-d-m-a-r-k- -—- -L-U-K-O-I-L- -f-i-l-l-i-n-g- -s-t-a-t-i-o-n- -o-n- -B-u-n-y-o-d-k-o-r- -A-v-e-n-u-e-.- -C-o-n-v-e-n-i-e-n-t- -p-a-r-k-i-n-g- -i-s- -a-v-a-i-l-a-b-l-e-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-H-o-w- -d-o- -I- -p-r-e-p-a-r-e- -f-o-r- -s-h-o-w- -j-u-m-p-i-n-g- -c-o-m-p-e-t-i-t-i-o-n-s-?-"-,--
+- - - - - - - - - - -a-:- -"-S-i-g-n- -u-p- -f-o-r- -s-h-o-w- -j-u-m-p-i-n-g- -t-r-a-i-n-i-n-g- -w-i-t-h- -o-u-r- -s-p-e-c-i-a-l-i-s-t- -t-r-a-i-n-e-r-.- -W-e-'-l-l- -b-u-i-l-d- -a-n- -i-n-d-i-v-i-d-u-a-l- -p-r-e-p-a-r-a-t-i-o-n- -p-l-a-n-:- -b-a-s-i-c- -t-e-c-h-n-i-q-u-e-,- -l-u-n-g-e- -w-o-r-k-,- -j-u-m-p- -p-r-a-c-t-i-c-e- -o-n- -t-h-e- -o-b-s-t-a-c-l-e- -c-o-u-r-s-e-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -f-o-r-m-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-B-o-o-k- -o-n-l-i-n-e-"-,--
+- - - - - - -t-i-t-l-e-:- -"-L-e-a-v-e- -a- -r-e-q-u-e-s-t- -—- -w-e-'-l-l- -c-a-l-l- -b-a-c-k-"-,--
+- - - - - - -d-e-s-c-1-:- -"-F-i-l-l- -i-n- -t-h-e- -f-o-r-m- -a-n-d- -a- -m-a-n-a-g-e-r- -w-i-l-l- -c-o-n-t-a-c-t- -y-o-u- -w-i-t-h-i-n- -"-,--
+- - - - - - -d-e-s-c-1-s-t-r-o-n-g-:- -"-1- -w-o-r-k-i-n-g- -h-o-u-r-"-,--
+- - - - - - -d-e-s-c-2-:--
+- - - - - - - - -"- -t-o- -c-o-n-f-i-r-m- -t-h-e- -d-a-t-e- -a-n-d- -t-i-m-e-,- -a-n-s-w-e-r- -q-u-e-s-t-i-o-n-s- -a-n-d- -h-e-l-p- -c-h-o-o-s-e- -a- -s-e-r-v-i-c-e-.-"-,--
+- - - - - - -o-r-C-o-n-t-a-c-t-:- -"-O-r- -c-o-n-t-a-c-t- -u-s- -d-i-r-e-c-t-l-y-:-"-,--
+- - - - - - -s-u-c-c-e-s-s-T-i-t-l-e-:- -"-R-e-q-u-e-s-t- -r-e-c-e-i-v-e-d-!-"-,--
+- - - - - - -s-u-c-c-e-s-s-T-e-x-t-:--
+- - - - - - - - -"-W-e-'-l-l- -c-o-n-t-a-c-t- -y-o-u- -w-i-t-h-i-n- -1- -w-o-r-k-i-n-g- -h-o-u-r-.- -I-f- -u-r-g-e-n-t- -—- -c-a-l-l- -r-i-g-h-t- -n-o-w-:-"-,--
+- - - - - - -a-r-i-a-L-a-b-e-l-:- -"-L-e-s-s-o-n- -b-o-o-k-i-n-g- -f-o-r-m-"-,--
+- - - - - - -l-a-b-e-l-N-a-m-e-:- -"-N-a-m-e-"-,--
+- - - - - - -l-a-b-e-l-P-h-o-n-e-:- -"-P-h-o-n-e-"-,--
+- - - - - - -l-a-b-e-l-T-e-l-e-g-r-a-m-:- -"-T-e-l-e-g-r-a-m-"-,--
+- - - - - - -l-a-b-e-l-S-e-r-v-i-c-e-:- -"-S-e-r-v-i-c-e-"-,--
+- - - - - - -p-l-a-c-e-h-o-l-d-e-r-N-a-m-e-:- -"-F-i-r-s-t- -L-a-s-t-"-,--
+- - - - - - -p-l-a-c-e-h-o-l-d-e-r-P-h-o-n-e-:- -"-+-9-9-8- -9-0- -9-9-9- -9-9- -9-9-"-,--
+- - - - - - -p-l-a-c-e-h-o-l-d-e-r-T-e-l-e-g-r-a-m-:- -"-@-t-e-l-e-g-r-a-m- -u-s-e-r-"-,--
+- - - - - - -s-e-l-e-c-t-P-l-a-c-e-h-o-l-d-e-r-:- -"-S-e-l-e-c-t- -a- -s-e-r-v-i-c-e-.-.-.-"-,--
+- - - - - - -s-e-r-v-i-c-e-O-p-t-i-o-n-s-:- -[--
+- - - - - - - - -"-T-r-i-a-l- -l-e-s-s-o-n-"-,--
+- - - - - - - - -"-I-n-d-i-v-i-d-u-a-l- -l-e-s-s-o-n-s-"-,--
+- - - - - - - - -"-G-r-o-u-p- -l-e-s-s-o-n-s-"-,--
+- - - - - - - - -"-P-h-o-t-o- -s-e-s-s-i-o-n- -w-i-t-h- -h-o-r-s-e-s-"-,--
+- - - - - - - - -"-S-h-o-w- -j-u-m-p-i-n-g- -t-r-a-i-n-i-n-g-"-,--
+- - - - - - -]-,--
+- - - - - - -c-o-n-s-e-n-t-:--
+- - - - - - - - -"-I- -a-g-r-e-e- -t-o- -t-h-e- -p-r-o-c-e-s-s-i-n-g- -o-f- -p-e-r-s-o-n-a-l- -d-a-t-a- -i-n- -a-c-c-o-r-d-a-n-c-e- -w-i-t-h- -t-h-e- -p-r-i-v-a-c-y- -p-o-l-i-c-y-"-,--
+- - - - - - -b-t-n-S-u-b-m-i-t-:- -"-S-e-n-d- -r-e-q-u-e-s-t-"-,--
+- - - - - - -b-t-n-S-u-b-m-i-t-t-i-n-g-:- -"-S-e-n-d-i-n-g-.-.-.-"-,--
+- - - - - - -c-o-n-s-e-n-t-N-o-t-e-:- -"-B-y- -c-l-i-c-k-i-n-g- -t-h-e- -b-u-t-t-o-n-,- -I- -a-g-r-e-e- -t-o- -t-h-e-"-,--
+- - - - - - -c-o-n-s-e-n-t-L-i-n-k-:- -"-p-r-o-c-e-s-s-i-n-g- -o-f- -p-e-r-s-o-n-a-l- -d-a-t-a-"-,--
+- - - - - - -e-r-r-N-a-m-e-:- -"-P-l-e-a-s-e- -e-n-t-e-r- -y-o-u-r- -n-a-m-e- -(-m-i-n-.- -2- -c-h-a-r-a-c-t-e-r-s-)-"-,--
+- - - - - - -e-r-r-P-h-o-n-e-:- -"-P-l-e-a-s-e- -e-n-t-e-r- -a- -v-a-l-i-d- -p-h-o-n-e- -n-u-m-b-e-r-"-,--
+- - - - - - -e-r-r-S-e-r-v-i-c-e-:- -"-P-l-e-a-s-e- -s-e-l-e-c-t- -a- -s-e-r-v-i-c-e-"-,--
+- - - - - - -e-r-r-C-o-n-s-e-n-t-:- -"-C-o-n-s-e-n-t- -t-o- -d-a-t-a- -p-r-o-c-e-s-s-i-n-g- -i-s- -r-e-q-u-i-r-e-d-"-,--
+- - - - -}-,--
+- - - - -c-o-n-t-a-c-t-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-F-i-n-d- -u-s-"-,--
+- - - - - - -t-i-t-l-e-:- -"-C-o-n-t-a-c-t-s- -a-n-d- -d-i-r-e-c-t-i-o-n-s-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-W-e-'-r-e- -i-n- -C-h-i-l-a-n-z-a-r- -—- -n-e-x-t- -t-o- -t-h-e- -h-i-p-p-o-d-r-o-m-e-.- -E-a-s-y- -p-a-r-k-i-n-g-,- -o-p-e-n- -e-v-e-r-y- -d-a-y- -f-r-o-m- -0-7-:-0-0-.-"-,--
+- - - - - - -b-t-n-C-a-l-l-:- -"-C-a-l-l-:-"-,--
+- - - - - - -b-t-n-W-a-:- -"-W-r-i-t-e- -o-n- -T-e-l-e-g-r-a-m-"-,--
+- - - - - - -m-a-p-A-r-i-a-:- -"-M-a-p- -o-f- -A-S-L-A-N- -H-o-r-s-e- -C-l-u-b- -l-o-c-a-t-i-o-n-"-,--
+- - - - - - -m-a-p-A-d-d-r-e-s-s-:- -"-B-u-n-y-o-d-k-o-r- -A-v-e-,- -C-h-i-l-a-n-z-a-r-"-,--
+- - - - - - -m-a-p-L-a-n-d-m-a-r-k-:- -"-L-a-n-d-m-a-r-k-:- -C-h-i-l-a-n-z-a-r- -H-i-p-p-o-d-r-o-m-e- -/- -L-U-K-O-I-L- -s-t-a-t-i-o-n-"-,--
+- - - - - - -m-a-p-s-B-t-n-:- -"-O-p-e-n- -i-n- -G-o-o-g-l-e- -M-a-p-s-"-,--
+- - - - - - -c-a-r-d-s-:- -[--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-M-a-i-n- -p-h-o-n-e-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-A-d-d-i-t-i-o-n-a-l- -p-h-o-n-e-"- -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -l-a-b-e-l-:- -"-A-d-d-r-e-s-s-"-,--
+- - - - - - - - - - -v-a-l-u-e-:- -"-B-u-n-y-o-d-k-o-r- -A-v-e-,- -C-h-i-l-a-n-z-a-r-,- -T-a-s-h-k-e-n-t-"-,--
+- - - - - - - - - - -s-u-b-:- -"-L-a-n-d-m-a-r-k-:- -C-h-i-l-a-n-z-a-r- -H-i-p-p-o-d-r-o-m-e- -/- -L-U-K-O-I-L- -s-t-a-t-i-o-n-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -l-a-b-e-l-:- -"-W-o-r-k-i-n-g- -h-o-u-r-s-"-,--
+- - - - - - - - - - -v-a-l-u-e-:- -"-D-a-i-l-y- -0-7-:-0-0- -–- -2-0-:-0-0-"-,--
+- - - - - - - - - - -s-u-b-:- -"-S-u-n-d-a-y- -u-n-t-i-l- -1-8-:-0-0-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -f-o-o-t-e-r-:- -{--
+- - - - - - -l-o-g-o-A-r-i-a-:- -"-A-S-L-A-N- -—- -b-a-c-k- -t-o- -t-o-p-"-,--
+- - - - - - -b-r-a-n-d-D-e-s-c-:--
+- - - - - - - - -"-P-r-o-f-e-s-s-i-o-n-a-l- -h-o-r-s-e- -c-l-u-b- -i-n- -C-h-i-l-a-n-z-a-r-,- -T-a-s-h-k-e-n-t-.- -R-i-d-i-n-g- -l-e-s-s-o-n-s-,- -s-h-o-w- -j-u-m-p-i-n-g-,- -p-h-o-t-o- -s-e-s-s-i-o-n-s- -w-i-t-h- -h-o-r-s-e-s-.-"-,--
+- - - - - - -h-o-u-r-s-:- -"-D-a-i-l-y- -0-7-:-0-0- -–- -2-0-:-0-0-"-,--
+- - - - - - -c-t-a-T-i-t-l-e-:- -"-R-e-a-d-y- -t-o- -s-t-a-r-t-?- -C-a-l-l- -u-s- -n-o-w-"-,--
+- - - - - - -c-t-a-S-u-b-:- -"-F-i-r-s-t- -t-r-i-a-l- -l-e-s-s-o-n- -—- -j-u-s-t- -c-a-l-l- -o-r- -w-r-i-t-e- -o-n- -T-e-l-e-g-r-a-m-.-"-,--
+- - - - - - -n-a-v-T-i-t-l-e-:- -"-N-a-v-i-g-a-t-i-o-n-"-,--
+- - - - - - -s-e-r-v-i-c-e-s-T-i-t-l-e-:- -"-S-e-r-v-i-c-e-s-"-,--
+- - - - - - -c-o-n-t-a-c-t-T-i-t-l-e-:- -"-C-o-n-t-a-c-t-s-"-,--
+- - - - - - -c-o-p-y-r-i-g-h-t-:- -"-A-S-L-A-N- -H-o-r-s-e- -C-l-u-b-.- -A-l-l- -r-i-g-h-t-s- -r-e-s-e-r-v-e-d-.-"-,--
+- - - - - - -s-e-o-:- -"-H-o-r-s-e- -C-l-u-b- -T-a-s-h-k-e-n-t- -·- -R-i-d-i-n-g- -l-e-s-s-o-n-s- -C-h-i-l-a-n-z-a-r- -·- -S-h-o-w- -j-u-m-p-i-n-g- -t-r-a-i-n-i-n-g-"-,--
+- - - - - - -n-a-v-L-i-n-k-s-:- -[--
+- - - - - - - - -"-H-o-m-e-"-,--
+- - - - - - - - -"-S-e-r-v-i-c-e-s-"-,--
+- - - - - - - - -"-A-b-o-u-t-"-,--
+- - - - - - - - -"-P-r-i-c-e-s-"-,--
+- - - - - - - - -"-G-a-l-l-e-r-y-"-,--
+- - - - - - - - -"-F-A-Q-"-,--
+- - - - - - - - -"-C-o-n-t-a-c-t-s-"-,--
+- - - - - - - - -"-B-o-o-k- -n-o-w-"-,--
+- - - - - - -]-,--
+- - - - - - -s-e-r-v-i-c-e-L-i-n-k-s-:- -[--
+- - - - - - - - -"-T-r-i-a-l- -l-e-s-s-o-n-"-,--
+- - - - - - - - -"-I-n-d-i-v-i-d-u-a-l- -l-e-s-s-o-n-s-"-,--
+- - - - - - - - -"-G-r-o-u-p- -l-e-s-s-o-n-s-"-,--
+- - - - - - - - -"-S-h-o-w- -j-u-m-p-i-n-g- -t-r-a-i-n-i-n-g-"-,--
+- - - - - - - - -"-P-h-o-t-o- -s-e-s-s-i-o-n-s- -w-i-t-h- -h-o-r-s-e-s-"-,--
+- - - - - - -]-,--
+- - - - - - -a-d-d-r-e-s-s-:- -"-B-u-n-y-o-d-k-o-r- -A-v-e-,- -C-h-i-l-a-n-z-a-r-"-,--
+- - - - -}-,--
+- - -}-,--
+--
+- - -u-z-:- -{--
+- - - - -h-e-a-d-e-r-:- -{--
+- - - - - - -l-o-g-o-S-u-b-:- -"-O-t- -k-l-u-b-i-"-,--
+- - - - - - -l-o-g-o-A-r-i-a-:- -"-A-S-L-A-N- -O-t- -k-l-u-b-i- -—- -b-o-s-h- -s-a-h-i-f-a-"-,--
+- - - - - - -n-a-v-:- -{--
+- - - - - - - - -s-e-r-v-i-c-e-s-:- -"-X-i-z-m-a-t-l-a-r-"-,--
+- - - - - - - - -a-b-o-u-t-:- -"-B-i-z- -h-a-q-i-m-i-z-d-a-"-,--
+- - - - - - - - -p-r-i-c-e-s-:- -"-N-a-r-x-l-a-r-"-,--
+- - - - - - - - -g-a-l-l-e-r-y-:- -"-G-a-l-e-r-e-y-a-"-,--
+- - - - - - - - -f-a-q-:- -"-F-A-Q-"-,--
+- - - - - - - - -c-o-n-t-a-c-t-s-:- -"-K-o-n-t-a-k-t-l-a-r-"-,--
+- - - - - - -}-,--
+- - - - - - -c-a-l-l-A-r-i-a-:- -"-B-i-z-g-a- -q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g-"-,--
+- - - - - - -w-a-A-r-i-a-:- -"-T-e-l-e-g-r-a-m- -d-a- -y-o-z-i-n-g-"-,--
+- - - - - - -b-o-o-k-:- -"-Y-o-z-i-l-i-s-h-"-,--
+- - - - - - -m-e-n-u-A-r-i-a-:- -"-M-e-n-y-u-n-i- -o-c-h-i-s-h-"-,--
+- - - - - - -m-o-b-i-l-e-N-a-v-A-r-i-a-:- -"-M-o-b-i-l- -n-a-v-i-g-a-t-s-i-y-a-"-,--
+- - - - - - -c-a-l-l-B-t-n-:- -"-Q-o-'-n-g-'-i-r-o-q-"-,--
+- - - - -}-,--
+- - - - -s-t-i-c-k-y-:- -{--
+- - - - - - -a-r-i-a-:- -"-T-e-z-k-o-r- -a-l-o-q-a-"-,--
+- - - - - - -c-a-l-l-A-r-i-a-:- -"-B-i-z-g-a- -q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g-"-,--
+- - - - - - -c-a-l-l-:- -"-Q-o-'-n-g-'-i-r-o-q-"-,--
+- - - - - - -w-a-A-r-i-a-:- -"-T-e-l-e-g-r-a-m- -d-a- -y-o-z-i-n-g-"-,--
+- - - - -}-,--
+- - - - -h-e-r-o-:- -{--
+- - - - - - -a-r-i-a-:- -"-A-s-o-s-i-y- -b-a-n-n-e-r-"-,--
+- - - - - - -i-m-g-A-l-t-:- -"-A-S-L-A-N- -o-t- -k-l-u-b-i-d-a- -m-a-s-h-g-'-u-l-o-t-l-a-r-,- -C-h-i-l-o-n-z-o-r-,- -T-o-s-h-k-e-n-t-"-,--
+- - - - - - -s-c-r-o-l-l-A-r-i-a-:- -"-P-a-s-t-g-a- -a-y-l-a-n-t-i-r-i-n-g-"-,--
+- - - - - - -c-a-l-l-A-r-i-a-:- -"-Q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g- -v-a- -y-o-z-i-l-i-n-g-"-,--
+- - - - - - -c-h-i-p-1-:- -"-0-7-:-0-0- -d-a-n- -i-s-h-l-a-y-m-i-z-"-,--
+- - - - - - -c-h-i-p-2-:- -"-5-0-0-+- -o-'-q-u-v-c-h-i-"-,--
+- - - - - - -c-h-i-p-3-:- -"-B-o-l-a-l-a-r- -u-c-h-u-n- -x-a-v-f-s-i-z-"-,--
+- - - - - - -l-a-b-e-l-:- -"-C-h-i-l-o-n-z-o-r-,- -T-o-s-h-k-e-n-t- -·- -g-i-p-p-o-d-r-o-m- -y-o-n-i-d-a-"-,--
+- - - - - - -h-1-:- -"-O-t- -k-l-u-b-i-"-,--
+- - - - - - -h-1-e-m-:- -"-C-h-i-l-o-n-z-o-r-d-a-"-,--
+- - - - - - -s-u-b-1-:- -"-G-i-p-p-o-d-r-o-m- -y-o-n-i-d-a- -c-h-a-v-a-n-d-o-z-l-i-k- -d-a-r-s-l-a-r-i- -—- -6- -y-o-s-h-d-a-n- -b-o-l-a-l-a-r- -v-a- -k-a-t-t-a-l-a-r- -u-c-h-u-n-.- -K-o-n-k-u-r- -b-o-'-y-i-c-h-a- -t-r-e-n-i-r-o-v-k-a-l-a-r-,- -s-a-y-r-l-a-r- -v-a- -o-t-l-a-r- -b-i-l-a-n- -f-o-t-o-s-e-s-s-i-y-a-l-a-r-.-"-,--
+- - - - - - -s-u-b-2-s-t-r-o-n-g-:- -"-S-i-n-o-v- -d-a-r-s-i-"-,--
+- - - - - - -s-u-b-2-r-e-s-t-:- -"- -—- -t-e-l-e-f-o-n- -y-o-k-i- -T-e-l-e-g-r-a-m- -o-r-q-a-l-i- -y-o-z-i-l-i-s-h-.-"-,--
+- - - - - - -b-t-n-C-a-l-l-:- -"-H-o-z-i-r- -q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g-"-,--
+- - - - - - -b-t-n-W-a-:- -"-T-e-l-e-g-r-a-m- -d-a- -y-o-z-i-n-g-"-,--
+- - - - - - -o-r-:- -"-Y-o-k-i-"-,--
+- - - - - - -l-e-a-v-e-A-p-p-:- -"-a-r-i-z-a- -q-o-l-d-i-r-i-n-g-"-,--
+- - - - - - -c-a-l-l-b-a-c-k-:- -"- -—- -1- -s-o-a-t- -i-c-h-i-d-a- -q-a-y-t-a- -q-o-'-n-g-'-i-r-o-q- -q-i-l-a-m-i-z-"-,--
+- - - - -}-,--
+- - - - -b-e-n-e-f-i-t-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-N-i-m-a- -u-c-h-u-n- -b-i-z-n-i- -t-a-n-l-a-s-h-a-d-i-"-,--
+- - - - - - -t-i-t-l-e-:- -"-A-S-L-A-N- -d-a- -m-a-s-h-g-'-u-l-o-t- -q-i-l-i-s-h-n-i-n-g- -4- -s-a-b-a-b-i-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-G-i-p-p-o-d-r-o-m- -y-o-n-i-d-a-g-i- -p-r-o-f-e-s-s-i-o-n-a-l- -o-t- -k-l-u-b-i- -—- -x-a-v-f-s-i-z-,- -q-u-l-a-y-,- -s-a-m-a-r-a-l-i-.-"-,--
+- - - - - - -c-t-a-T-e-x-t-:- -"-S-i-n-a-b- -k-o-'-r-i-s-h-g-a- -t-a-y-y-o-r-m-i-s-i-z-?- -B-i-r-i-n-c-h-i- -d-a-r-s- -—- -m-a-j-b-u-r-i-y-a-t-s-i-z-.-"-,--
+- - - - - - -c-t-a-B-t-n-:- -"-S-i-n-o-v- -d-a-r-s-i-g-a- -y-o-z-i-l-i-s-h-"-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-T-a-j-r-i-b-a-l-i- -m-u-r-a-b-b-i-y-l-a-r-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-C-h-e-m-p-i-o-n-l-a-r- -t-a-y-y-o-r-l-o-v-i- -—- -i-n-d-i-v-i-d-u-a-l- -r-e-j-a-,- -o-'-t-i-r-i-s-h- -v-a- -b-o-s-h-q-a-r-u-v- -t-e-x-n-i-k-a-s-i- -u-s-t-i-d-a- -i-s-h-l-a-s-h-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-Q-u-l-a-y- -j-o-y-l-a-s-h-u-v-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-C-h-i-l-o-n-z-o-r-,- -g-i-p-p-o-d-r-o-m- -y-o-n-i-d-a- -—- -k-l-u-b- -o-l-d-i-d-a- -a-v-t-o-t-u-r-a-r-g-o-h-,- -s-h-a-h-a-r-n-i-n-g- -i-s-t-a-l-g-a-n- -n-u-q-t-a-s-i-d-a-n- -q-u-l-a-y- -k-i-r-i-s-h-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-X-a-v-f-s-i-z-l-i-k-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-S-e-r-t-i-f-i-k-a-t-l-a-n-g-a-n- -j-i-h-o-z-l-a-r-,- -y-a-n-g-i- -b-o-s-h-l-o-v-c-h-i-l-a-r- -u-c-h-u-n- -y-o-'-r-i-q-n-o-m-a-,- -b-o-l-a-l-a-r- -u-s-k-u-n-a-l-a-r-i- -v-a- -d-o-i-m-i-y- -n-a-z-o-r-a-t-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-F-o-t-o-s-e-s-s-i-y-a-l-a-r-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-I-s-t-a-l-g-a-n- -t-a-d-b-i-r- -u-c-h-u-n- -o-t-l-a-r- -b-i-l-a-n- -p-r-o-f-e-s-s-i-o-n-a-l- -f-o-t-o- -v-a- -v-i-d-e-o- -t-a-s-h-k-i-l- -q-i-l-a-m-i-z- -—- -n-a-t-i-j-a- -e-r-t-a-s-i- -k-u-n- -t-a-y-y-o-r-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -s-e-r-v-i-c-e-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-N-i-m-a- -t-a-k-l-i-f- -q-i-l-a-m-i-z-"-,--
+- - - - - - -t-i-t-l-e-:- -"-A-S-L-A-N- -k-l-u-b-i- -x-i-z-m-a-t-l-a-r-i-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-6- -y-o-s-h-d-a-n- -b-o-l-a-l-a-r- -v-a- -h-a-r- -q-a-n-d-a-y- -d-a-r-a-j-a-d-a-g-i- -k-a-t-t-a-l-a-r- -u-c-h-u-n- -—- -b-i-r-i-n-c-h-i- -d-a-r-s-d-a-n- -m-u-s-o-b-a-q-a-l-a-r-g-a-c-h-a-.-"-,--
+- - - - - - -c-t-a-:- -"-N-a-r-x- -v-a- -v-a-q-t-n-i- -a-n-i-q-l-a-n-g-"-,--
+- - - - - - -b-t-n-W-a-:- -"-T-e-l-e-g-r-a-m- -d-a- -s-a-v-o-l- -b-e-r-i-n-g-"-,--
+- - - - - - -b-t-n-B-o-o-k-:- -"-O-n-l-a-y-n- -a-r-i-z-a- -q-o-l-d-i-r-i-s-h-"-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-I-n-d-i-v-i-d-u-a-l- -d-a-r-s-l-a-r-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-M-u-r-a-b-b-i-y- -b-i-l-a-n- -b-i-t-t-a-m-a---b-i-t-t-a- -—- -c-h-a-v-a-n-d-o-z-l-i-k- -t-e-x-n-i-k-a-s-i-,- -o-'-t-i-r-i-s-h-,- -o-t-n-i- -b-o-s-h-q-a-r-i-s-h-.- -T-e-z- -r-i-v-o-j-l-a-n-i-s-h- -u-c-h-u-n- -e-n-g- -y-a-x-s-h-i-s-i-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-M-a-s-h-h-u-r-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-G-u-r-u-h- -d-a-r-s-l-a-r-i-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-B-o-l-a-l-a-r- -v-a- -k-a-t-t-a-l-a-r- -u-c-h-u-n- -k-i-c-h-i-k- -g-u-r-u-h-l-a-r- -—- -q-i-z-i-q-a-r-l-i-,- -r-a-g-'-b-a-t-l-a-n-t-i-r-u-v-c-h-i- -v-a- -h-a-m-y-o-n-b-o-p-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-S-i-n-o-v- -d-a-r-s-i-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-Y-a-n-g-i- -b-o-s-h-l-o-v-c-h-i-l-a-r- -u-c-h-u-n- -x-a-v-f-s-i-z- -k-i-r-i-s-h- -d-a-s-t-u-r-i- -—- -o-t- -b-i-l-a-n- -t-a-n-i-s-h-i-s-h-,- -o-'-t-i-r-i-s-h-n-i-n-g- -a-s-o-s-l-a-r-i-,- -e-g-a-r-d-a- -b-i-r-i-n-c-h-i- -q-a-d-a-m-l-a-r-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-Y-a-n-g-i- -b-o-s-h-l-o-v-c-h-i-l-a-r- -u-c-h-u-n-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-K-o-n-k-u-r- -b-o-'-y-i-c-h-a- -t-r-e-n-i-r-o-v-k-a-l-a-r-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-M-u-s-o-b-a-q-a- -t-a-y-y-o-r-l-i-g-i- -—- -k-o-r-d-a- -i-s-h-l-a-s-h-,- -s-a-k-r-a-s-h-l-a-r-,- -t-o-'-s-i-q-l-a-r- -k-u-r-s-a-s-i-d-a- -t-e-x-n-i-k-a-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-S-p-o-r-t-c-h-i-l-a-r- -u-c-h-u-n-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-O-t-l-a-r- -b-i-l-a-n- -f-o-t-o-s-e-s-s-i-y-a-l-a-r-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-P-r-o-f-e-s-s-i-o-n-a-l- -f-o-t-o- -v-a- -v-i-d-e-o- -t-a-s-h-k-i-l- -q-i-l-a-m-i-z- -—- -t-u-g-'-i-l-g-a-n- -k-u-n-l-a-r-,- -u-c-h-r-a-s-h-u-v-l-a-r-,- -o-i-l-a-v-i-y- -s-e-s-s-i-y-a-l-a-r- -v-a- -f-a-s-h-i-o-n- -s-u-r-a-t-l-a-r-.-"-,--
+- - - - - - - - - - -t-a-g-:- -"-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -t-e-s-t-i-m-o-n-i-a-l-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-M-i-j-o-z-l-a-r- -s-h-a-r-h-l-a-r-i-"-,--
+- - - - - - -t-i-t-l-e-:- -"-O-'-q-u-v-c-h-i-l-a-r-i-m-i-z- -n-i-m-a- -d-e-y-d-i-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-A-S-L-A-N- -d-a- -a-l-l-a-q-a-c-h-o-n- -m-a-s-h-g-'-u-l-o-t- -q-i-l-a-y-o-t-g-a-n- -o-i-l-a-l-a-r-,- -s-p-o-r-t-c-h-i-l-a-r- -v-a- -f-o-t-o-g-r-f-l-a-r-n-i-n-g- -h-a-q-i-q-i-y- -h-i-k-o-y-a-l-a-r-i-.-"-,--
+- - - - - - -s-t-a-r-s-A-r-i-a-:- -"-5- -y-u-l-d-u-z-"-,--
+- - - - - - -r-e-v-i-e-w-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-Q-i-z-i-m-i-z-n-i- -s-i-n-o-v- -d-a-r-s-i-g-a- -y-o-z-i-b- -o-l-d-i-k- -—- -u- -h-a-y-r-a-t-d-a-!- -M-u-r-a-b-b-i-y- -s-a-b-r---t-o-q-a-t-l-i-,- -a-n-i-q- -t-u-s-h-u-n-t-i-r-a-d-i-.- -D-a-r-h-o-l- -b-i-r- -o-y-g-a- -y-o-z-i-l-d-i-k-.- -C-h-i-l-o-n-z-o-r-d-a-g-i- -b-a-r-c-h-a- -o-i-l-a-l-a-r-g-a- -t-a-v-s-i-y-a- -q-i-l-a-m-a-n-.-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-D-i-l-n-o-z-a- -M-.-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-O-'-q-u-v-c-h-i-n-i-n-g- -o-n-a-s-i-,- -8- -y-o-s-h-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-2-0-2-6- -y-i-l- -F-e-v-r-a-l-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-T-o-'-y- -y-i-l-l-i-g-i-m-i-z- -u-c-h-u-n- -o-t-l-a-r- -b-i-l-a-n- -f-o-t-o-s-e-s-s-i-y-a- -b-u-y-u-r-t-m-a- -q-i-l-d-i-k-.- -H-a-m-m-a-s-i- -z-o-'-r- -o-'-t-d-i- -—- -o-t-l-a-r- -s-o-k-i-n-,- -j-o-y- -c-h-i-r-o-y-l-i-.- -R-a-s-m-l-a-r- -a-j-o-y-i-b- -c-h-i-q-d-i-.- -A-S-L-A-N- -j-a-m-o-a-s-i-g-a- -r-a-h-m-a-t-!-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-K-a-m-i-l-a- -v-a- -A-k-b-a-r-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-Y-i-l-l-i-k- -f-o-t-o-s-e-s-s-i-y-a-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-2-0-2-6- -y-i-l- -Y-a-n-v-a-r-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-4- -o-y-d-a-n- -b-e-r-i- -k-o-n-k-u-r- -b-o-'-y-i-c-h-a- -m-a-s-h-g-'-u-l-o-t- -q-i-l-a-m-a-n-.- -A-v-v-a-l-i-g-a- -n-o-l-d-a-n- -b-o-s-h-l-a-g-a-n- -e-d-i-m-,- -h-o-z-i-r- -b-i-r-i-n-c-h-i- -m-u-s-o-b-a-q-a-g-a- -t-a-y-y-o-r-l-a-n-m-o-q-d-a-m-a-n-.- -M-u-r-a-b-b-i-y- -p-r-o-f-e-s-s-i-o-n-a-l-,- -i-s-h-i-n-i- -s-e-v-i-s-h-i- -s-e-z-i-l-a-d-i-.-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-T-i-m-u-r- -R-.-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-S-p-o-r-t-c-h-i-,- -k-o-n-k-u-r-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-2-0-2-5- -y-i-l- -D-e-k-a-b-r-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-e-x-t-:- -"-B-o-l-a-l-a-r- -u-c-h-u-n- -a-j-o-y-i-b- -j-o-y-!- -X-a-v-f-s-i-z-,- -o-t-l-a-r- -m-u-l-o-y-i-m-,- -x-o-d-i-m-l-a-r- -d-i-q-q-a-t-l-i-.- -O-'-g-'-l-i-m- -h-a-r- -s-h-a-n-b-a- -k-u-n-i-n-i- -b-a-y-r-a-m- -k-a-b-i- -k-u-t-a-d-i-.-"-,--
+- - - - - - - - - - -n-a-m-e-:- -"-S-h-a-h-l-o- -X-.-"-,--
+- - - - - - - - - - -r-o-l-e-:- -"-O-'-q-u-v-c-h-i-n-i-n-g- -o-n-a-s-i-,- -1-0- -y-o-s-h-"-,--
+- - - - - - - - - - -d-a-t-e-:- -"-2-0-2-5- -y-i-l- -N-o-y-a-b-r-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - - - -s-t-a-t-s-:- -[--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-5-0-0-+-"-,- -l-a-b-e-l-:- -"-o-'-q-u-v-c-h-i- -o-'-q-i-t-i-l-d-i-"- -}-,--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-5-+-"-,- -l-a-b-e-l-:- -"-y-i-l- -T-o-s-h-k-e-n-t-d-a- -i-s-h-l-a-m-o-q-d-a-"- -}-,--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-4-.-9-★-"-,- -l-a-b-e-l-:- -"-o-'-r-t-a-c-h-a- -m-i-j-o-z-l-a-r- -b-a-h-o-s-i-"- -}-,--
+- - - - - - - - -{- -n-u-m-b-e-r-:- -"-3-0-+-"-,- -l-a-b-e-l-:- -"-f-o-t-o-s-e-s-s-i-y-a- -o-'-t-k-a-z-i-l-d-i-"- -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -a-b-o-u-t-:- -{--
+- - - - - - -i-m-g-A-l-t-:- -"-A-S-L-A-N- -o-t- -k-l-u-b-i- -m-u-r-a-b-b-i-y-l-a-r- -j-a-m-o-a-s-i-"-,--
+- - - - - - -i-m-g-P-l-a-c-e-h-o-l-d-e-r-:- -"-J-a-m-o-a- -f-o-t-o-s-i-"-,--
+- - - - - - -c-h-i-p-1-:- -"-5-+- -y-i-l- -t-a-j-r-i-b-a-"-,--
+- - - - - - -c-h-i-p-2-:- -"-S-e-r-t-i-f-i-k-a-t-l-a-n-g-a-n- -m-u-r-a-b-b-i-y-l-a-r-"-,--
+- - - - - - -c-h-i-p-3-:- -"-6- -y-o-s-h-d-a-n- -b-o-l-a-l-a-r- -u-c-h-u-n- -x-a-v-f-s-i-z-"-,--
+- - - - - - -l-a-b-e-l-:- -"-K-l-u-b- -h-a-q-i-d-a-"-,--
+- - - - - - -t-i-t-l-e-:- -"-A-S-L-A-N- -j-a-m-o-a-s-i- -—- -m-u-r-a-b-b-i-y-l-a-r- -v-a- -i-n-f-r-a-t-u-z-i-l-m-a-"-,--
+- - - - - - -l-e-a-d-:- -"-A-S-L-A-N- -o-t- -k-l-u-b-i- -C-h-i-l-o-n-z-o-r- -g-i-p-p-o-d-r-o-m-i- -y-o-n-i-d-a- -j-o-y-l-a-s-h-g-a-n- -—- -T-o-s-h-k-e-n-t-d-a-g-i- -e-n-g- -y-a-x-s-h-i- -c-h-a-v-a-n-d-o-z-l-i-k- -m-a-y-d-o-n-l-a-r-i-d-a-n- -b-i-r-i-.- -B-i-z- -e-g-a-r-d-a- -b-i-r-i-n-c-h-i- -q-a-d-a-m-l-a-r-i-n-i- -q-o-'-y-a-y-o-t-g-a-n-l-a-r- -u-c-h-u-n- -h-a-m-,- -k-o-n-k-u-r- -m-u-s-o-b-a-q-a-l-a-r-i-g-a- -t-a-y-y-o-r-l-a-n-a-y-o-t-g-a-n-l-a-r- -u-c-h-u-n- -h-a-m- -i-s-h-l-a-y-d-i-.-"-,--
+- - - - - - -b-t-n-C-o-n-t-a-c-t-:- -"-M-u-r-a-b-b-i-y- -b-i-l-a-n- -b-o-g-'-l-a-n-i-s-h-"-,--
+- - - - - - -b-t-n-P-r-i-c-e-s-:- -"-N-a-r-x-l-a-r-n-i- -k-o-'-r-i-s-h-"-,--
+- - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-P-r-o-f-e-s-s-i-o-n-a-l- -m-u-r-a-b-b-i-y-l-a-r-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-I-n-s-t-r-u-k-t-o-r-l-a-r-i-m-i-z- -b-o-l-a-l-a-r- -v-a- -k-a-t-t-a-l-a-r- -u-c-h-u-n- -k-o-'-p- -y-i-l-l-i-k- -o-'-q-i-t-i-s-h- -t-a-j-r-i-b-a-s-i-g-a- -e-g-a- -k-o-n-k-u-r- -m-u-s-o-b-a-q-a- -i-s-h-t-i-r-o-k-c-h-i-l-a-r-i-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-G-i-p-p-o-d-r-o-m- -i-n-f-r-a-t-u-z-i-l-m-a-s-i-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-Y-o-p-i-q- -v-a- -o-c-h-i-q- -m-a-n-e-j-l-a-r-,- -c-h-a-v-a-n-d-o-z-l-i-k- -t-r-e-k-l-a-r-i-,- -k-o-n-k-u-r- -t-o-'-s-i-q-l-a-r- -k-u-r-a-s-i-,- -z-a-m-o-n-a-v-i-y- -j-i-h-o-z-l-a-r-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -t-i-t-l-e-:- -"-X-a-v-f-s-i-z-l-i-k- -—- -u-s-t-u-v-o-r-"-,--
+- - - - - - - - - - -t-e-x-t-:- -"-M-a-j-b-u-r-i-y- -y-o-'-r-i-q-n-o-m-a-,- -s-e-r-t-i-f-i-k-a-t-l-a-n-g-a-n- -e-g-a-r-l-a-r-,- -b-a-r-c-h-a- -c-h-a-v-a-n-d-o-z-l-a-r- -u-c-h-u-n- -d-u-b-u-l-g-'-a-l-a-r-,- -i-n-s-t-r-u-k-t-o-r-n-i-n-g- -d-o-i-m-i-y- -m-a-v-j-u-d-l-i-g-i-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -p-r-i-c-e-s-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-N-a-r-x-l-a-r- -v-a- -j-a-d-v-a-l-"-,--
+- - - - - - -t-i-t-l-e-:- -"-M-a-s-h-g-'-u-l-o-t-l-a-r- -j-a-d-v-a-l-i- -v-a- -n-a-r-x-i-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-H-a-r- -k-u-n-i- -0-7-:-0-0- -d-a-n- -i-s-h-l-a-y-m-i-z-.- -A-n-i-q- -n-a-r-x-l-a-r- -s-o-'-r-o-v- -a-s-o-s-i-d-a- -(-g-u-r-u-h- -c-h-e-g-i-r-m-a-l-a-r-i- -m-a-v-j-u-d-)-.-"-,--
+- - - - - - -f-e-a-t-u-r-e-s-A-r-i-a-:- -"-N-i-m-a- -k-i-r-i-t-i-l-g-a-n-"-,--
+- - - - - - -b-t-n-:- -"-T-e-l-e-f-o-n- -o-r-q-a-l-i- -y-o-z-i-l-i-s-h-"-,--
+- - - - - - -n-o-t-e-:- -"-*- -N-a-r-x-l-a-r- -y-o-z-i-l-i-s-h-d-a- -a-n-i-q-l-a-n-a-d-i- -—- -g-u-r-u-h-l-a-r-,- -b-o-l-a-l-a-r- -v-a- -d-o-i-m-i-y- -m-i-j-o-z-l-a-r- -u-c-h-u-n- -c-h-e-g-i-r-m-a-l-a-r- -m-a-v-j-u-d-.- -Q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g-:-"-,--
+- - - - - - -n-o-t-e-O-r-:- -"-y-o-k-i-"-,--
+- - - - - - -s-c-h-e-d-u-l-e-:- -[--
+- - - - - - - - -{- -d-a-y-s-:- -"-D-u- -–- -J-u-"-,- -h-o-u-r-s-:- -"-0-7-:-0-0- -–- -2-0-:-0-0-"- -}-,--
+- - - - - - - - -{- -d-a-y-s-:- -"-S-h-a-n-b-a-"-,- -h-o-u-r-s-:- -"-0-7-:-0-0- -–- -1-9-:-0-0-"- -}-,--
+- - - - - - - - -{- -d-a-y-s-:- -"-Y-a-k-s-h-a-n-b-a-"-,- -h-o-u-r-s-:- -"-0-8-:-0-0- -–- -1-8-:-0-0-"- -}-,--
+- - - - - - -]-,--
+- - - - - - -p-l-a-n-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-S-i-n-o-v- -d-a-r-s-i-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-Y-a-n-g-i- -b-o-s-h-l-o-v-c-h-i-l-a-r- -u-c-h-u-n- -i-d-e-a-l- -—- -i-n-s-t-r-u-k-t-o-r- -b-i-l-a-n- -4-5- -d-a-q-i-q-a-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-S-o-'-r-o-v- -a-s-o-s-i-d-a-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -1- -m-a-s-h-g-'-u-l-o-t-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-I-n-s-t-r-u-k-t-o-r- -b-i-l-a-n- -4-5- -d-a-q-i-q-a-"-,--
+- - - - - - - - - - - - -"-T-e-k-s-h-i-r-i-l-g-a-n- -j-i-h-o-z-l-a-r-"-,--
+- - - - - - - - - - - - -"-X-a-v-f-s-i-z-l-i-k- -y-o-'-r-i-q-n-o-m-a-s-i-"-,--
+- - - - - - - - - - - - -"-O-l-d-i-n-d-a-n- -t-o-'-l-o-v-s-i-z-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-I-n-d-i-v-i-d-u-a-l- -d-a-r-s-l-a-r-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-M-u-r-a-b-b-i-y- -b-i-l-a-n- -s-h-a-x-s-i-y- -d-a-s-t-u-r- -—- -e-n-g- -t-e-z- -t-a-r-a-q-q-i-y-o-t-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-S-o-'-r-o-v- -a-s-o-s-i-d-a-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -1- -m-a-s-h-g-'-u-l-o-t-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-M-a-s-h-h-u-r-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-M-u-r-a-b-b-i-y- -b-i-l-a-n- -1---g-a---1-"-,--
+- - - - - - - - - - - - -"-I-n-d-i-v-i-d-u-a-l- -r-e-j-a-"-,--
+- - - - - - - - - - - - -"-M-o-s-l-a-s-h-u-v-c-h-a-n- -j-a-d-v-a-l-"-,--
+- - - - - - - - - - - - -"-S-o-'-r-o-v- -b-o-'-y-i-c-h-a- -v-i-d-e-o- -t-a-h-l-i-l-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-G-u-r-u-h- -d-a-r-s-l-a-r-i-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-B-o-l-a-l-a-r- -v-a- -k-a-t-t-a-l-a-r- -u-c-h-u-n- -—- -q-i-z-i-q-a-r-l-i-r-o-q- -v-a- -h-a-m-y-o-n-b-o-p-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-S-o-'-r-o-v- -a-s-o-s-i-d-a-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -1- -m-a-s-h-g-'-u-l-o-t-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-G-u-r-u-h-d-a- -5- -k-i-s-h-i-g-a-c-h-a-"-,--
+- - - - - - - - - - - - -"-6- -y-o-s-h-d-a-n- -b-o-l-a-l-a-r-g-a- -m-o-s-"-,--
+- - - - - - - - - - - - -"-B-e-l-g-i-l-a-n-g-a-n- -j-a-d-v-a-l-"-,--
+- - - - - - - - - - - - -"-O-b-u-n-a- -c-h-e-g-i-r-m-a-s-i-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -n-a-m-e-:- -"-K-o-n-k-u-r- -/- -M-u-s-o-b-a-q-a-l-a-r-"-,--
+- - - - - - - - - - -d-e-s-c-:- -"-T-u-r-n-i-r- -t-a-y-y-o-r-l-i-g-i- -—- -k-u-r-s- -i-s-h-l-a-s-h- -v-a- -s-a-k-r-a-s-h- -t-e-x-n-i-k-a-s-i-.-"-,--
+- - - - - - - - - - -p-r-i-c-e-:- -"-S-o-'-r-o-v- -a-s-o-s-i-d-a-"-,--
+- - - - - - - - - - -u-n-i-t-:- -"-·- -1- -m-a-s-h-g-'-u-l-o-t-"-,--
+- - - - - - - - - - -b-a-d-g-e-:- -"-M-a-s-h-h-u-r-"-,--
+- - - - - - - - - - -f-e-a-t-u-r-e-s-:- -[--
+- - - - - - - - - - - - -"-T-o-'-s-i-q-l-a-r- -k-u-r-a-s-i-"-,--
+- - - - - - - - - - - - -"-K-o-n-k-u-r- -m-u-r-a-b-b-i-y-s-i- -b-i-l-a-n- -i-s-h-l-a-s-h-"-,--
+- - - - - - - - - - - - -"-T-e-x-n-i-k-a-n-i- -b-a-h-o-l-a-s-h- -v-a- -t-a-h-l-i-l-"-,--
+- - - - - - - - - - - - -"-C-h-e-m-p-i-o-n-a-t-l-a-r-g-a- -t-a-y-y-o-r-l-i-k-"-,--
+- - - - - - - - - - -]-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -g-a-l-l-e-r-y-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-F-o-t-o-g-a-l-e-r-e-y-a-"-,--
+- - - - - - -t-i-t-l-e-:- -"-M-a-s-h-g-'-u-l-o-t-l-a-r-i-m-i-z- -v-a- -m-u-s-o-b-a-q-a-l-a-r-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-A-S-L-A-N- -o-t- -k-l-u-b-i-d-a- -t-r-e-n-i-r-o-v-k-a-l-a-r-,- -k-o-n-k-u-r-,- -f-o-t-o-s-e-s-s-i-y-a-l-a-r- -v-a- -b-a-y-r-a-m-l-a-r-.-"-,--
+- - - - - - -f-i-l-t-e-r-A-r-i-a-:- -"-G-a-l-e-r-e-y-a- -f-i-l-t-r-i-"-,--
+- - - - - - -b-t-n-W-a-:- -"-F-o-t-o-s-e-s-s-i-y-a- -b-u-y-u-r-t-m-a- -q-i-l-i-s-h-"-,--
+- - - - - - -b-t-n-W-a-S-u-b-:- -"-T-e-l-e-g-r-a-m- -d-a- -t-e-z-k-o-r- -j-a-v-o-b-"-,--
+- - - - - - -c-l-o-s-e-L-i-g-h-t-b-o-x-:- -"-Y-o-p-i-s-h-"-,--
+- - - - - - -p-r-e-v-P-h-o-t-o-:- -"-O-l-d-i-n-g-i- -f-o-t-o-"-,--
+- - - - - - -n-e-x-t-P-h-o-t-o-:- -"-K-e-y-i-n-g-i- -f-o-t-o-"-,--
+- - - - - - -t-a-b-s-:- -[--
+- - - - - - - - -{- -i-d-:- -"-a-l-l-"-,- -l-a-b-e-l-:- -"-H-a-m-m-a-s-i-"- -}-,--
+- - - - - - - - -{- -i-d-:- -"-t-r-a-i-n-i-n-g-"-,- -l-a-b-e-l-:- -"-T-r-e-n-i-r-o-v-k-a-l-a-r-"- -}-,--
+- - - - - - - - -{- -i-d-:- -"-c-o-m-p-e-t-i-t-i-o-n-"-,- -l-a-b-e-l-:- -"-M-u-s-o-b-a-q-a-l-a-r-"- -}-,--
+- - - - - - - - -{- -i-d-:- -"-p-h-o-t-o-"-,- -l-a-b-e-l-:- -"-F-o-t-o-s-e-s-s-i-y-a-l-a-r-"- -}-,--
+- - - - - - -]-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-T-r-e-n-i-r-o-v-k-a-"-,- -a-l-t-:- -"-I-n-d-i-v-i-d-u-a-l- -c-h-a-v-a-n-d-o-z-l-i-k- -d-a-r-s-i-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-K-o-n-k-u-r-"-,- -a-l-t-:- -"-A-S-L-A-N- -d-a- -k-o-n-k-u-r- -m-u-s-o-b-a-q-a-s-i-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-F-o-t-o-s-e-s-s-i-y-a-"-,- -a-l-t-:- -"-O-t-l-a-r- -b-i-l-a-n- -p-r-o-f-e-s-s-i-o-n-a-l- -f-o-t-o-s-e-s-s-i-y-a-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-G-u-r-u-h-"-,- -a-l-t-:- -"-B-o-l-a-l-a-r- -u-c-h-u-n- -g-u-r-u-h- -c-h-a-v-a-n-d-o-z-l-i-k- -d-a-r-s-l-a-r-i-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-S-a-k-r-a-s-h-"-,- -a-l-t-:- -"-M-u-s-o-b-a-q-a-d-a- -s-a-k-r-a-s-h-l-a-r-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-J-u-f-t-"-,- -a-l-t-:- -"-O-t- -b-i-l-a-n- -r-o-m-a-n-t-i-k- -f-o-t-o-s-e-s-s-i-y-a-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-K-o-r-d-a-"-,- -a-l-t-:- -"-M-u-r-a-b-b-i-y- -b-i-l-a-n- -k-o-r-d-a- -i-s-h-l-a-s-h-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-G-'-a-l-a-b-a-"-,- -a-l-t-:- -"-K-o-n-k-u-r- -g-'-o-l-i-b-l-a-r-i-n-i- -t-a-q-d-i-r-l-a-ш-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-B-o-l-a-l-a-r-"-,- -a-l-t-:- -"-O-t-l-a-r- -b-i-l-a-n- -b-o-l-a-l-a-r- -f-o-t-o-s-e-s-s-i-y-a-s-i-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-Y-a-n-g-i-"-,- -a-l-t-:- -"-Y-a-n-g-i- -b-o-s-h-l-o-v-c-h-i-l-a-r- -u-c-h-u-n- -s-i-n-o-v- -d-a-r-s-i-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-C-h-e-m-p-i-o-n-a-t-"-,- -a-l-t-:- -"-K-o-n-k-u-r- -c-h-e-m-p-i-o-n-a-t-i-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-T-o-'-y-"-,- -a-l-t-:- -"-O-t-l-a-r- -b-i-l-a-n- -t-o-'-y- -f-o-t-o-s-e-s-s-i-y-a-s-i-"- -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -f-a-q-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-F-A-Q-"-,--
+- - - - - - -t-i-t-l-e-:- -"-K-o-'-p- -s-o-'-r-a-l-a-d-i-g-a-n- -s-a-v-o-l-l-a-r-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-J-a-v-o-b- -t-o-p-a- -o-l-m-a-d-i-n-g-i-z-m-i-?- -Q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g- -y-o-k-i- -y-o-z-i-n-g- -—- -b-i-r- -n-e-c-h-a- -d-a-q-i-q-a-d-a- -j-a-v-o-b- -b-e-r-a-m-i-z-.-"-,--
+- - - - - - -c-t-a-T-i-t-l-e-:- -"-S-a-v-o-l-l-a-r- -q-o-l-d-i-m-i-?-"-,--
+- - - - - - -c-t-a-T-e-x-t-:- -"-Q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g- -y-o-k-i- -y-o-z-i-n-g- -—- -t-e-z- -j-a-v-o-b- -b-e-r-a-m-i-z-.-"-,--
+- - - - - - -b-t-n-C-a-l-l-:- -"-Q-o-'-n-g-'-i-r-o-q-"-,--
+- - - - - - -i-t-e-m-s-:- -[--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-S-i-n-o-v- -d-a-r-s-i-g-a- -q-a-n-d-a-y- -y-o-z-i-l-i-s-h- -m-u-m-k-i-n-?-"-,--
+- - - - - - - - - - -a-:- -"-+-9-9-8- -8-8- -2-5-8---6-5---6-5- -r-a-q-a-m-i-g-a- -q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g- -y-o-k-i- -T-e-l-e-g-r-a-m- -d-a- -y-o-z-i-n-g- -—- -m-e-n-e-j-e-r- -b-i-r- -n-e-c-h-a- -d-a-q-i-q-a- -i-c-h-i-d-a- -q-u-l-a-y- -v-a-q-t-n-i- -t-a-s-d-i-q-l-a-y-d-i-.- -S-h-u-n-i-n-g-d-e-k-,- -s-a-y-t-d-a-g-i- -f-o-r-m-a- -o-r-q-a-l-i- -a-r-i-z-a- -q-o-l-d-i-r-i-s-h-i-n-g-i-z- -m-u-m-k-i-n-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-N-e-c-h-a- -y-o-s-h-d-a-n- -c-h-a-v-a-n-d-o-z-l-i-k- -b-i-l-а-н- -s-h-u-g-'-u-l-l-a-n-i-s-h- -m-u-m-k-i-n-?-"-,--
+- - - - - - - - - - -a-:- -"-B-i-z-d-a- -6- -y-o-s-h-d-a-n- -b-o-l-a-l-a-r- -m-a-s-h-g-'-u-l-o-t- -q-i-l-a-d-i-.- -K-i-c-h-k-i-n-t-o-y-l-a-r- -u-c-h-u-n- -m-a-x-s-u-s- -b-o-l-a-l-a-r- -j-i-h-o-z-l-a-r-i-,- -d-u-b-u-l-g-'-a-l-a-r- -v-a- -i-n-s-t-r-u-k-t-o-r-n-i-n-g- -d-o-i-m-i-y- -m-a-v-j-u-d-l-i-g-i- -t-a-'-m-i-n-l-a-n-g-a-n-.- -Y-u-q-o-r-i- -y-o-s-h- -c-h-e-g-a-r-a-s-i- -y-o-'-q- -—- -i-s-t-a-l-g-a-n- -y-o-s-h-d-a- -b-o-s-h-l-a-s-h- -m-u-m-k-i-n-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-B-i-r-i-n-c-h-i- -d-a-r-s-g-a- -n-i-m-a- -o-l-i-b- -k-e-l-i-s-h- -k-e-r-a-k-?-"-,--
+- - - - - - - - - - -a-:- -"-Q-u-l-a-y- -k-i-y-i-m-d-a- -k-e-l-i-s-h- -k-i-f-o-y-a-:- -y-o-p-i-q- -s-h-i-m-l-a-r- -(-j-i-n-s-i- -y-o-k-i- -l-e-g-g-i-n-g-s-)-,- -k-i-c-h-i-k- -p-o-s-h-n-a-l-i- -y-o-p-i-q- -o-y-o-q- -k-i-y-i-m-i- -(-p-l-a-t-f-o-r-m-a-s-i-z- -k-r-o-s-s-o-v-k-a- -y-o-k-i- -e-t-i-k-)-.- -A-g-a-r- -o-'-z-i-n-g-i-z-n-i-k-i-n-i- -o-l-i-b- -k-e-l-m-a-g-a-n- -b-o-'-l-s-a-n-g-i-z-,- -d-u-b-u-l-g-'-a- -b-e-p-u-l- -b-e-r-i-l-a-d-i-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-S-a-y-r- -u-c-h-u-n- -o-t- -i-j-a-r-a-s-i- -b-o-r-m-i-?-"-,--
+- - - - - - - - - - -a-:- -"-H-a- -—- -k-l-u-b- -h-u-d-u-d-i-d-a- -s-a-y-r- -u-c-h-u-n- -o-t-l-a-r- -t-a-q-d-i-m- -e-t-a-m-i-z-.- -N-a-r-x- -v-a- -d-a-v-o-m-i-y-l-i-g-i- -h-a-q-i-d-a- -t-e-l-e-f-o-n- -y-o-k-i- -T-e-l-e-g-r-a-m- -o-r-q-a-l-i- -y-o-z-i-l-i-s-h-d-a- -s-o-'-r-a-n-g-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-O-t-l-a-r- -b-i-l-a-n- -f-o-t-o-s-e-s-s-i-y-a-n-i- -q-a-n-d-a-y- -t-a-s-h-k-i-l- -q-i-l-i-s-h- -m-u-m-k-i-n-?-"-,--
+- - - - - - - - - - -a-:- -"-T-e-l-e-g-r-a-m- -d-a- -y-o-z-i-n-g- -y-o-k-i- -q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g- -—- -s-a-n-a-,- -v-a-q-t- -v-a- -f-o-r-m-a-t- -b-o-'-y-i-c-h-a- -(-t-a-b-i-a-t-d-a-/-m-a-n-e-j-d-a-)- -i-s-t-a-k-l-a-r-n-i- -m-u-h-o-k-a-m-a- -q-i-l-a-m-i-z-.- -K-e-l-i-s-h-i-l-g-a-n- -h-o-l-d-a- -t-a-k-l-i-f- -e-t-i-l-g-a-n- -f-o-t-o-g-r-f-l-a-r- -b-i-l-a-n- -h-a-m- -i-s-h-l-a-y-m-i-z-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-B-o-l-a-l-a-r- -u-c-h-u-n- -g-u-r-u-h- -d-a-r-s-l-a-r-i- -b-o-r-m-i-?-"-,--
+- - - - - - - - - - -a-:- -"-H-a-,- -g-u-r-u-h- -d-a-r-s-l-a-r-i- -b-o-l-a-l-a-r- -v-a- -k-a-t-t-a-l-a-r- -u-c-h-u-n- -m-a-v-j-u-d-.- -G-u-r-u-h-l-a-r- -k-i-c-h-i-k- -—- -5- -k-i-s-h-i-g-a-c-h-a-,- -s-h-u-n-d-a- -m-u-r-a-b-b-i-y- -h-a-r- -b-i-r-i-g-a- -e-'-t-i-b-o-r- -b-e-r-a- -o-l-a-d-i-.- -D-a-r-s-l-a-r- -b-e-l-g-i-l-a-n-g-a-n- -j-a-d-v-a-l- -b-o-'-y-i-c-h-a-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-K-l-u-b- -q-a-y-e-r-d-a- -j-o-y-l-a-s-h-g-a-n-?-"-,--
+- - - - - - - - - - -a-:- -"-B-i-z- -T-o-s-h-k-e-n-t-n-i-n-g- -C-h-i-l-o-n-z-o-r- -t-u-m-a-n-i-d-a-,- -g-i-p-p-o-d-r-o-m- -y-o-n-i-d-a- -j-o-y-l-a-s-h-g-a-n-m-i-z-.- -M-o-'-l-j-a-l- -—- -B-u-n-y-o-d-k-o-r- -p-r-o-s-p-e-k-t-i-d-a-g-i- -L-U-K-O-I-L- -A-Z-S-.- -A-v-t-o-m-o-b-i-l-l-a-r- -u-c-h-u-n- -q-u-l-a-y- -t-o-'-x-t-a-s-h- -j-o-y-i- -m-a-v-j-u-d-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -q-:- -"-K-o-n-k-u-r- -m-u-s-o-b-a-q-a-l-a-r-i-g-a- -q-a-n-d-a-y- -t-a-y-y-o-r-l-a-n-i-s-h- -m-u-m-k-i-n-?-"-,--
+- - - - - - - - - - -a-:- -"-I-x-t-i-s-o-s-l-a-s-h-g-a-n- -m-u-r-a-b-b-i-y-i-m-i-z- -b-i-l-a-n- -k-o-n-k-u-r- -b-o-'-y-i-c-h-a- -t-r-e-n-i-r-o-v-k-a-l-a-r-g-a- -y-o-z-i-l-i-n-g-.- -I-n-d-i-v-i-d-u-a-l- -t-a-y-y-o-r-g-a-r-l-i-k- -r-e-j-a-s-i-n-i- -t-u-z-a-m-i-z-:- -a-s-o-s-i-y- -t-e-x-n-i-k-a-,- -k-o-r-d-a- -i-s-h-l-a-s-h-,- -t-o-'-s-i-q-l-a-r- -k-u-r-s-a-s-i-d-a- -s-a-k-r-a-s-h-l-a-r-n-i- -m-a-s-h-q- -q-i-l-i-s-h-.-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -f-o-r-m-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-O-n-l-a-y-n- -y-o-z-i-l-i-s-h-"-,--
+- - - - - - -t-i-t-l-e-:- -"-A-r-i-z-a- -q-o-l-d-i-r-i-n-g- -—- -q-a-y-t-a- -q-o-'-n-g-'-i-r-o-q- -q-i-l-a-m-i-z-"-,--
+- - - - - - -d-e-s-c-1-:- -"-F-o-r-m-a-n-i- -t-o-'-l-d-i-r-i-n-g- -v-a- -m-e-n-e-j-e-r- -"-,--
+- - - - - - -d-e-s-c-1-s-t-r-o-n-g-:- -"-1- -i-s-h- -s-o-a-t-i-"-,--
+- - - - - - -d-e-s-c-2-:--
+- - - - - - - - -"- -i-c-h-i-d-a- -s-i-z- -b-i-l-a-n- -b-o-g-'-l-a-n-a-d-i- -—- -s-a-n-a-n-i- -v-a- -v-a-q-t-n-i- -t-a-s-d-i-q-l-a-s-h-,- -s-a-v-o-l-l-a-r-g-a- -j-a-v-o-b- -b-e-r-i-s-h- -v-a- -x-i-z-m-a-t-n-i- -t-a-n-l-a-s-h-d-a- -y-o-r-d-a-m- -b-e-r-i-s-h- -u-c-h-u-n-.-"-,--
+- - - - - - -o-r-C-o-n-t-a-c-t-:- -"-Y-o-k-i- -b-e-v-o-s-i-t-a- -b-o-g-'-l-a-n-i-n-g-:-"-,--
+- - - - - - -s-u-c-c-e-s-s-T-i-t-l-e-:- -"-A-r-i-z-a- -q-a-b-u-l- -q-i-l-i-n-d-i-!-"-,--
+- - - - - - -s-u-c-c-e-s-s-T-e-x-t-:--
+- - - - - - - - -"-1- -i-s-h- -s-o-a-t-i- -i-c-h-i-d-a- -s-i-z- -b-i-l-a-n- -b-o-g-'-l-a-n-a-m-i-z-.- -S-h-o-s-h-i-l-i-n-c-h- -b-o-'-l-s-a- -—- -h-o-z-i-r- -q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g-:-"-,--
+- - - - - - -a-r-i-a-L-a-b-e-l-:- -"-M-a-s-h-g-'-u-l-o-t-g-a- -y-o-z-i-l-i-s-h- -f-o-r-m-a-s-i-"-,--
+- - - - - - -l-a-b-e-l-N-a-m-e-:- -"-I-s-m-"-,--
+- - - - - - -l-a-b-e-l-P-h-o-n-e-:- -"-T-e-l-e-f-o-n-"-,--
+- - - - - - -l-a-b-e-l-T-e-l-e-g-r-a-m-:- -"-T-e-l-e-g-r-a-m-"-,--
+- - - - - - -l-a-b-e-l-S-e-r-v-i-c-e-:- -"-X-i-z-m-a-t-"-,--
+- - - - - - -p-l-a-c-e-h-o-l-d-e-r-N-a-m-e-:- -"-I-s-m- -F-a-m-i-l-i-y-a-"-,--
+- - - - - - -p-l-a-c-e-h-o-l-d-e-r-P-h-o-n-e-:- -"-+-9-9-8- -9-0- -9-9-9- -9-9- -9-9-"-,--
+- - - - - - -p-l-a-c-e-h-o-l-d-e-r-T-e-l-e-g-r-a-m-:- -"-@-t-e-l-e-g-r-a-m- -u-s-e-r-"-,--
+- - - - - - -s-e-l-e-c-t-P-l-a-c-e-h-o-l-d-e-r-:- -"-X-i-z-m-a-t-n-i- -t-a-n-l-a-n-g-.-.-.-"-,--
+- - - - - - -s-e-r-v-i-c-e-O-p-t-i-o-n-s-:- -[--
+- - - - - - - - -"-S-i-n-o-v- -d-a-r-s-i-"-,--
+- - - - - - - - -"-I-n-d-i-v-i-d-u-a-l- -d-a-r-s-l-a-r-"-,--
+- - - - - - - - -"-G-u-r-u-h- -d-a-r-s-l-a-r-i-"-,--
+- - - - - - - - -"-O-t-l-a-r- -b-i-l-a-n- -f-o-t-o-s-e-s-s-i-y-a-"-,--
+- - - - - - - - -"-K-o-n-k-u-r- -b-o-'-y-i-c-h-a- -t-r-e-n-i-r-o-v-k-a-l-a-r-"-,--
+- - - - - - -]-,--
+- - - - - - -c-o-n-s-e-n-t-:--
+- - - - - - - - -"-M-a-x-f-i-y-l-i-k- -s-i-y-o-s-a-t-i-g-a- -m-u-v-o-f-i-q- -s-h-a-x-s-i-y- -m-a-'-l-u-m-o-t-l-a-r-n-i- -q-a-y-t-a- -i-s-h-l-a-s-h-g-a- -r-o-z-i-m-a-n-"-,--
+- - - - - - -b-t-n-S-u-b-m-i-t-:- -"-A-r-i-z-a- -y-u-b-o-r-i-s-h-"-,--
+- - - - - - -b-t-n-S-u-b-m-i-t-t-i-n-g-:- -"-Y-u-b-o-r-i-l-m-o-q-d-a-.-.-.-"-,--
+- - - - - - -c-o-n-s-e-n-t-N-o-t-e-:- -"-T-u-g-m-a-n-i- -b-o-s-i-b-,- -m-e-n- -r-o-z-i-l-i-k- -b-e-r-a-m-a-n-"-,--
+- - - - - - -c-o-n-s-e-n-t-L-i-n-k-:- -"-s-h-a-x-s-i-y- -m-a-'-l-u-m-o-t-l-a-r-n-i- -q-a-y-t-a- -i-s-h-l-a-s-h-g-a-"-,--
+- - - - - - -e-r-r-N-a-m-e-:- -"-I-s-m-i-n-g-i-z-n-i- -k-i-r-i-t-i-n-g- -(-k-a-m-i-d-a- -2- -t-a- -b-e-l-g-i-)-"-,--
+- - - - - - -e-r-r-P-h-o-n-e-:- -"-T-o-'-g-'-r-i- -t-e-l-e-f-o-n- -r-a-q-a-m-i-n-i- -k-i-r-i-t-i-n-g-"-,--
+- - - - - - -e-r-r-S-e-r-v-i-c-e-:- -"-X-i-z-m-a-t-n-i- -t-a-n-l-a-n-g-"-,--
+- - - - - - -e-r-r-C-o-n-s-e-n-t-:- -"-M-a-'-l-u-m-o-t-l-a-r-n-i- -q-a-y-t-a- -i-s-h-l-a-s-h-g-a- -r-o-z-i-l-i-k- -t-a-l-a-b- -q-i-l-i-n-a-d-i-"-,--
+- - - - -}-,--
+- - - - -c-o-n-t-a-c-t-:- -{--
+- - - - - - -l-a-b-e-l-:- -"-B-i-z-n-i- -q-a-y-e-r-d-a-n- -t-o-p-i-s-h- -m-u-m-k-i-n-"-,--
+- - - - - - -t-i-t-l-e-:- -"-K-o-n-t-a-k-t-l-a-r- -v-a- -q-a-n-d-a-y- -b-o-r-i-s-h-"-,--
+- - - - - - -s-u-b-t-i-t-l-e-:--
+- - - - - - - - -"-B-i-z- -C-h-i-l-o-n-z-o-r-d-a-m-i-z- -—- -g-i-p-p-o-d-r-o-m- -y-o-n-i-d-a-.- -Q-u-l-a-y- -t-o-'-x-t-a-s-h- -j-o-y-i-,- -h-a-r- -k-u-n-i- -0-7-:-0-0- -d-a-n- -i-s-h-l-a-y-m-i-z-.-"-,--
+- - - - - - -b-t-n-C-a-l-l-:- -"-Q-o-'-n-g-'-i-r-o-q-:-"-,--
+- - - - - - -b-t-n-W-a-:- -"-T-e-l-e-g-r-a-m- -d-a- -y-o-z-i-n-g-"-,--
+- - - - - - -m-a-p-A-r-i-a-:- -"-A-S-L-A-N- -o-t- -k-l-u-b-i- -j-o-y-l-a-s-h-u-v- -x-a-r-i-t-a-s-i-"-,--
+- - - - - - -m-a-p-A-d-d-r-e-s-s-:- -"-B-u-n-y-o-d-k-o-r- -p-r---t-i-,- -C-h-i-l-o-n-z-o-r-"-,--
+- - - - - - -m-a-p-L-a-n-d-m-a-r-k-:- -"-M-o-'-l-j-a-l-:- -C-h-i-l-o-n-z-o-r- -g-i-p-p-o-d-r-o-m-i- -/- -L-U-K-O-I-L- -A-Z-S-"-,--
+- - - - - - -m-a-p-s-B-t-n-:- -"-G-o-o-g-l-e- -M-a-p-s- -d-a- -o-c-h-i-s-h-"-,--
+- - - - - - -c-a-r-d-s-:- -[--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-A-s-o-s-i-y- -t-e-l-e-f-o-n-"- -}-,--
+- - - - - - - - -{- -l-a-b-e-l-:- -"-Q-o-'-s-h-i-m-c-h-a- -t-e-l-e-f-o-n-"- -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -l-a-b-e-l-:- -"-M-a-n-z-i-l-"-,--
+- - - - - - - - - - -v-a-l-u-e-:- -"-B-u-n-y-o-d-k-o-r- -p-r---t-i-,- -C-h-i-l-o-n-z-o-r-,- -T-o-s-h-k-e-n-t-"-,--
+- - - - - - - - - - -s-u-b-:- -"-M-o-'-l-j-a-l-:- -C-h-i-l-o-n-z-o-r- -g-i-p-p-o-d-r-o-m-i- -/- -L-U-K-O-I-L- -A-Z-S-"-,--
+- - - - - - - - -}-,--
+- - - - - - - - -{--
+- - - - - - - - - - -l-a-b-e-l-:- -"-I-s-h- -v-a-q-t-i-"-,--
+- - - - - - - - - - -v-a-l-u-e-:- -"-H-a-r- -k-u-n-i- -0-7-:-0-0- -d-a-n- -2-0-:-0-0- -g-a-c-h-a-"-,--
+- - - - - - - - - - -s-u-b-:- -"-Y-a-k-s-h-a-n-b-a-d-a- -1-8-:-0-0- -g-a-c-h-a-"-,--
+- - - - - - - - -}-,--
+- - - - - - -]-,--
+- - - - -}-,--
+- - - - -f-o-o-t-e-r-:- -{--
+- - - - - - -l-o-g-o-A-r-i-a-:- -"-A-S-L-A-N- -—- -s-a-h-i-f-a- -b-o-s-h-i-g-a-"-,--
+- - - - - - -b-r-a-n-d-D-e-s-c-:--
+- - - - - - - - -"-C-h-i-l-o-n-z-o-r-,- -T-o-s-h-k-e-n-t-d-a-g-i- -p-r-o-f-e-s-s-i-o-n-a-l- -o-t- -k-l-u-b-i-.- -C-h-a-v-a-n-d-o-z-l-i-k- -d-a-r-s-l-a-r-i-,- -k-o-n-k-u-r-,- -o-t-l-a-r- -b-i-l-a-n- -f-o-t-o-s-e-s-s-i-y-a-l-a-r-.-"-,--
+- - - - - - -h-o-u-r-s-:- -"-H-a-r- -k-u-n-i- -0-7-:-0-0- -d-a-n- -2-0-:-0-0- -g-a-c-h-a-"-,--
+- - - - - - -c-t-a-T-i-t-l-e-:- -"-B-o-s-h-l-a-s-h-g-a- -t-a-y-y-o-r-m-i-s-i-z-?- -H-o-z-i-r- -q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g-"-,--
+- - - - - - -c-t-a-S-u-b-:--
+- - - - - - - - -"-B-i-r-i-n-c-h-i- -s-i-n-o-v- -d-a-r-s-i- -—- -s-h-u-n-c-h-a-k-i- -q-o-'-n-g-'-i-r-o-q- -q-i-l-i-n-g- -y-o-k-i- -T-e-l-e-g-r-a-m- -d-a- -y-o-z-i-n-g-.-"-,--
+- - - - - - -n-a-v-T-i-t-l-e-:- -"-N-a-v-i-g-a-t-s-i-y-a-"-,--
+- - - - - - -s-e-r-v-i-c-e-s-T-i-t-l-e-:- -"-X-i-z-m-a-t-l-a-r-"-,--
+- - - - - - -c-o-n-t-a-c-t-T-i-t-l-e-:- -"-K-o-n-t-a-k-t-l-a-r-"-,--
+- - - - - - -c-o-p-y-r-i-g-h-t-:- -"-A-S-L-A-N- -O-t- -k-l-u-b-i-.- -B-a-r-c-h-a- -h-u-q-u-q-l-a-r- -h-i-m-o-y-a-l-a-n-g-a-n-.-"-,--
+- - - - - - -s-e-o-:- -"-O-t- -k-l-u-b-i- -T-o-s-h-k-e-n-t- -·- -C-h-a-v-a-n-d-o-z-l-i-k- -d-a-r-s-l-a-r-i- -C-h-i-l-o-n-z-o-r- -·- -K-o-n-k-u-r- -t-r-e-n-i-r-o-v-k-a-l-a-r-i-"-,--
+- - - - - - -n-a-v-L-i-n-k-s-:- -[--
+- - - - - - - - -"-B-o-s-h- -s-a-h-i-f-a-"-,--
+- - - - - - - - -"-X-i-z-m-a-t-l-a-r-"-,--
+- - - - - - - - -"-B-i-z- -h-a-q-i-m-i-z-d-a-"-,--
+- - - - - - - - -"-N-a-r-x-l-a-r-"-,--
+- - - - - - - - -"-G-a-l-e-r-e-y-a-"-,--
+- - - - - - - - -"-F-A-Q-"-,--
+- - - - - - - - -"-K-o-n-t-a-k-t-l-a-r-"-,--
+- - - - - - - - -"-Y-o-z-i-l-i-s-h-"-,--
+- - - - - - -]-,--
+- - - - - - -s-e-r-v-i-c-e-L-i-n-k-s-:- -[--
+- - - - - - - - -"-S-i-n-o-v- -d-a-r-s-i-"-,--
+- - - - - - - - -"-I-n-d-i-v-i-d-u-a-l- -d-a-r-s-l-a-r-"-,--
+- - - - - - - - -"-G-u-r-u-h- -d-a-r-s-l-a-r-i-"-,--
+- - - - - - - - -"-K-o-n-k-u-r- -b-o-'-y-i-c-h-a- -t-r-e-n-i-r-o-v-k-a-l-a-r-"-,--
+- - - - - - - - -"-O-t-l-a-r- -b-i-l-a-n- -f-o-t-o-s-e-s-s-i-y-a-l-a-r-"-,--
+- - - - - - -]-,--
+- - - - - - -a-d-d-r-e-s-s-:- -"-B-u-n-y-o-d-k-o-r- -p-r---t-i-,- -C-h-i-l-o-n-z-o-r-"-,--
+- - - - -}-,--
+- - -}-,--
+-}-;--
+-

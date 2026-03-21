@@ -1,460 +1,461 @@
-<template>
-  <section class="hero" :aria-label="t.hero.aria">
-    <!-- Background -->
-    <div class="hero__bg">
-      <!-- Replace src with your real photo: /images/hero.jpg -->
-      <img
-        class="hero__bg-img"
-        :src="'/images/hero.jpg'"
-        :alt="t.hero.imgAlt"
-        loading="eager"
-        fetchpriority="high"
-        onerror="this.style.display = 'none'"
-      />
-      <div class="hero__overlay"></div>
-    </div>
-
-    <!-- Floating trust chips -->
-    <div class="hero__trust container">
-      <span class="trust-chip">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <polyline points="12 6 12 12 16 14" />
-        </svg>
-        {{ t.hero.chip1 }}
-      </span>
-      <span class="trust-chip">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          aria-hidden="true"
-        >
-          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 00-3-3.87" />
-          <path d="M16 3.13a4 4 0 010 7.75" />
-        </svg>
-        {{ t.hero.chip2 }}
-      </span>
-      <span class="trust-chip">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          aria-hidden="true"
-        >
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        </svg>
-        {{ t.hero.chip3 }}
-      </span>
-    </div>
-
-    <!-- Content -->
-    <div class="container hero__content">
-      <div class="hero__text">
-        <span class="hero__label">{{ t.hero.label }}</span>
-
-        <h1 class="hero__h1">
-          {{ t.hero.h1 }}<br />
-          <em>{{ t.hero.h1em }}</em>
-        </h1>
-
-        <p class="hero__sub">
-          {{ t.hero.sub1 }}
-          <strong>{{ t.hero.sub2strong }}</strong
-          >{{ t.hero.sub2rest }}
-        </p>
-
-        <div class="hero__actions">
-          <a
-            :href="`tel:${PHONE1_RAW}`"
-            class="btn btn--primary btn--lg"
-            @click="handleCall"
-            :aria-label="t.hero.callAria"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              aria-hidden="true"
-            >
-              <path
-                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.93a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.74a16 16 0 006.35 6.35l1.11-1.11a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
-              />
-            </svg>
-            {{ t.hero.btnCall }}
-          </a>
-
-          <a
-            :href="TELEGRAM_URL"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn--telegram btn--lg"
-            @click="handleWhatsApp"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path
-                d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
-              />
-            </svg>
-            {{ t.hero.btnWa }}
-          </a>
-        </div>
-
-        <p class="hero__note">
-          {{ t.hero.or }}
-          <a href="#booking" @click.prevent="scrollTo('booking')">{{
-            t.hero.leaveApp
-          }}</a
-          >{{ t.hero.callback }}
-        </p>
-      </div>
-
-      <!-- Decorative horse silhouette -->
-      <div class="hero__deco" aria-hidden="true">
-        <svg
-          viewBox="0 0 340 400"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M260 60c-8-20-28-32-48-28-12 2-22 10-28 20-6 10-6 22-2 32 2 6 6 12 10 16-4 2-8 6-12 10-8 10-12 22-12 34 0 8 2 16 6 22-8 4-16 10-22 18-10 14-14 30-12 46 2 14 8 26 18 36 4 4 8 8 14 10-2 6-4 12-4 18 0 10 4 20 10 28 6 8 14 14 24 16 10 2 20 0 28-6 8-6 14-16 14-26 0-8-2-16-6-22 2-2 4-4 6-6 10-12 16-28 16-44 0-10-2-20-6-28 6-6 10-14 12-22 2-10 2-20-2-30-4-8-10-16-18-20 4-6 6-14 4-22-2-10-8-20-16-26 4-8 6-18 4-26z"
-            fill="white"
-            opacity="0.06"
-          />
-          <path
-            d="M220 80c-6 0-12 4-16 10-2 4-4 8-4 12 0 6 2 12 6 16-6 2-12 8-16 14-6 10-8 22-6 32 2 8 6 16 12 22-10 6-18 16-22 26-4 10-4 22 0 32 4 10 10 18 20 24-4 8-6 16-4 24 2 10 8 18 16 24 8 6 18 8 28 6 10-2 18-8 24-18 4-8 6-18 4-26 6-4 10-10 14-18 4-10 6-20 4-30-2-10-8-20-16-26 4-6 6-14 6-22 0-10-4-20-10-26 6-4 10-10 12-18 2-8 0-18-4-26-4-6-10-12-18-14-4-2-8-2-12-2"
-            stroke="white"
-            stroke-width="2"
-            opacity="0.2"
-            stroke-linecap="round"
-          />
-          <!-- Horse legs stylized -->
-          <rect
-            x="170"
-            y="290"
-            width="16"
-            height="70"
-            rx="8"
-            fill="white"
-            opacity="0.1"
-          />
-          <rect
-            x="200"
-            y="285"
-            width="16"
-            height="75"
-            rx="8"
-            fill="white"
-            opacity="0.1"
-          />
-          <rect
-            x="145"
-            y="295"
-            width="14"
-            height="65"
-            rx="7"
-            fill="white"
-            opacity="0.08"
-          />
-          <rect
-            x="225"
-            y="290"
-            width="14"
-            height="70"
-            rx="7"
-            fill="white"
-            opacity="0.08"
-          />
-        </svg>
-      </div>
-    </div>
-
-    <!-- Scroll Down -->
-    <button
-      class="hero__scroll"
-      @click="scrollTo('benefits')"
-      :aria-label="t.hero.scrollAria"
-    >
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        aria-hidden="true"
-      >
-        <polyline points="6 9 12 15 18 9" />
-      </svg>
-    </button>
-  </section>
-</template>
-
-<script setup>
-import { useAnalytics } from "@/composables/useAnalytics.js";
-import { useI18n } from "@/composables/useI18n.js";
-
-const PHONE1_RAW = "+998882586565";
-const TELEGRAM_URL = "https://t.me/+998882586565";
-
-const { trackCall, trackWhatsApp, trackCTAClick } = useAnalytics();
-const { t } = useI18n();
-
-const handleCall = () => {
-  trackCall(PHONE1_RAW);
-  trackCTAClick("call", "hero");
-};
-const handleWhatsApp = () => {
-  trackWhatsApp();
-  trackCTAClick("whatsapp", "hero");
-};
-
-const scrollTo = (id) => {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-};
-</script>
-
-<style scoped>
-.hero {
-  position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  padding-top: var(--header-height);
-}
-
-/* Background */
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #0a152e 0%, #162b5b 50%, #0a1f40 100%);
-  z-index: 0;
-}
-
-.hero__bg-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  opacity: 0.45;
-}
-
-.hero__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(10, 21, 46, 0.85) 0%,
-    rgba(13, 27, 62, 0.65) 60%,
-    rgba(10, 21, 46, 0.8) 100%
-  );
-}
-
-/* Trust chips — top of hero */
-.hero__trust {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding-top: 24px;
-  padding-bottom: 0;
-  margin-bottom: auto;
-}
-
-.trust-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-full);
-  font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(8px);
-}
-
-.trust-chip svg {
-  width: 13px;
-  height: 13px;
-  flex-shrink: 0;
-  stroke: var(--gold-light);
-}
-
-/* Main content */
-.hero__content {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  align-items: center;
-  gap: 40px;
-  padding-top: 48px;
-  padding-bottom: 80px;
-}
-
-.hero__text {
-  max-width: 620px;
-}
-
-.hero__label {
-  display: inline-block;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  margin-bottom: 16px;
-}
-
-.hero__h1 {
-  font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 5.5vw, 4rem);
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--white);
-  margin-bottom: 20px;
-}
-
-.hero__h1 em {
-  font-style: normal;
-  color: var(--gold-light);
-}
-
-.hero__sub {
-  font-size: 1.0625rem;
-  color: rgba(255, 255, 255, 0.78);
-  line-height: 1.7;
-  margin-bottom: 36px;
-  max-width: 520px;
-}
-
-.hero__sub strong {
-  color: var(--white);
-  font-weight: 600;
-}
-
-.hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
-.hero__note {
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.hero__note a {
-  color: var(--gold-light);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* Decorative SVG */
-.hero__deco {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.9;
-}
-
-.hero__deco svg {
-  width: 100%;
-  max-width: 320px;
-  filter: drop-shadow(0 0 60px rgba(200, 150, 46, 0.15));
-}
-
-/* Scroll indicator */
-.hero__scroll {
-  position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-full);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  cursor: pointer;
-  animation: bounce 2s ease-in-out infinite;
-  transition: background var(--transition-fast);
-}
-
-.hero__scroll:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.hero__scroll svg {
-  width: 20px;
-  height: 20px;
-}
-
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  50% {
-    transform: translateX(-50%) translateY(6px);
-  }
-}
-
-/* Responsive */
-@media (max-width: 1023px) {
-  .hero__content {
-    grid-template-columns: 1fr;
-  }
-  .hero__deco {
-    display: none;
-  }
-  .hero__text {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 767px) {
-  .hero {
-    min-height: 92vh;
-  }
-  .hero__h1 {
-    font-size: clamp(2rem, 8vw, 3rem);
-  }
-  .hero__actions {
-    flex-direction: column;
-  }
-  .hero__actions .btn {
-    width: 100%;
-    justify-content: center;
-  }
-  .hero__trust {
-    gap: 6px;
-  }
-  .trust-chip {
-    font-size: 0.75rem;
-    padding: 5px 10px;
-  }
-}
-</style>
+﻿-<-t-e-m-p-l-a-t-e->--
+- - -<-s-e-c-t-i-o-n- -c-l-a-s-s-=-"-h-e-r-o-"- -:-a-r-i-a---l-a-b-e-l-=-"-t-.-h-e-r-o-.-a-r-i-a-"->--
+- - - - -<-!----- -B-a-c-k-g-r-o-u-n-d- ----->--
+- - - - -<-d-i-v- -c-l-a-s-s-=-"-h-e-r-o-_-_-b-g-"->--
+- - - - - - -<-!----- -R-e-p-l-a-c-e- -s-r-c- -w-i-t-h- -y-o-u-r- -r-e-a-l- -p-h-o-t-o-:- -/-i-m-a-g-e-s-/-h-e-r-o-.-j-p-g- ----->--
+- - - - - - -<-i-m-g--
+- - - - - - - - -c-l-a-s-s-=-"-h-e-r-o-_-_-b-g---i-m-g-"--
+- - - - - - - - -:-s-r-c-=-"-'-/-i-m-a-g-e-s-/-h-e-r-o-.-j-p-g-'-"--
+- - - - - - - - -:-a-l-t-=-"-t-.-h-e-r-o-.-i-m-g-A-l-t-"--
+- - - - - - - - -l-o-a-d-i-n-g-=-"-e-a-g-e-r-"--
+- - - - - - - - -f-e-t-c-h-p-r-i-o-r-i-t-y-=-"-h-i-g-h-"--
+- - - - - - - - -o-n-e-r-r-o-r-=-"-t-h-i-s-.-s-t-y-l-e-.-d-i-s-p-l-a-y- -=- -'-n-o-n-e-'-"--
+- - - - - - -/->--
+- - - - - - -<-d-i-v- -c-l-a-s-s-=-"-h-e-r-o-_-_-o-v-e-r-l-a-y-"->-<-/-d-i-v->--
+- - - - -<-/-d-i-v->--
+--
+- - - - -<-!----- -F-l-o-a-t-i-n-g- -t-r-u-s-t- -c-h-i-p-s- ----->--
+- - - - -<-d-i-v- -c-l-a-s-s-=-"-h-e-r-o-_-_-t-r-u-s-t- -c-o-n-t-a-i-n-e-r-"->--
+- - - - - - -<-s-p-a-n- -c-l-a-s-s-=-"-t-r-u-s-t---c-h-i-p-"->--
+- - - - - - - - -<-s-v-g--
+- - - - - - - - - - -v-i-e-w-B-o-x-=-"-0- -0- -2-4- -2-4-"--
+- - - - - - - - - - -f-i-l-l-=-"-n-o-n-e-"--
+- - - - - - - - - - -s-t-r-o-k-e-=-"-c-u-r-r-e-n-t-C-o-l-o-r-"--
+- - - - - - - - - - -s-t-r-o-k-e---w-i-d-t-h-=-"-2-"--
+- - - - - - - - - - -a-r-i-a---h-i-d-d-e-n-=-"-t-r-u-e-"--
+- - - - - - - - ->--
+- - - - - - - - - - -<-c-i-r-c-l-e- -c-x-=-"-1-2-"- -c-y-=-"-1-2-"- -r-=-"-1-0-"- -/->--
+- - - - - - - - - - -<-p-o-l-y-l-i-n-e- -p-o-i-n-t-s-=-"-1-2- -6- -1-2- -1-2- -1-6- -1-4-"- -/->--
+- - - - - - - - -<-/-s-v-g->--
+- - - - - - - - -{-{- -t-.-h-e-r-o-.-c-h-i-p-1- -}-}--
+- - - - - - -<-/-s-p-a-n->--
+- - - - - - -<-s-p-a-n- -c-l-a-s-s-=-"-t-r-u-s-t---c-h-i-p-"->--
+- - - - - - - - -<-s-v-g--
+- - - - - - - - - - -v-i-e-w-B-o-x-=-"-0- -0- -2-4- -2-4-"--
+- - - - - - - - - - -f-i-l-l-=-"-n-o-n-e-"--
+- - - - - - - - - - -s-t-r-o-k-e-=-"-c-u-r-r-e-n-t-C-o-l-o-r-"--
+- - - - - - - - - - -s-t-r-o-k-e---w-i-d-t-h-=-"-2-"--
+- - - - - - - - - - -a-r-i-a---h-i-d-d-e-n-=-"-t-r-u-e-"--
+- - - - - - - - ->--
+- - - - - - - - - - -<-p-a-t-h- -d-=-"-M-1-7- -2-1-v---2-a-4- -4- -0- -0-0---4---4-H-5-a-4- -4- -0- -0-0---4- -4-v-2-"- -/->--
+- - - - - - - - - - -<-c-i-r-c-l-e- -c-x-=-"-9-"- -c-y-=-"-7-"- -r-=-"-4-"- -/->--
+- - - - - - - - - - -<-p-a-t-h- -d-=-"-M-2-3- -2-1-v---2-a-4- -4- -0- -0-0---3---3-.-8-7-"- -/->--
+- - - - - - - - - - -<-p-a-t-h- -d-=-"-M-1-6- -3-.-1-3-a-4- -4- -0- -0-1-0- -7-.-7-5-"- -/->--
+- - - - - - - - -<-/-s-v-g->--
+- - - - - - - - -{-{- -t-.-h-e-r-o-.-c-h-i-p-2- -}-}--
+- - - - - - -<-/-s-p-a-n->--
+- - - - - - -<-s-p-a-n- -c-l-a-s-s-=-"-t-r-u-s-t---c-h-i-p-"->--
+- - - - - - - - -<-s-v-g--
+- - - - - - - - - - -v-i-e-w-B-o-x-=-"-0- -0- -2-4- -2-4-"--
+- - - - - - - - - - -f-i-l-l-=-"-n-o-n-e-"--
+- - - - - - - - - - -s-t-r-o-k-e-=-"-c-u-r-r-e-n-t-C-o-l-o-r-"--
+- - - - - - - - - - -s-t-r-o-k-e---w-i-d-t-h-=-"-2-"--
+- - - - - - - - - - -a-r-i-a---h-i-d-d-e-n-=-"-t-r-u-e-"--
+- - - - - - - - ->--
+- - - - - - - - - - -<-p-a-t-h- -d-=-"-M-1-2- -2-2-s-8---4- -8---1-0-V-5-l---8---3---8- -3-v-7-c-0- -6- -8- -1-0- -8- -1-0-z-"- -/->--
+- - - - - - - - -<-/-s-v-g->--
+- - - - - - - - -{-{- -t-.-h-e-r-o-.-c-h-i-p-3- -}-}--
+- - - - - - -<-/-s-p-a-n->--
+- - - - -<-/-d-i-v->--
+--
+- - - - -<-!----- -C-o-n-t-e-n-t- ----->--
+- - - - -<-d-i-v- -c-l-a-s-s-=-"-c-o-n-t-a-i-n-e-r- -h-e-r-o-_-_-c-o-n-t-e-n-t-"->--
+- - - - - - -<-d-i-v- -c-l-a-s-s-=-"-h-e-r-o-_-_-t-e-x-t-"->--
+- - - - - - - - -<-s-p-a-n- -c-l-a-s-s-=-"-h-e-r-o-_-_-l-a-b-e-l-"->-{-{- -t-.-h-e-r-o-.-l-a-b-e-l- -}-}-<-/-s-p-a-n->--
+--
+- - - - - - - - -<-h-1- -c-l-a-s-s-=-"-h-e-r-o-_-_-h-1-"->--
+- - - - - - - - - - -{-{- -t-.-h-e-r-o-.-h-1- -}-}-<-b-r- -/->--
+- - - - - - - - - - -<-e-m->-{-{- -t-.-h-e-r-o-.-h-1-e-m- -}-}-<-/-e-m->--
+- - - - - - - - -<-/-h-1->--
+--
+- - - - - - - - -<-p- -c-l-a-s-s-=-"-h-e-r-o-_-_-s-u-b-"->--
+- - - - - - - - - - -{-{- -t-.-h-e-r-o-.-s-u-b-1- -}-}--
+- - - - - - - - - - -<-s-t-r-o-n-g->-{-{- -t-.-h-e-r-o-.-s-u-b-2-s-t-r-o-n-g- -}-}-<-/-s-t-r-o-n-g--
+- - - - - - - - - - ->-{-{- -t-.-h-e-r-o-.-s-u-b-2-r-e-s-t- -}-}--
+- - - - - - - - -<-/-p->--
+--
+- - - - - - - - -<-d-i-v- -c-l-a-s-s-=-"-h-e-r-o-_-_-a-c-t-i-o-n-s-"->--
+- - - - - - - - - - -<-a--
+- - - - - - - - - - - - -:-h-r-e-f-=-"-`-t-e-l-:-$-{-P-H-O-N-E-1-_-R-A-W-}-`-"--
+- - - - - - - - - - - - -c-l-a-s-s-=-"-b-t-n- -b-t-n-----p-r-i-m-a-r-y- -b-t-n-----l-g-"--
+- - - - - - - - - - - - -@-c-l-i-c-k-=-"-h-a-n-d-l-e-C-a-l-l-"--
+- - - - - - - - - - - - -:-a-r-i-a---l-a-b-e-l-=-"-t-.-h-e-r-o-.-c-a-l-l-A-r-i-a-"--
+- - - - - - - - - - ->--
+- - - - - - - - - - - - -<-s-v-g--
+- - - - - - - - - - - - - - -v-i-e-w-B-o-x-=-"-0- -0- -2-4- -2-4-"--
+- - - - - - - - - - - - - - -f-i-l-l-=-"-n-o-n-e-"--
+- - - - - - - - - - - - - - -s-t-r-o-k-e-=-"-c-u-r-r-e-n-t-C-o-l-o-r-"--
+- - - - - - - - - - - - - - -s-t-r-o-k-e---w-i-d-t-h-=-"-2-.-2-"--
+- - - - - - - - - - - - - - -a-r-i-a---h-i-d-d-e-n-=-"-t-r-u-e-"--
+- - - - - - - - - - - - ->--
+- - - - - - - - - - - - - - -<-p-a-t-h--
+- - - - - - - - - - - - - - - - -d-=-"-M-2-2- -1-6-.-9-2-v-3-a-2- -2- -0- -0-1---2-.-1-8- -2- -1-9-.-7-9- -1-9-.-7-9- -0- -0-1---8-.-6-3---3-.-0-7-A-1-9-.-5- -1-9-.-5- -0- -0-1-3-.-8-6- -9-.-9-3-a-1-9-.-7-9- -1-9-.-7-9- -0- -0-1---3-.-0-7---8-.-6-7-A-2- -2- -0- -0-1-2-.-7-7- -1-h-3-a-2- -2- -0- -0-1-2- -1-.-7-2-c-.-1-2-7-.-9-6-.-3-6-1- -1-.-9-0-3-.-7- -2-.-8-1-a-2- -2- -0- -0-1---.-4-5- -2-.-1-1-L-6-.-9-1- -8-.-7-4-a-1-6- -1-6- -0- -0-0-6-.-3-5- -6-.-3-5-l-1-.-1-1---1-.-1-1-a-2- -2- -0- -0-1-2-.-1-1---.-4-5-c-.-9-0-7-.-3-3-9- -1-.-8-5-.-5-7-3- -2-.-8-1-.-7-A-2- -2- -0- -0-1-2-2- -1-6-.-9-2-z-"--
+- - - - - - - - - - - - - - -/->--
+- - - - - - - - - - - - -<-/-s-v-g->--
+- - - - - - - - - - - - -{-{- -t-.-h-e-r-o-.-b-t-n-C-a-l-l- -}-}--
+- - - - - - - - - - -<-/-a->--
+--
+- - - - - - - - - - -<-a--
+- - - - - - - - - - - - -:-h-r-e-f-=-"-T-E-L-E-G-R-A-M-_-U-R-L-"--
+- - - - - - - - - - - - -t-a-r-g-e-t-=-"-_-b-l-a-n-k-"--
+- - - - - - - - - - - - -r-e-l-=-"-n-o-o-p-e-n-e-r- -n-o-r-e-f-e-r-r-e-r-"--
+- - - - - - - - - - - - -c-l-a-s-s-=-"-b-t-n- -b-t-n-----t-e-l-e-g-r-a-m- -b-t-n-----l-g-"--
+- - - - - - - - - - - - -@-c-l-i-c-k-=-"-h-a-n-d-l-e-W-h-a-t-s-A-p-p-"--
+- - - - - - - - - - ->--
+- - - - - - - - - - - - -<-s-v-g- -v-i-e-w-B-o-x-=-"-0- -0- -2-4- -2-4-"- -f-i-l-l-=-"-c-u-r-r-e-n-t-C-o-l-o-r-"- -a-r-i-a---h-i-d-d-e-n-=-"-t-r-u-e-"->--
+- - - - - - - - - - - - - - -<-p-a-t-h--
+- - - - - - - - - - - - - - - - -d-=-"-M-1-1-.-9-4-4- -0-A-1-2- -1-2- -0- -0- -0- -0- -1-2-a-1-2- -1-2- -0- -0- -0- -1-2- -1-2- -1-2- -1-2- -0- -0- -0- -1-2---1-2-A-1-2- -1-2- -0- -0- -0- -1-2- -0-a-1-2- -1-2- -0- -0- -0---.-0-5-6- -0-z-m-4-.-9-6-2- -7-.-2-2-4-c-.-1---.-0-0-2-.-3-2-1-.-0-2-3-.-4-6-5-.-1-4-a-.-5-0-6-.-5-0-6- -0- -0- -1- -.-1-7-1-.-3-2-5-c-.-0-1-6-.-0-9-3-.-0-3-6-.-3-0-6-.-0-2-.-4-7-2---.-1-8- -1-.-8-9-8---.-9-6-2- -6-.-5-0-2---1-.-3-6- -8-.-6-2-7---.-1-6-8-.-9---.-4-9-9- -1-.-2-0-1---.-8-2- -1-.-2-3---.-6-9-6-.-0-6-5---1-.-2-2-5---.-4-6---1-.-9---.-9-0-2---1-.-0-5-6---.-6-9-3---1-.-6-5-3---1-.-1-2-4---2-.-6-7-8---1-.-8---1-.-1-8-5---.-7-8---.-4-1-7---1-.-2-1-.-2-5-8---1-.-9-1-.-1-7-7---.-1-8-4- -3-.-2-4-7---2-.-9-7-7- -3-.-3-0-7---3-.-2-3-.-0-0-7---.-0-3-2-.-0-1-4---.-1-5---.-0-5-6---.-2-1-2-s---.-1-7-4---.-0-4-1---.-2-4-9---.-0-2-4-c---.-1-0-6-.-0-2-4---1-.-7-9-3- -1-.-1-4---5-.-0-6-1- -3-.-3-4-5---.-4-8-.-3-3---.-9-1-3-.-4-9---1-.-3-0-2-.-4-8---.-4-2-8---.-0-0-8---1-.-2-5-2---.-2-4-1---1-.-8-6-5---.-4-4---.-7-5-2---.-2-4-5---1-.-3-4-9---.-3-7-4---1-.-2-9-7---.-7-8-9-.-0-2-7---.-2-1-6-.-3-2-5---.-4-3-7-.-8-9-3---.-6-6-3- -3-.-4-9-8---1-.-5-2-4- -5-.-8-3---2-.-5-2-9- -6-.-9-9-8---3-.-0-1-4- -3-.-3-3-2---1-.-3-8-6- -4-.-0-2-5---1-.-6-2-7- -4-.-4-7-6---1-.-6-3-5-z-"--
+- - - - - - - - - - - - - - -/->--
+- - - - - - - - - - - - -<-/-s-v-g->--
+- - - - - - - - - - - - -{-{- -t-.-h-e-r-o-.-b-t-n-W-a- -}-}--
+- - - - - - - - - - -<-/-a->--
+- - - - - - - - -<-/-d-i-v->--
+--
+- - - - - - - - -<-p- -c-l-a-s-s-=-"-h-e-r-o-_-_-n-o-t-e-"->--
+- - - - - - - - - - -{-{- -t-.-h-e-r-o-.-o-r- -}-}--
+- - - - - - - - - - -<-a- -h-r-e-f-=-"-#-b-o-o-k-i-n-g-"- -@-c-l-i-c-k-.-p-r-e-v-e-n-t-=-"-s-c-r-o-l-l-T-o-(-'-b-o-o-k-i-n-g-'-)-"->-{-{--
+- - - - - - - - - - - - -t-.-h-e-r-o-.-l-e-a-v-e-A-p-p--
+- - - - - - - - - - -}-}-<-/-a--
+- - - - - - - - - - ->-{-{- -t-.-h-e-r-o-.-c-a-l-l-b-a-c-k- -}-}--
+- - - - - - - - -<-/-p->--
+- - - - - - -<-/-d-i-v->--
+--
+- - - - - - -<-!----- -D-e-c-o-r-a-t-i-v-e- -h-o-r-s-e- -s-i-l-h-o-u-e-t-t-e- ----->--
+- - - - - - -<-d-i-v- -c-l-a-s-s-=-"-h-e-r-o-_-_-d-e-c-o-"- -a-r-i-a---h-i-d-d-e-n-=-"-t-r-u-e-"->--
+- - - - - - - - -<-s-v-g--
+- - - - - - - - - - -v-i-e-w-B-o-x-=-"-0- -0- -3-4-0- -4-0-0-"--
+- - - - - - - - - - -f-i-l-l-=-"-n-o-n-e-"--
+- - - - - - - - - - -x-m-l-n-s-=-"-h-t-t-p-:-/-/-w-w-w-.-w-3-.-o-r-g-/-2-0-0-0-/-s-v-g-"--
+- - - - - - - - ->--
+- - - - - - - - - - -<-p-a-t-h--
+- - - - - - - - - - - - -d-=-"-M-2-6-0- -6-0-c---8---2-0---2-8---3-2---4-8---2-8---1-2- -2---2-2- -1-0---2-8- -2-0---6- -1-0---6- -2-2---2- -3-2- -2- -6- -6- -1-2- -1-0- -1-6---4- -2---8- -6---1-2- -1-0---8- -1-0---1-2- -2-2---1-2- -3-4- -0- -8- -2- -1-6- -6- -2-2---8- -4---1-6- -1-0---2-2- -1-8---1-0- -1-4---1-4- -3-0---1-2- -4-6- -2- -1-4- -8- -2-6- -1-8- -3-6- -4- -4- -8- -8- -1-4- -1-0---2- -6---4- -1-2---4- -1-8- -0- -1-0- -4- -2-0- -1-0- -2-8- -6- -8- -1-4- -1-4- -2-4- -1-6- -1-0- -2- -2-0- -0- -2-8---6- -8---6- -1-4---1-6- -1-4---2-6- -0---8---2---1-6---6---2-2- -2---2- -4---4- -6---6- -1-0---1-2- -1-6---2-8- -1-6---4-4- -0---1-0---2---2-0---6---2-8- -6---6- -1-0---1-4- -1-2---2-2- -2---1-0- -2---2-0---2---3-0---4---8---1-0---1-6---1-8---2-0- -4---6- -6---1-4- -4---2-2---2---1-0---8---2-0---1-6---2-6- -4---8- -6---1-8- -4---2-6-z-"--
+- - - - - - - - - - - - -f-i-l-l-=-"-w-h-i-t-e-"--
+- - - - - - - - - - - - -o-p-a-c-i-t-y-=-"-0-.-0-6-"--
+- - - - - - - - - - -/->--
+- - - - - - - - - - -<-p-a-t-h--
+- - - - - - - - - - - - -d-=-"-M-2-2-0- -8-0-c---6- -0---1-2- -4---1-6- -1-0---2- -4---4- -8---4- -1-2- -0- -6- -2- -1-2- -6- -1-6---6- -2---1-2- -8---1-6- -1-4---6- -1-0---8- -2-2---6- -3-2- -2- -8- -6- -1-6- -1-2- -2-2---1-0- -6---1-8- -1-6---2-2- -2-6---4- -1-0---4- -2-2- -0- -3-2- -4- -1-0- -1-0- -1-8- -2-0- -2-4---4- -8---6- -1-6---4- -2-4- -2- -1-0- -8- -1-8- -1-6- -2-4- -8- -6- -1-8- -8- -2-8- -6- -1-0---2- -1-8---8- -2-4---1-8- -4---8- -6---1-8- -4---2-6- -6---4- -1-0---1-0- -1-4---1-8- -4---1-0- -6---2-0- -4---3-0---2---1-0---8---2-0---1-6---2-6- -4---6- -6---1-4- -6---2-2- -0---1-0---4---2-0---1-0---2-6- -6---4- -1-0---1-0- -1-2---1-8- -2---8- -0---1-8---4---2-6---4---6---1-0---1-2---1-8---1-4---4---2---8---2---1-2---2-"--
+- - - - - - - - - - - - -s-t-r-o-k-e-=-"-w-h-i-t-e-"--
+- - - - - - - - - - - - -s-t-r-o-k-e---w-i-d-t-h-=-"-2-"--
+- - - - - - - - - - - - -o-p-a-c-i-t-y-=-"-0-.-2-"--
+- - - - - - - - - - - - -s-t-r-o-k-e---l-i-n-e-c-a-p-=-"-r-o-u-n-d-"--
+- - - - - - - - - - -/->--
+- - - - - - - - - - -<-!----- -H-o-r-s-e- -l-e-g-s- -s-t-y-l-i-z-e-d- ----->--
+- - - - - - - - - - -<-r-e-c-t--
+- - - - - - - - - - - - -x-=-"-1-7-0-"--
+- - - - - - - - - - - - -y-=-"-2-9-0-"--
+- - - - - - - - - - - - -w-i-d-t-h-=-"-1-6-"--
+- - - - - - - - - - - - -h-e-i-g-h-t-=-"-7-0-"--
+- - - - - - - - - - - - -r-x-=-"-8-"--
+- - - - - - - - - - - - -f-i-l-l-=-"-w-h-i-t-e-"--
+- - - - - - - - - - - - -o-p-a-c-i-t-y-=-"-0-.-1-"--
+- - - - - - - - - - -/->--
+- - - - - - - - - - -<-r-e-c-t--
+- - - - - - - - - - - - -x-=-"-2-0-0-"--
+- - - - - - - - - - - - -y-=-"-2-8-5-"--
+- - - - - - - - - - - - -w-i-d-t-h-=-"-1-6-"--
+- - - - - - - - - - - - -h-e-i-g-h-t-=-"-7-5-"--
+- - - - - - - - - - - - -r-x-=-"-8-"--
+- - - - - - - - - - - - -f-i-l-l-=-"-w-h-i-t-e-"--
+- - - - - - - - - - - - -o-p-a-c-i-t-y-=-"-0-.-1-"--
+- - - - - - - - - - -/->--
+- - - - - - - - - - -<-r-e-c-t--
+- - - - - - - - - - - - -x-=-"-1-4-5-"--
+- - - - - - - - - - - - -y-=-"-2-9-5-"--
+- - - - - - - - - - - - -w-i-d-t-h-=-"-1-4-"--
+- - - - - - - - - - - - -h-e-i-g-h-t-=-"-6-5-"--
+- - - - - - - - - - - - -r-x-=-"-7-"--
+- - - - - - - - - - - - -f-i-l-l-=-"-w-h-i-t-e-"--
+- - - - - - - - - - - - -o-p-a-c-i-t-y-=-"-0-.-0-8-"--
+- - - - - - - - - - -/->--
+- - - - - - - - - - -<-r-e-c-t--
+- - - - - - - - - - - - -x-=-"-2-2-5-"--
+- - - - - - - - - - - - -y-=-"-2-9-0-"--
+- - - - - - - - - - - - -w-i-d-t-h-=-"-1-4-"--
+- - - - - - - - - - - - -h-e-i-g-h-t-=-"-7-0-"--
+- - - - - - - - - - - - -r-x-=-"-7-"--
+- - - - - - - - - - - - -f-i-l-l-=-"-w-h-i-t-e-"--
+- - - - - - - - - - - - -o-p-a-c-i-t-y-=-"-0-.-0-8-"--
+- - - - - - - - - - -/->--
+- - - - - - - - -<-/-s-v-g->--
+- - - - - - -<-/-d-i-v->--
+- - - - -<-/-d-i-v->--
+--
+- - - - -<-!----- -S-c-r-o-l-l- -D-o-w-n- ----->--
+- - - - -<-b-u-t-t-o-n--
+- - - - - - -c-l-a-s-s-=-"-h-e-r-o-_-_-s-c-r-o-l-l-"--
+- - - - - - -@-c-l-i-c-k-=-"-s-c-r-o-l-l-T-o-(-'-b-e-n-e-f-i-t-s-'-)-"--
+- - - - - - -:-a-r-i-a---l-a-b-e-l-=-"-t-.-h-e-r-o-.-s-c-r-o-l-l-A-r-i-a-"--
+- - - - ->--
+- - - - - - -<-s-v-g--
+- - - - - - - - -v-i-e-w-B-o-x-=-"-0- -0- -2-4- -2-4-"--
+- - - - - - - - -f-i-l-l-=-"-n-o-n-e-"--
+- - - - - - - - -s-t-r-o-k-e-=-"-c-u-r-r-e-n-t-C-o-l-o-r-"--
+- - - - - - - - -s-t-r-o-k-e---w-i-d-t-h-=-"-2-"--
+- - - - - - - - -a-r-i-a---h-i-d-d-e-n-=-"-t-r-u-e-"--
+- - - - - - ->--
+- - - - - - - - -<-p-o-l-y-l-i-n-e- -p-o-i-n-t-s-=-"-6- -9- -1-2- -1-5- -1-8- -9-"- -/->--
+- - - - - - -<-/-s-v-g->--
+- - - - -<-/-b-u-t-t-o-n->--
+- - -<-/-s-e-c-t-i-o-n->--
+-<-/-t-e-m-p-l-a-t-e->--
+--
+-<-s-c-r-i-p-t- -s-e-t-u-p->--
+-i-m-p-o-r-t- -{- -u-s-e-A-n-a-l-y-t-i-c-s- -}- -f-r-o-m- -"-@-/-c-o-m-p-o-s-a-b-l-e-s-/-u-s-e-A-n-a-l-y-t-i-c-s-.-j-s-"-;--
+-i-m-p-o-r-t- -{- -u-s-e-I-1-8-n- -}- -f-r-o-m- -"-@-/-c-o-m-p-o-s-a-b-l-e-s-/-u-s-e-I-1-8-n-.-j-s-"-;--
+--
+-c-o-n-s-t- -P-H-O-N-E-1-_-R-A-W- -=- -"-+-9-9-8-8-8-2-5-8-6-5-6-5-"-;--
+-c-o-n-s-t- -T-E-L-E-G-R-A-M-_-U-R-L- -=- -"-h-t-t-p-s-:-/-/-t-.-m-e-/-+-9-9-8-8-8-2-5-8-6-5-6-5-"-;--
+--
+-c-o-n-s-t- -{- -t-r-a-c-k-C-a-l-l-,- -t-r-a-c-k-W-h-a-t-s-A-p-p-,- -t-r-a-c-k-C-T-A-C-l-i-c-k- -}- -=- -u-s-e-A-n-a-l-y-t-i-c-s-(-)-;--
+-c-o-n-s-t- -{- -t- -}- -=- -u-s-e-I-1-8-n-(-)-;--
+--
+-c-o-n-s-t- -h-a-n-d-l-e-C-a-l-l- -=- -(-)- -=->- -{--
+- - -t-r-a-c-k-C-a-l-l-(-P-H-O-N-E-1-_-R-A-W-)-;--
+- - -t-r-a-c-k-C-T-A-C-l-i-c-k-(-"-c-a-l-l-"-,- -"-h-e-r-o-"-)-;--
+-}-;--
+-c-o-n-s-t- -h-a-n-d-l-e-W-h-a-t-s-A-p-p- -=- -(-)- -=->- -{--
+- - -t-r-a-c-k-W-h-a-t-s-A-p-p-(-)-;--
+- - -t-r-a-c-k-C-T-A-C-l-i-c-k-(-"-w-h-a-t-s-a-p-p-"-,- -"-h-e-r-o-"-)-;--
+-}-;--
+--
+-c-o-n-s-t- -s-c-r-o-l-l-T-o- -=- -(-i-d-)- -=->- -{--
+- - -c-o-n-s-t- -e-l- -=- -d-o-c-u-m-e-n-t-.-g-e-t-E-l-e-m-e-n-t-B-y-I-d-(-i-d-)-;--
+- - -i-f- -(-e-l-)- -e-l-.-s-c-r-o-l-l-I-n-t-o-V-i-e-w-(-{- -b-e-h-a-v-i-o-r-:- -"-s-m-o-o-t-h-"-,- -b-l-o-c-k-:- -"-s-t-a-r-t-"- -}-)-;--
+-}-;--
+-<-/-s-c-r-i-p-t->--
+--
+-<-s-t-y-l-e- -s-c-o-p-e-d->--
+-.-h-e-r-o- -{--
+- - -p-o-s-i-t-i-o-n-:- -r-e-l-a-t-i-v-e-;--
+- - -m-i-n---h-e-i-g-h-t-:- -1-0-0-v-h-;--
+- - -m-i-n---h-e-i-g-h-t-:- -1-0-0-s-v-h-;--
+- - -d-i-s-p-l-a-y-:- -f-l-e-x-;--
+- - -f-l-e-x---d-i-r-e-c-t-i-o-n-:- -c-o-l-u-m-n-;--
+- - -j-u-s-t-i-f-y---c-o-n-t-e-n-t-:- -c-e-n-t-e-r-;--
+- - -o-v-e-r-f-l-o-w-:- -h-i-d-d-e-n-;--
+- - -p-a-d-d-i-n-g---t-o-p-:- -v-a-r-(-----h-e-a-d-e-r---h-e-i-g-h-t-)-;--
+-}--
+--
+-/-*- -B-a-c-k-g-r-o-u-n-d- -*-/--
+-.-h-e-r-o-_-_-b-g- -{--
+- - -p-o-s-i-t-i-o-n-:- -a-b-s-o-l-u-t-e-;--
+- - -i-n-s-e-t-:- -0-;--
+- - -b-a-c-k-g-r-o-u-n-d-:- -l-i-n-e-a-r---g-r-a-d-i-e-n-t-(-1-3-5-d-e-g-,- -#-0-a-1-5-2-e- -0-%-,- -#-1-6-2-b-5-b- -5-0-%-,- -#-0-a-1-f-4-0- -1-0-0-%-)-;--
+- - -z---i-n-d-e-x-:- -0-;--
+-}--
+--
+-.-h-e-r-o-_-_-b-g---i-m-g- -{--
+- - -p-o-s-i-t-i-o-n-:- -a-b-s-o-l-u-t-e-;--
+- - -i-n-s-e-t-:- -0-;--
+- - -w-i-d-t-h-:- -1-0-0-%-;--
+- - -h-e-i-g-h-t-:- -1-0-0-%-;--
+- - -o-b-j-e-c-t---f-i-t-:- -c-o-v-e-r-;--
+- - -o-b-j-e-c-t---p-o-s-i-t-i-o-n-:- -c-e-n-t-e-r- -3-0-%-;--
+- - -o-p-a-c-i-t-y-:- -0-.-4-5-;--
+-}--
+--
+-.-h-e-r-o-_-_-o-v-e-r-l-a-y- -{--
+- - -p-o-s-i-t-i-o-n-:- -a-b-s-o-l-u-t-e-;--
+- - -i-n-s-e-t-:- -0-;--
+- - -b-a-c-k-g-r-o-u-n-d-:- -l-i-n-e-a-r---g-r-a-d-i-e-n-t-(--
+- - - - -1-3-5-d-e-g-,--
+- - - - -r-g-b-a-(-1-0-,- -2-1-,- -4-6-,- -0-.-8-5-)- -0-%-,--
+- - - - -r-g-b-a-(-1-3-,- -2-7-,- -6-2-,- -0-.-6-5-)- -6-0-%-,--
+- - - - -r-g-b-a-(-1-0-,- -2-1-,- -4-6-,- -0-.-8-)- -1-0-0-%--
+- - -)-;--
+-}--
+--
+-/-*- -T-r-u-s-t- -c-h-i-p-s- -—- -t-o-p- -o-f- -h-e-r-o- -*-/--
+-.-h-e-r-o-_-_-t-r-u-s-t- -{--
+- - -p-o-s-i-t-i-o-n-:- -r-e-l-a-t-i-v-e-;--
+- - -z---i-n-d-e-x-:- -1-;--
+- - -d-i-s-p-l-a-y-:- -f-l-e-x-;--
+- - -f-l-e-x---w-r-a-p-:- -w-r-a-p-;--
+- - -g-a-p-:- -8-p-x-;--
+- - -p-a-d-d-i-n-g---t-o-p-:- -2-4-p-x-;--
+- - -p-a-d-d-i-n-g---b-o-t-t-o-m-:- -0-;--
+- - -m-a-r-g-i-n---b-o-t-t-o-m-:- -a-u-t-o-;--
+-}--
+--
+-.-t-r-u-s-t---c-h-i-p- -{--
+- - -d-i-s-p-l-a-y-:- -i-n-l-i-n-e---f-l-e-x-;--
+- - -a-l-i-g-n---i-t-e-m-s-:- -c-e-n-t-e-r-;--
+- - -g-a-p-:- -6-p-x-;--
+- - -p-a-d-d-i-n-g-:- -6-p-x- -1-4-p-x-;--
+- - -b-a-c-k-g-r-o-u-n-d-:- -r-g-b-a-(-2-5-5-,- -2-5-5-,- -2-5-5-,- -0-.-0-8-)-;--
+- - -b-o-r-d-e-r-:- -1-p-x- -s-o-l-i-d- -r-g-b-a-(-2-5-5-,- -2-5-5-,- -2-5-5-,- -0-.-1-5-)-;--
+- - -b-o-r-d-e-r---r-a-d-i-u-s-:- -v-a-r-(-----r-a-d-i-u-s---f-u-l-l-)-;--
+- - -f-o-n-t---s-i-z-e-:- -0-.-8-1-2-5-r-e-m-;--
+- - -c-o-l-o-r-:- -r-g-b-a-(-2-5-5-,- -2-5-5-,- -2-5-5-,- -0-.-8-2-)-;--
+- - -b-a-c-k-d-r-o-p---f-i-l-t-e-r-:- -b-l-u-r-(-8-p-x-)-;--
+-}--
+--
+-.-t-r-u-s-t---c-h-i-p- -s-v-g- -{--
+- - -w-i-d-t-h-:- -1-3-p-x-;--
+- - -h-e-i-g-h-t-:- -1-3-p-x-;--
+- - -f-l-e-x---s-h-r-i-n-k-:- -0-;--
+- - -s-t-r-o-k-e-:- -v-a-r-(-----g-o-l-d---l-i-g-h-t-)-;--
+-}--
+--
+-/-*- -M-a-i-n- -c-o-n-t-e-n-t- -*-/--
+-.-h-e-r-o-_-_-c-o-n-t-e-n-t- -{--
+- - -p-o-s-i-t-i-o-n-:- -r-e-l-a-t-i-v-e-;--
+- - -z---i-n-d-e-x-:- -1-;--
+- - -d-i-s-p-l-a-y-:- -g-r-i-d-;--
+- - -g-r-i-d---t-e-m-p-l-a-t-e---c-o-l-u-m-n-s-:- -1-f-r- -3-8-0-p-x-;--
+- - -a-l-i-g-n---i-t-e-m-s-:- -c-e-n-t-e-r-;--
+- - -g-a-p-:- -4-0-p-x-;--
+- - -p-a-d-d-i-n-g---t-o-p-:- -4-8-p-x-;--
+- - -p-a-d-d-i-n-g---b-o-t-t-o-m-:- -8-0-p-x-;--
+-}--
+--
+-.-h-e-r-o-_-_-t-e-x-t- -{--
+- - -m-a-x---w-i-d-t-h-:- -6-2-0-p-x-;--
+-}--
+--
+-.-h-e-r-o-_-_-l-a-b-e-l- -{--
+- - -d-i-s-p-l-a-y-:- -i-n-l-i-n-e---b-l-o-c-k-;--
+- - -f-o-n-t---s-i-z-e-:- -0-.-8-1-2-5-r-e-m-;--
+- - -f-o-n-t---w-e-i-g-h-t-:- -6-0-0-;--
+- - -l-e-t-t-e-r---s-p-a-c-i-n-g-:- -0-.-1-e-m-;--
+- - -t-e-x-t---t-r-a-n-s-f-o-r-m-:- -u-p-p-e-r-c-a-s-e-;--
+- - -c-o-l-o-r-:- -v-a-r-(-----g-o-l-d---l-i-g-h-t-)-;--
+- - -m-a-r-g-i-n---b-o-t-t-o-m-:- -1-6-p-x-;--
+-}--
+--
+-.-h-e-r-o-_-_-h-1- -{--
+- - -f-o-n-t---f-a-m-i-l-y-:- -v-a-r-(-----f-o-n-t---h-e-a-d-i-n-g-)-;--
+- - -f-o-n-t---s-i-z-e-:- -c-l-a-m-p-(-2-.-4-r-e-m-,- -5-.-5-v-w-,- -4-r-e-m-)-;--
+- - -f-o-n-t---w-e-i-g-h-t-:- -7-0-0-;--
+- - -l-i-n-e---h-e-i-g-h-t-:- -1-.-1-;--
+- - -c-o-l-o-r-:- -v-a-r-(-----w-h-i-t-e-)-;--
+- - -m-a-r-g-i-n---b-o-t-t-o-m-:- -2-0-p-x-;--
+-}--
+--
+-.-h-e-r-o-_-_-h-1- -e-m- -{--
+- - -f-o-n-t---s-t-y-l-e-:- -n-o-r-m-a-l-;--
+- - -c-o-l-o-r-:- -v-a-r-(-----g-o-l-d---l-i-g-h-t-)-;--
+-}--
+--
+-.-h-e-r-o-_-_-s-u-b- -{--
+- - -f-o-n-t---s-i-z-e-:- -1-.-0-6-2-5-r-e-m-;--
+- - -c-o-l-o-r-:- -r-g-b-a-(-2-5-5-,- -2-5-5-,- -2-5-5-,- -0-.-7-8-)-;--
+- - -l-i-n-e---h-e-i-g-h-t-:- -1-.-7-;--
+- - -m-a-r-g-i-n---b-o-t-t-o-m-:- -3-6-p-x-;--
+- - -m-a-x---w-i-d-t-h-:- -5-2-0-p-x-;--
+-}--
+--
+-.-h-e-r-o-_-_-s-u-b- -s-t-r-o-n-g- -{--
+- - -c-o-l-o-r-:- -v-a-r-(-----w-h-i-t-e-)-;--
+- - -f-o-n-t---w-e-i-g-h-t-:- -6-0-0-;--
+-}--
+--
+-.-h-e-r-o-_-_-a-c-t-i-o-n-s- -{--
+- - -d-i-s-p-l-a-y-:- -f-l-e-x-;--
+- - -f-l-e-x---w-r-a-p-:- -w-r-a-p-;--
+- - -g-a-p-:- -1-4-p-x-;--
+- - -m-a-r-g-i-n---b-o-t-t-o-m-:- -2-0-p-x-;--
+-}--
+--
+-.-h-e-r-o-_-_-n-o-t-e- -{--
+- - -f-o-n-t---s-i-z-e-:- -0-.-8-7-5-r-e-m-;--
+- - -c-o-l-o-r-:- -r-g-b-a-(-2-5-5-,- -2-5-5-,- -2-5-5-,- -0-.-5-5-)-;--
+-}--
+--
+-.-h-e-r-o-_-_-n-o-t-e- -a- -{--
+- - -c-o-l-o-r-:- -v-a-r-(-----g-o-l-d---l-i-g-h-t-)-;--
+- - -t-e-x-t---d-e-c-o-r-a-t-i-o-n-:- -u-n-d-e-r-l-i-n-e-;--
+- - -t-e-x-t---u-n-d-e-r-l-i-n-e---o-f-f-s-e-t-:- -3-p-x-;--
+-}--
+--
+-/-*- -D-e-c-o-r-a-t-i-v-e- -S-V-G- -*-/--
+-.-h-e-r-o-_-_-d-e-c-o- -{--
+- - -d-i-s-p-l-a-y-:- -f-l-e-x-;--
+- - -a-l-i-g-n---i-t-e-m-s-:- -c-e-n-t-e-r-;--
+- - -j-u-s-t-i-f-y---c-o-n-t-e-n-t-:- -c-e-n-t-e-r-;--
+- - -o-p-a-c-i-t-y-:- -0-.-9-;--
+-}--
+--
+-.-h-e-r-o-_-_-d-e-c-o- -s-v-g- -{--
+- - -w-i-d-t-h-:- -1-0-0-%-;--
+- - -m-a-x---w-i-d-t-h-:- -3-2-0-p-x-;--
+- - -f-i-l-t-e-r-:- -d-r-o-p---s-h-a-d-o-w-(-0- -0- -6-0-p-x- -r-g-b-a-(-2-0-0-,- -1-5-0-,- -4-6-,- -0-.-1-5-)-)-;--
+-}--
+--
+-/-*- -S-c-r-o-l-l- -i-n-d-i-c-a-t-o-r- -*-/--
+-.-h-e-r-o-_-_-s-c-r-o-l-l- -{--
+- - -p-o-s-i-t-i-o-n-:- -a-b-s-o-l-u-t-e-;--
+- - -b-o-t-t-o-m-:- -2-8-p-x-;--
+- - -l-e-f-t-:- -5-0-%-;--
+- - -t-r-a-n-s-f-o-r-m-:- -t-r-a-n-s-l-a-t-e-X-(---5-0-%-)-;--
+- - -z---i-n-d-e-x-:- -1-;--
+- - -b-a-c-k-g-r-o-u-n-d-:- -r-g-b-a-(-2-5-5-,- -2-5-5-,- -2-5-5-,- -0-.-1-2-)-;--
+- - -b-o-r-d-e-r-:- -1-p-x- -s-o-l-i-d- -r-g-b-a-(-2-5-5-,- -2-5-5-,- -2-5-5-,- -0-.-2-)-;--
+- - -b-o-r-d-e-r---r-a-d-i-u-s-:- -v-a-r-(-----r-a-d-i-u-s---f-u-l-l-)-;--
+- - -w-i-d-t-h-:- -4-0-p-x-;--
+- - -h-e-i-g-h-t-:- -4-0-p-x-;--
+- - -d-i-s-p-l-a-y-:- -f-l-e-x-;--
+- - -a-l-i-g-n---i-t-e-m-s-:- -c-e-n-t-e-r-;--
+- - -j-u-s-t-i-f-y---c-o-n-t-e-n-t-:- -c-e-n-t-e-r-;--
+- - -c-o-l-o-r-:- -v-a-r-(-----w-h-i-t-e-)-;--
+- - -c-u-r-s-o-r-:- -p-o-i-n-t-e-r-;--
+- - -a-n-i-m-a-t-i-o-n-:- -b-o-u-n-c-e- -2-s- -e-a-s-e---i-n---o-u-t- -i-n-f-i-n-i-t-e-;--
+- - -t-r-a-n-s-i-t-i-o-n-:- -b-a-c-k-g-r-o-u-n-d- -v-a-r-(-----t-r-a-n-s-i-t-i-o-n---f-a-s-t-)-;--
+-}--
+--
+-.-h-e-r-o-_-_-s-c-r-o-l-l-:-h-o-v-e-r- -{--
+- - -b-a-c-k-g-r-o-u-n-d-:- -r-g-b-a-(-2-5-5-,- -2-5-5-,- -2-5-5-,- -0-.-2-)-;--
+-}--
+--
+-.-h-e-r-o-_-_-s-c-r-o-l-l- -s-v-g- -{--
+- - -w-i-d-t-h-:- -2-0-p-x-;--
+- - -h-e-i-g-h-t-:- -2-0-p-x-;--
+-}--
+--
+-@-k-e-y-f-r-a-m-e-s- -b-o-u-n-c-e- -{--
+- - -0-%-,--
+- - -1-0-0-%- -{--
+- - - - -t-r-a-n-s-f-o-r-m-:- -t-r-a-n-s-l-a-t-e-X-(---5-0-%-)- -t-r-a-n-s-l-a-t-e-Y-(-0-)-;--
+- - -}--
+- - -5-0-%- -{--
+- - - - -t-r-a-n-s-f-o-r-m-:- -t-r-a-n-s-l-a-t-e-X-(---5-0-%-)- -t-r-a-n-s-l-a-t-e-Y-(-6-p-x-)-;--
+- - -}--
+-}--
+--
+-/-*- -R-e-s-p-o-n-s-i-v-e- -*-/--
+-@-m-e-d-i-a- -(-m-a-x---w-i-d-t-h-:- -1-0-2-3-p-x-)- -{--
+- - -.-h-e-r-o-_-_-c-o-n-t-e-n-t- -{--
+- - - - -g-r-i-d---t-e-m-p-l-a-t-e---c-o-l-u-m-n-s-:- -1-f-r-;--
+- - -}--
+- - -.-h-e-r-o-_-_-d-e-c-o- -{--
+- - - - -d-i-s-p-l-a-y-:- -n-o-n-e-;--
+- - -}--
+- - -.-h-e-r-o-_-_-t-e-x-t- -{--
+- - - - -m-a-x---w-i-d-t-h-:- -1-0-0-%-;--
+- - -}--
+-}--
+--
+-@-m-e-d-i-a- -(-m-a-x---w-i-d-t-h-:- -7-6-7-p-x-)- -{--
+- - -.-h-e-r-o- -{--
+- - - - -m-i-n---h-e-i-g-h-t-:- -9-2-v-h-;--
+- - -}--
+- - -.-h-e-r-o-_-_-h-1- -{--
+- - - - -f-o-n-t---s-i-z-e-:- -c-l-a-m-p-(-2-r-e-m-,- -8-v-w-,- -3-r-e-m-)-;--
+- - -}--
+- - -.-h-e-r-o-_-_-a-c-t-i-o-n-s- -{--
+- - - - -f-l-e-x---d-i-r-e-c-t-i-o-n-:- -c-o-l-u-m-n-;--
+- - -}--
+- - -.-h-e-r-o-_-_-a-c-t-i-o-n-s- -.-b-t-n- -{--
+- - - - -w-i-d-t-h-:- -1-0-0-%-;--
+- - - - -j-u-s-t-i-f-y---c-o-n-t-e-n-t-:- -c-e-n-t-e-r-;--
+- - -}--
+- - -.-h-e-r-o-_-_-t-r-u-s-t- -{--
+- - - - -g-a-p-:- -6-p-x-;--
+- - -}--
+- - -.-t-r-u-s-t---c-h-i-p- -{--
+- - - - -f-o-n-t---s-i-z-e-:- -0-.-7-5-r-e-m-;--
+- - - - -p-a-d-d-i-n-g-:- -5-p-x- -1-0-p-x-;--
+- - -}--
+-}--
+-<-/-s-t-y-l-e->--
+-
