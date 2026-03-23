@@ -1,8 +1,7 @@
-﻿-i-m-p-o-r-t- -{- -V-i-t-e-S-S-G- -}- -f-r-o-m- -"-v-i-t-e---s-s-g-"-;--
--i-m-p-o-r-t- -A-p-p- -f-r-o-m- -"-.-/-A-p-p-.-v-u-e-"-;--
--i-m-p-o-r-t- -"-.-/-s-t-y-l-e-.-c-s-s-"-;--
---
--/-/- -V-i-t-e-S-S-G- -п-р-е---р-е-н-д-е-р-и-т- -H-T-M-L- -п-р-и- -с-б-о-р-к-е- -—- -G-o-o-g-l-e-b-o-t- -в-и-д-и-т- -р-е-а-л-ь-н-ы-й- -к-о-н-т-е-н-т--
--/-/- -О-д-и-н- -м-а-р-ш-р-у-т- -/- -б-е-з- -R-o-u-t-e-r-V-i-e-w-:- -A-p-p-.-v-u-e- -р-е-н-д-е-р-и-т- -в-с-ё- -н-а-п-р-я-м-у-ю--
--e-x-p-o-r-t- -c-o-n-s-t- -c-r-e-a-t-e-A-p-p- -=- -V-i-t-e-S-S-G-(-A-p-p-,- -{- -r-o-u-t-e-s-:- -[-{- -p-a-t-h-:- -"-/-"- -}-]- -}-)-;--
--
+import { ViteSSG } from "vite-ssg";
+import App from "./App.vue";
+import "./style.css";
+
+// ViteSSG пре-рендерит HTML при сборке - Googlebot видит реальный контент
+// Один маршрут / без RouterView: App.vue рендерит всё напрямую
+export const createApp = ViteSSG(App, { routes: [{ path: "/" }] });
