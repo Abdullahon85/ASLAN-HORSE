@@ -4,7 +4,10 @@
     aria-labelledby="gallery-title"
   >
     <div class="container">
-      <div class="section__header section__header--center on-dark">
+      <div
+        class="section__header section__header--center on-dark"
+        v-reveal="'fade'"
+      >
         <span class="section__label">{{ t.gallery.label }}</span>
         <h2 class="section__title" id="gallery-title">
           {{ t.gallery.title }}
@@ -43,6 +46,7 @@
           @click="openLightbox(i)"
           :aria-label="`Открыть фото: ${item.alt}`"
           role="listitem"
+          v-reveal="{ dir: 'scale', delay: (i % 4) * 75 }"
         >
           <!-- Lazy-loaded image; replace src with real /images/ path -->
           <img

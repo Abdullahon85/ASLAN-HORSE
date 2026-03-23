@@ -6,7 +6,7 @@
     <div class="container">
       <div class="lead-form__layout">
         <!-- Left: why form -->
-        <div class="lead-form__left">
+        <div class="lead-form__left" v-reveal="'left'">
           <span class="section__label on-dark">{{ t.form.label }}</span>
           <h2
             class="section__title on-dark"
@@ -87,7 +87,7 @@
         </div>
 
         <!-- Right: form -->
-        <div class="lead-form__right">
+        <div class="lead-form__right" v-reveal="{ dir: 'right', delay: 120 }">
           <!-- Success state -->
           <Transition name="fade">
             <div v-if="submitted" class="form-success" role="status">

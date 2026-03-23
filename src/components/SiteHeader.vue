@@ -12,7 +12,7 @@
         href="#home"
         class="header__logo"
         @click.prevent="scrollTo('home')"
-        :aria-label="t.header.logoAria"
+        aria-label="ASLAN Конный клуб — главная"
       >
         <svg
           class="logo-icon"
@@ -31,77 +31,29 @@
           />
         </svg>
         <span class="logo-text">ASLAN</span>
-        <span class="logo-sub">{{ t.header.logoSub }}</span>
+        <span class="logo-sub">Конный клуб</span>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav class="header__nav" aria-label="navigation">
+      <nav class="header__nav" aria-label="Основная навигация">
         <ul class="nav-list">
           <li>
-            <a href="#services" @click.prevent="scrollTo('services')">{{
-              t.header.nav.services
-            }}</a>
+            <a href="#services" @click.prevent="scrollTo('services')">Услуги</a>
+          </li>
+          <li><a href="#about" @click.prevent="scrollTo('about')">О нас</a></li>
+          <li>
+            <a href="#prices" @click.prevent="scrollTo('prices')">Цены</a>
           </li>
           <li>
-            <a href="#about" @click.prevent="scrollTo('about')">{{
-              t.header.nav.about
-            }}</a>
+            <a href="#gallery" @click.prevent="scrollTo('gallery')">Галерея</a>
           </li>
           <li>
-            <a href="#prices" @click.prevent="scrollTo('prices')">{{
-              t.header.nav.prices
-            }}</a>
-          </li>
-          <li>
-            <a href="#gallery" @click.prevent="scrollTo('gallery')">{{
-              t.header.nav.gallery
-            }}</a>
-          </li>
-          <li>
-            <a href="#contacts" @click.prevent="scrollTo('contacts')">{{
-              t.header.nav.contacts
-            }}</a>
+            <a href="#contacts" @click.prevent="scrollTo('contacts')"
+              >Контакты</a
+            >
           </li>
         </ul>
       </nav>
-
-      <!-- Language switcher -->
-      <div class="lang-switcher" v-click-outside="closeLangMenu">
-        <button
-          class="lang-toggle"
-          @click="langOpen = !langOpen"
-          :aria-expanded="langOpen"
-          aria-haspopup="listbox"
-        >
-          {{ lang.toUpperCase() }}
-          <svg
-            viewBox="0 0 10 6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            width="10"
-            height="6"
-            aria-hidden="true"
-          >
-            <polyline points="1 1 5 5 9 1" />
-          </svg>
-        </button>
-        <Transition name="lang-drop">
-          <div v-if="langOpen" class="lang-dropdown" role="listbox">
-            <button
-              v-for="l in langs"
-              :key="l.code"
-              class="lang-option"
-              :class="{ 'lang-option--active': lang === l.code }"
-              role="option"
-              :aria-selected="lang === l.code"
-              @click="pickLang(l.code)"
-            >
-              {{ l.label }}
-            </button>
-          </div>
-        </Transition>
-      </div>
 
       <!-- Desktop CTAs -->
       <div class="header__cta">
@@ -109,7 +61,7 @@
           :href="`tel:${PHONE1_RAW}`"
           class="header__phone"
           @click="trackCall(PHONE1_RAW)"
-          :aria-label="t.header.callAria"
+          aria-label="Позвонить нам"
         >
           <svg
             viewBox="0 0 24 24"
@@ -128,11 +80,17 @@
           :href="TELEGRAM_URL"
           target="_blank"
           rel="noopener noreferrer"
-          class="btn btn--telegram btn--sm"
+          class="btn btn--tg btn--sm"
           @click="trackWhatsApp()"
-          :aria-label="t.header.waAria"
+          aria-label="Написать в Telegram"
         >
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            width="16"
+            height="16"
+          >
             <path
               d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
             />
@@ -144,7 +102,7 @@
           class="btn btn--primary btn--sm"
           @click.prevent="scrollTo('booking')"
         >
-          {{ t.header.book }}
+          Записаться
         </a>
       </div>
 
@@ -154,7 +112,7 @@
         :class="{ active: menuOpen }"
         @click="menuOpen = !menuOpen"
         :aria-expanded="menuOpen"
-        :aria-label="t.header.menuAria"
+        aria-label="Открыть меню"
       >
         <span></span><span></span><span></span>
       </button>
@@ -163,58 +121,38 @@
     <!-- Mobile Menu -->
     <Transition name="menu-slide">
       <div v-if="menuOpen" class="mobile-menu" @click="menuOpen = false">
-        <nav :aria-label="t.header.mobileNavAria">
+        <nav aria-label="Мобильная навигация">
           <ul>
             <li>
-              <a
-                href="#services"
-                @click.prevent="handleMobileNav('services')"
-                >{{ t.header.nav.services }}</a
+              <a href="#services" @click.prevent="handleMobileNav('services')"
+                >Услуги</a
               >
             </li>
             <li>
-              <a href="#about" @click.prevent="handleMobileNav('about')">{{
-                t.header.nav.about
-              }}</a>
+              <a href="#about" @click.prevent="handleMobileNav('about')"
+                >О нас</a
+              >
             </li>
             <li>
-              <a href="#prices" @click.prevent="handleMobileNav('prices')">{{
-                t.header.nav.prices
-              }}</a>
+              <a href="#prices" @click.prevent="handleMobileNav('prices')"
+                >Цены</a
+              >
             </li>
             <li>
-              <a href="#gallery" @click.prevent="handleMobileNav('gallery')">{{
-                t.header.nav.gallery
-              }}</a>
+              <a href="#gallery" @click.prevent="handleMobileNav('gallery')"
+                >Галерея</a
+              >
             </li>
             <li>
-              <a href="#faq" @click.prevent="handleMobileNav('faq')">{{
-                t.header.nav.faq
-              }}</a>
+              <a href="#faq" @click.prevent="handleMobileNav('faq')">FAQ</a>
             </li>
             <li>
-              <a
-                href="#contacts"
-                @click.prevent="handleMobileNav('contacts')"
-                >{{ t.header.nav.contacts }}</a
+              <a href="#contacts" @click.prevent="handleMobileNav('contacts')"
+                >Контакты</a
               >
             </li>
           </ul>
         </nav>
-
-        <!-- Mobile lang switcher -->
-        <div class="mobile-lang-switcher" @click.stop>
-          <button
-            v-for="l in langs"
-            :key="l.code"
-            class="lang-btn"
-            :class="{ 'lang-btn--active': lang === l.code }"
-            @click="setLang(l.code)"
-          >
-            {{ l.label }}
-          </button>
-        </div>
-
         <div class="mobile-menu__cta">
           <a
             :href="`tel:${PHONE1_RAW}`"
@@ -232,13 +170,13 @@
                 d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.93a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.74a16 16 0 006.35 6.35l1.11-1.11a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
               />
             </svg>
-            {{ t.header.callBtn }}: {{ PHONE1_DISPLAY }}
+            Позвонить: {{ PHONE1_DISPLAY }}
           </a>
           <a
             :href="TELEGRAM_URL"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn--telegram btn--full"
+            class="btn btn--tg btn--full"
             @click="trackWhatsApp()"
           >
             Telegram
@@ -252,46 +190,15 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useAnalytics } from "@/composables/useAnalytics.js";
-import { useI18n } from "@/composables/useI18n.js";
 
 const PHONE1_RAW = "+998882586565";
 const PHONE1_DISPLAY = "+998 88 258-65-65";
 const TELEGRAM_URL = "https://t.me/+998882586565";
 
 const { trackCall, trackWhatsApp } = useAnalytics();
-const { lang, setLang, t } = useI18n();
-
-const langs = [
-  { code: "ru", label: "RU" },
-  { code: "en", label: "EN" },
-  { code: "uz", label: "UZ" },
-];
 
 const scrolled = ref(false);
 const menuOpen = ref(false);
-const langOpen = ref(false);
-
-const pickLang = (code) => {
-  setLang(code);
-  langOpen.value = false;
-};
-
-const closeLangMenu = () => {
-  langOpen.value = false;
-};
-
-// v-click-outside directive
-const vClickOutside = {
-  mounted(el, binding) {
-    el._clickOutside = (e) => {
-      if (!el.contains(e.target)) binding.value();
-    };
-    document.addEventListener("click", el._clickOutside);
-  },
-  unmounted(el) {
-    document.removeEventListener("click", el._clickOutside);
-  },
-};
 
 const onScroll = () => {
   scrolled.value = window.scrollY > 60;
@@ -340,7 +247,7 @@ onUnmounted(() => window.removeEventListener("scroll", onScroll));
   display: flex;
   align-items: center;
   height: var(--header-height);
-  gap: 15px;
+  gap: 24px;
 }
 
 /* Logo */
@@ -533,9 +440,6 @@ onUnmounted(() => window.removeEventListener("scroll", onScroll));
   .header__cta {
     display: none;
   }
-  .lang-switcher {
-    display: none;
-  }
   .hamburger {
     display: flex;
   }
@@ -545,122 +449,5 @@ onUnmounted(() => window.removeEventListener("scroll", onScroll));
   .mobile-menu {
     display: none;
   }
-}
-
-/* Language switcher dropdown */
-.lang-switcher {
-  position: relative;
-  flex-shrink: 0;
-}
-
-.lang-toggle {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  color: rgba(255, 255, 255, 0.75);
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition:
-    color var(--transition-fast),
-    border-color var(--transition-fast),
-    background var(--transition-fast);
-  line-height: 1;
-}
-
-.lang-toggle:hover {
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-
-.lang-dropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  right: 0;
-  background: var(--navy);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-md);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  overflow: hidden;
-  min-width: 72px;
-  z-index: 200;
-}
-
-.lang-option {
-  display: block;
-  width: 100%;
-  padding: 9px 16px;
-  text-align: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  color: rgba(255, 255, 255, 0.65);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition:
-    background var(--transition-fast),
-    color var(--transition-fast);
-}
-
-.lang-option:hover {
-  background: rgba(255, 255, 255, 0.07);
-  color: var(--white);
-}
-
-.lang-option--active {
-  color: var(--gold-light);
-  background: rgba(200, 150, 46, 0.12);
-}
-
-/* Dropdown animation */
-.lang-drop-enter-active,
-.lang-drop-leave-active {
-  transition:
-    opacity 0.15s ease,
-    transform 0.15s ease;
-}
-.lang-drop-enter-from,
-.lang-drop-leave-to {
-  opacity: 0;
-  transform: translateY(-6px);
-}
-
-.mobile-lang-switcher {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 12px 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  margin-top: 4px;
-}
-
-.mobile-lang-switcher .lang-btn {
-  padding: 5px 14px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition:
-    color 0.2s,
-    background 0.2s,
-    border-color 0.2s;
-}
-
-.mobile-lang-switcher .lang-btn--active {
-  color: var(--gold-light, #e6b84a);
-  background: rgba(200, 150, 46, 0.18);
-  border-color: rgba(200, 150, 46, 0.45);
 }
 </style>

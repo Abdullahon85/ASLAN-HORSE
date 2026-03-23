@@ -3,12 +3,12 @@
     <div class="container">
       <div class="about__layout">
         <!-- Left: image placeholder -->
-        <div class="about__media">
+        <div class="about__media" v-reveal="'left'">
           <!-- Replace src with /images/about-team.jpg -->
           <div class="about__img-wrap">
             <img
               :src="'/images/about-team.jpg'"
-              :alt="t.about.imgAlt"
+              alt="Команда тренеров конного клуба ASLAN"
               loading="lazy"
               class="about__img"
               onerror="this.parentElement.classList.add('no-img')"
@@ -27,7 +27,7 @@
                   fill="none"
                 />
               </svg>
-              <span>{{ t.about.imgPlaceholder }}</span>
+              <span>Фото команды</span>
             </div>
           </div>
 
@@ -47,7 +47,7 @@
                   d="M10 2l2.39 4.84L18 7.64l-4 3.9.94 5.5L10 14.27l-4.94 2.77.94-5.5-4-3.9 5.61-.8z"
                 />
               </svg>
-              <span>{{ t.about.chip1 }}</span>
+              <span>Опыт 5+ лет</span>
             </div>
             <div class="about__chip">
               <svg
@@ -61,7 +61,7 @@
               >
                 <path d="M10 1l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" />
               </svg>
-              <span>{{ t.about.chip2 }}</span>
+              <span>Сертифицированные тренеры</span>
             </div>
             <div class="about__chip about__chip--wide">
               <svg
@@ -75,25 +75,33 @@
               >
                 <path d="M10 19s-8-4-8-10V4l8-3 8 3v5c0 6-8 10-8 10z" />
               </svg>
-              <span>{{ t.about.chip3 }}</span>
+              <span>Безопасность для детей от 6 лет</span>
             </div>
           </div>
         </div>
 
         <!-- Right: text -->
-        <div class="about__text">
-          <span class="section__label">{{ t.about.label }}</span>
+        <div class="about__text" v-reveal="'right'">
+          <span class="section__label">О клубе</span>
           <h2 class="section__title" id="about-title">
-            {{ t.about.title }}
+            Команда ASLAN — тренеры и инфраструктура
           </h2>
           <div class="divider-gold"></div>
 
           <p class="about__lead">
-            {{ t.about.lead }}
+            Конный клуб ASLAN расположен у Чиланзарского ипподрома — одного из
+            лучших площадок для верховой езды в Ташкенте. Мы работаем для тех,
+            кто делает первые шаги в седле, и для тех, кто готовится к
+            соревнованиям по конкуру.
           </p>
 
           <div class="about__features">
-            <div v-for="(f, i) in features" :key="i" class="about__feature">
+            <div
+              v-for="(f, i) in features"
+              :key="i"
+              class="about__feature"
+              v-reveal="{ dir: 'right', delay: i * 100 }"
+            >
               <div class="about__feature-icon" aria-hidden="true">
                 <div v-html="f.icon"></div>
               </div>
@@ -112,14 +120,14 @@
               class="btn btn--primary"
               @click="trackWhatsApp()"
             >
-              {{ t.about.btnContact }}
+              Связаться с тренером
             </a>
             <a
               href="#prices"
               class="btn btn--outline-navy"
               @click.prevent="scrollTo('prices')"
             >
-              {{ t.about.btnPrices }}
+              Посмотреть цены
             </a>
           </div>
         </div>
@@ -129,37 +137,42 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
 import { useAnalytics } from "@/composables/useAnalytics.js";
-import { useI18n } from "@/composables/useI18n.js";
 
 const TELEGRAM_URL = "https://t.me/+998882586565";
 
 const { trackWhatsApp } = useAnalytics();
-const { t } = useI18n();
 
 const scrollTo = (id) => {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
-const featureIcons = [
-  `<svg viewBox="0 0 24 24" fill="none" stroke="#C8962E" stroke-width="1.8" width="22" height="22">
-     <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/>
-   </svg>`,
-  `<svg viewBox="0 0 24 24" fill="none" stroke="#162B5B" stroke-width="1.8" width="22" height="22">
-     <rect x="3" y="8" width="18" height="14" rx="2"/>
-     <path d="M7 8V5a5 5 0 0110 0v3"/>
-   </svg>`,
-  `<svg viewBox="0 0 24 24" fill="none" stroke="#27A96B" stroke-width="1.8" width="22" height="22">
-     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-     <polyline points="9 12 11 14 15 10"/>
-   </svg>`,
+const features = [
+  {
+    title: "Профессиональные тренеры",
+    text: "Наши инструкторы — участники соревнований по конкуру с многолетним опытом преподавания для детей и взрослых.",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#C8962E" stroke-width="1.8" width="22" height="22">
+             <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/>
+           </svg>`,
+  },
+  {
+    title: "Инфраструктура ипподрома",
+    text: "Крытый и открытый манежи, конные трассы, трасса препятствий для конкура, современное снаряжение.",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#162B5B" stroke-width="1.8" width="22" height="22">
+             <rect x="3" y="8" width="18" height="14" rx="2"/>
+             <path d="M7 8V5a5 5 0 0110 0v3"/>
+           </svg>`,
+  },
+  {
+    title: "Безопасность — приоритет",
+    text: "Обязательный инструктаж, сертифицированные сёдла, шлемы для всех всадников, постоянное присутствие инструктора.",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#27A96B" stroke-width="1.8" width="22" height="22">
+             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+             <polyline points="9 12 11 14 15 10"/>
+           </svg>`,
+  },
 ];
-
-const features = computed(() =>
-  t.value.about.features.map((f, i) => ({ ...f, icon: featureIcons[i] })),
-);
 </script>
 
 <style scoped>

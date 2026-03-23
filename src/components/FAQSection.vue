@@ -1,15 +1,15 @@
 <template>
   <section class="section section--white faq" aria-labelledby="faq-title">
     <div class="container">
-      <div class="section__header section__header--center">
-        <span class="section__label">{{ t.faq.label }}</span>
-        <h2 class="section__title" id="faq-title">{{ t.faq.title }}</h2>
+      <div class="section__header section__header--center" v-reveal="'fade'">
+        <span class="section__label">FAQ</span>
+        <h2 class="section__title" id="faq-title">Частые вопросы</h2>
         <p class="section__subtitle">
-          {{ t.faq.subtitle }}
+          Не нашли ответ? Позвоните или напишите — ответим за несколько минут.
         </p>
       </div>
 
-      <div class="faq__grid">
+      <div class="faq__grid" v-reveal="{ delay: 120 }">
         <div
           v-for="(item, i) in faqItems"
           :key="i"
@@ -50,8 +50,8 @@
       <!-- Bottom CTA -->
       <div class="faq__cta">
         <div class="faq__cta-text">
-          <h3>{{ t.faq.ctaTitle }}</h3>
-          <p>{{ t.faq.ctaText }}</p>
+          <h3>Остались вопросы?</h3>
+          <p>Позвоните или напишите — ответим быстро.</p>
         </div>
         <div class="faq__cta-btns">
           <a
@@ -70,13 +70,13 @@
                 d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.93a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.74a16 16 0 006.35 6.35l1.11-1.11a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
               />
             </svg>
-            {{ t.faq.btnCall }}
+            Позвонить
           </a>
           <a
             :href="TELEGRAM_URL"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn--telegram"
+            class="btn btn--tg"
             @click="trackWhatsApp()"
           >
             Telegram
@@ -88,15 +88,13 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useAnalytics } from "@/composables/useAnalytics.js";
-import { useI18n } from "@/composables/useI18n.js";
 
 const PHONE1_RAW = "+998882586565";
 const TELEGRAM_URL = "https://t.me/+998882586565";
 
 const { trackCall, trackWhatsApp } = useAnalytics();
-const { t } = useI18n();
 
 const openIndex = ref(0);
 
@@ -104,7 +102,40 @@ const toggle = (i) => {
   openIndex.value = openIndex.value === i ? -1 : i;
 };
 
-const faqItems = computed(() => t.value.faq.items);
+const faqItems = [
+  {
+    q: "Как записаться на пробный урок?",
+    a: "Позвоните по номеру +998 88 258-65-65 или напишите в Telegram — менеджер подтвердит удобное время в течение нескольких минут. Также можно оставить заявку через форму на сайте.",
+  },
+  {
+    q: "С какого возраста можно заниматься верховой ездой?",
+    a: "У нас занимаются дети от 6 лет. Для малышей предусмотрено специальное детское снаряжение, шлемы и постоянное присутствие инструктора. Взрослый возрастной порог — нет: начать можно в любом возрасте.",
+  },
+  {
+    q: "Что взять на первый урок?",
+    a: "Достаточно прийти в удобной одежде: закрытые брюки (джинсы или леггинсы), закрытая обувь на небольшом каблуке (кроссовки без платформы или ботинки). Шлем выдаём на прокат бесплатно, если нет своего.",
+  },
+  {
+    q: "Есть ли прокат лошадей для прогулок?",
+    a: "Да — предоставляем лошадей для прогулок на территории клуба. Стоимость и продолжительность уточняйте при записи по телефону или в Telegram.",
+  },
+  {
+    q: "Как организовать фотосессию с лошадьми?",
+    a: "Напишите нам в Telegram или позвоните — обсудим дату, время, пожелания по формату (на природе/в манеже). Работаем также с приглашёнными фотографами по согласованию.",
+  },
+  {
+    q: "Есть ли групповые занятия для детей?",
+    a: "Да, групповые занятия доступны для детей и взрослых. Группы небольшие — до 5 человек, чтобы тренер мог уделить внимание каждому. Занятия по фиксированному расписанию.",
+  },
+  {
+    q: "Где именно расположен клуб?",
+    a: "Мы находимся в Чиланзарском районе Ташкента, рядом с ипподромом. Ориентир — АЗС LUKOIL на проспекте Бунийодкор. Есть удобная парковка для автомобилей.",
+  },
+  {
+    q: "Как подготовиться к соревнованиям по конкуру?",
+    a: "Запишитесь на тренировки по конкуру с нашим специализированным тренером. Составим индивидуальный план подготовки: базовая техника, работа на корде, отработка прыжков на трассе препятствий.",
+  },
+];
 </script>
 
 <style scoped>

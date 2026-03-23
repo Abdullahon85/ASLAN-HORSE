@@ -252,6 +252,8 @@ const scrollTo = (id) => {
   object-fit: cover;
   object-position: center 30%;
   opacity: 0.45;
+  transform-origin: center;
+  animation: kenBurns 20s ease-in-out alternate infinite;
 }
 
 .hero__overlay {
@@ -455,6 +457,31 @@ const scrollTo = (id) => {
   .trust-chip {
     font-size: 0.75rem;
     padding: 5px 10px;
+  }
+}
+
+/* ── Hero entrance animations (on page load, above the fold) ── */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__label {
+    animation: heroIn 0.6s cubic-bezier(0.2, 0, 0, 1) 0.1s both;
+  }
+  .hero__h1 {
+    animation: heroIn 0.6s cubic-bezier(0.2, 0, 0, 1) 0.22s both;
+  }
+  .hero__sub {
+    animation: heroIn 0.6s cubic-bezier(0.2, 0, 0, 1) 0.38s both;
+  }
+  .hero__actions {
+    animation: heroIn 0.6s cubic-bezier(0.2, 0, 0, 1) 0.52s both;
+  }
+  .hero__trust .trust-chip:nth-child(1) {
+    animation: chipPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.72s both;
+  }
+  .hero__trust .trust-chip:nth-child(2) {
+    animation: chipPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.86s both;
+  }
+  .hero__trust .trust-chip:nth-child(3) {
+    animation: chipPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1s both;
   }
 }
 </style>

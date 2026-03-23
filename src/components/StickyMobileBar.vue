@@ -1,10 +1,10 @@
 <template>
-  <div class="sticky-bar" :aria-label="t.sticky.aria">
+  <div class="sticky-bar" aria-label="Быстрый контакт">
     <a
       :href="`tel:${PHONE1_RAW}`"
       class="sticky-bar__btn sticky-bar__btn--call"
       @click="trackCall(PHONE1_RAW)"
-      :aria-label="t.sticky.callAria"
+      aria-label="Позвонить нам"
     >
       <svg
         viewBox="0 0 24 24"
@@ -17,7 +17,7 @@
           d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.93a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.74a16 16 0 006.35 6.35l1.11-1.11a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
         />
       </svg>
-      <span>{{ t.sticky.call }}</span>
+      <span>Позвонить</span>
     </a>
 
     <a
@@ -26,7 +26,7 @@
       rel="noopener noreferrer"
       class="sticky-bar__btn sticky-bar__btn--tg"
       @click="trackWhatsApp()"
-      :aria-label="t.sticky.waAria"
+      aria-label="Написать в Telegram"
     >
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path
@@ -40,13 +40,11 @@
 
 <script setup>
 import { useAnalytics } from "@/composables/useAnalytics.js";
-import { useI18n } from "@/composables/useI18n.js";
 
 const PHONE1_RAW = "+998882586565";
 const TELEGRAM_URL = "https://t.me/+998882586565";
 
 const { trackCall, trackWhatsApp } = useAnalytics();
-const { t } = useI18n();
 </script>
 
 <style scoped>

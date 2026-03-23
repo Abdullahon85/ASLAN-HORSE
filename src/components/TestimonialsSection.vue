@@ -1,20 +1,26 @@
 <template>
   <section class="section section--white" aria-labelledby="reviews-title">
     <div class="container">
-      <div class="section__header section__header--center">
-        <span class="section__label">{{ t.testimonials.label }}</span>
+      <div class="section__header section__header--center" v-reveal="'fade'">
+        <span class="section__label">Отзывы клиентов</span>
         <h2 class="section__title" id="reviews-title">
-          {{ t.testimonials.title }}
+          Что говорят наши ученики
         </h2>
         <p class="section__subtitle">
-          {{ t.testimonials.subtitle }}
+          Реальные истории семей, спортсменов и фотографов, которые уже
+          занимаются в ASLAN.
         </p>
       </div>
 
       <div class="reviews__grid">
-        <blockquote v-for="(rev, i) in reviews" :key="i" class="review-card">
+        <blockquote
+          v-for="(rev, i) in reviews"
+          :key="i"
+          class="review-card"
+          v-reveal="{ dir: i % 2 === 0 ? 'left' : 'right', delay: i * 60 }"
+        >
           <div class="review-card__top">
-            <div class="stars" :aria-label="t.testimonials.starsAria">
+            <div class="stars" aria-label="5 звёзд">
               <svg
                 v-for="s in 5"
                 :key="s"
@@ -50,7 +56,12 @@
 
       <!-- Social proof numbers -->
       <div class="reviews__stats">
-        <div v-for="(stat, i) in stats" :key="i" class="stat-item">
+        <div
+          v-for="(stat, i) in stats"
+          :key="i"
+          class="stat-item"
+          v-reveal="{ delay: i * 100 }"
+        >
           <span class="stat-item__number">{{ stat.number }}</span>
           <span class="stat-item__label">{{ stat.label }}</span>
         </div>
@@ -60,21 +71,43 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useI18n } from "@/composables/useI18n.js";
+const reviews = [
+  {
+    text: "Записали дочку на пробный урок — она в восторге! Тренер терпеливый, объясняет понятно. Записались сразу на месяц. Рекомендую всем семьям с детьми в Чиланзаре.",
+    name: "Дилноза М.",
+    role: "Мама ученицы, 8 лет",
+    date: "Февраль 2026",
+    avatarBg: "#4A90D9",
+  },
+  {
+    text: "Заказывали фотосессию с лошадьми для годовщины свадьбы. Всё прошло отлично — лошади спокойные, место красивое. Фото получились невероятные. Спасибо команде ASLAN!",
+    name: "Камила и Акбар",
+    role: "Фотосессия на годовщину",
+    date: "Январь 2026",
+    avatarBg: "#E4AE4A",
+  },
+  {
+    text: "Тренируюсь по конкуру уже 4 месяца. Изначально был на нулевом уровне, сейчас готовлюсь к первым соревнованиям. Тренер профессиональный, видно, что любит своё дело.",
+    name: "Тимур Р.",
+    role: "Спортсмен, конкур",
+    date: "Декабрь 2025",
+    avatarBg: "#27A96B",
+  },
+  {
+    text: "Отличное место для детей! Безопасно, лошади добрые, персонал внимательный. Сын ждёт каждой субботы как праздника.",
+    name: "Шахло Х.",
+    role: "Мама ученика, 10 лет",
+    date: "Ноябрь 2025",
+    avatarBg: "#C8962E",
+  },
+];
 
-const { t } = useI18n();
-
-const avatarBgs = ["#4A90D9", "#E4AE4A", "#27A96B", "#C8962E"];
-
-const reviews = computed(() =>
-  t.value.testimonials.reviews.map((rev, i) => ({
-    ...rev,
-    avatarBg: avatarBgs[i],
-  })),
-);
-
-const stats = computed(() => t.value.testimonials.stats);
+const stats = [
+  { number: "500+", label: "учеников прошли обучение" },
+  { number: "5+", label: "лет клуб работает в Ташкенте" },
+  { number: "4.9★", label: "средняя оценка клиентов" },
+  { number: "30+", label: "фотосессий проведено" },
+];
 </script>
 
 <style scoped>

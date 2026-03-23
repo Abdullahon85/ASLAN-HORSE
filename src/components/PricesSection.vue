@@ -1,13 +1,14 @@
 <template>
   <section class="section section--white prices" aria-labelledby="prices-title">
     <div class="container">
-      <div class="section__header section__header--center">
-        <span class="section__label">{{ t.prices.label }}</span>
+      <div class="section__header section__header--center" v-reveal="'fade'">
+        <span class="section__label">Цены и расписание</span>
         <h2 class="section__title" id="prices-title">
-          {{ t.prices.title }}
+          Расписание и стоимость занятий
         </h2>
         <p class="section__subtitle">
-          {{ t.prices.subtitle }}
+          Работаем ежедневно с 07:00. Точные цены — по запросу (возможны
+          групповые скидки).
         </p>
       </div>
 
@@ -26,6 +27,7 @@
           :key="i"
           class="price-card"
           :class="{ 'price-card--featured': plan.featured }"
+          v-reveal="{ delay: i * 80 }"
         >
           <div v-if="plan.badge" class="price-card__badge">
             {{ plan.badge }}
@@ -40,10 +42,10 @@
 
           <div class="price-card__price">
             <span class="price-card__amount">{{ plan.price }}</span>
-            <!-- <span class="price-card__unit">{{ plan.unit }}</span> -->
+            <span class="price-card__unit">{{ plan.unit }}</span>
           </div>
 
-          <ul class="price-card__features" :aria-label="t.prices.featuresAria">
+          <ul class="price-card__features" aria-label="Что включено">
             <li v-for="(f, fi) in plan.features" :key="fi">
               <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <circle
@@ -68,17 +70,18 @@
             :class="plan.featured ? 'btn--primary' : 'btn--outline-navy'"
             @click="handlePriceCall(plan.name)"
           >
-            {{ t.prices.btn }}
+            Записаться по телефону
           </a>
         </div>
       </div>
 
       <p class="prices__note">
-        {{ t.prices.note }}
+        * Цены уточняются при записи — возможны скидки для групп, детей и
+        постоянных клиентов. Звоните:
         <a :href="`tel:${PHONE1_RAW}`" @click="handlePriceCall('footer')">{{
           PHONE1_DISPLAY
         }}</a>
-        {{ t.prices.noteOr }}
+        или
         <a :href="`tel:${PHONE2_RAW}`" @click="handlePriceCall('footer2')">{{
           PHONE2_DISPLAY
         }}</a>
@@ -88,9 +91,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
 import { useAnalytics } from "@/composables/useAnalytics.js";
-import { useI18n } from "@/composables/useI18n.js";
 
 const PHONE1_RAW = "+998882586565";
 const PHONE1_DISPLAY = "+998 88 258-65-65";
@@ -98,47 +99,96 @@ const PHONE2_RAW = "+998959090875";
 const PHONE2_DISPLAY = "+998 95 909-08-75";
 
 const { trackCall, trackCTAClick } = useAnalytics();
-const { t } = useI18n();
 
 const handlePriceCall = (plan) => {
   trackCall(PHONE1_RAW);
   trackCTAClick(`price_call_${plan}`, "prices");
 };
 
-const planIcons = [
-  `<svg viewBox="0 0 28 28" fill="none" stroke="#162B5B" stroke-width="1.8" width="28" height="28">
-     <polygon points="5 3 23 14 5 25 5 3"/>
-   </svg>`,
-  `<svg viewBox="0 0 28 28" fill="none" stroke="#FFF" stroke-width="1.8" width="28" height="28">
-     <circle cx="14" cy="9" r="5"/>
-     <path d="M5 24c0-5 4-9 9-9s9 4 9 9"/>
-   </svg>`,
-  `<svg viewBox="0 0 28 28" fill="none" stroke="#162B5B" stroke-width="1.8" width="28" height="28">
-     <circle cx="9" cy="9" r="4"/>
-     <circle cx="19" cy="9" r="4"/>
-     <path d="M2 24c0-4 3-7 7-7"/>
-     <path d="M19 17c4 0 7 3 7 7"/>
-     <path d="M10 24c0-2.76 1.79-5 4-5s4 2.24 4 5"/>
-   </svg>`,
-  `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28">
-     <path d="M4 18 Q9 8 14 14 Q19 20 24 10"/>
-     <line x1="4" y1="22" x2="24" y2="22"/>
-     <line x1="9" y1="22" x2="9" y2="18"/>
-     <line x1="19" y1="22" x2="19" y2="12"/>
-   </svg>`,
+const schedule = [
+  { days: "Пн – Пт", hours: "07:00 – 20:00" },
+  { days: "Суббота", hours: "07:00 – 19:00" },
+  { days: "Воскресенье", hours: "08:00 – 18:00" },
 ];
 
-const planFeatured = [false, true, false, true];
-
-const schedule = computed(() => t.value.prices.schedule);
-
-const plans = computed(() =>
-  t.value.prices.plans.map((plan, i) => ({
-    ...plan,
-    icon: planIcons[i],
-    featured: planFeatured[i],
-  })),
-);
+const plans = [
+  {
+    name: "Пробный урок",
+    desc: "Идеально для начинающих — 45 минут с инструктором.",
+    price: "По запросу",
+    unit: "· 1 занятие",
+    badge: "",
+    featured: false,
+    icon: `<svg viewBox="0 0 28 28" fill="none" stroke="#162B5B" stroke-width="1.8" width="28" height="28">
+             <polygon points="5 3 23 14 5 25 5 3"/>
+           </svg>`,
+    features: [
+      "45 мин с инструктором",
+      "Проверенное снаряжение",
+      "Инструктаж по безопасности",
+      "Без предоплаты",
+    ],
+  },
+  {
+    name: "Индивидуальные занятия",
+    desc: "Персональная программа с тренером — самый быстрый прогресс.",
+    price: "По запросу",
+    unit: "· 1 занятие",
+    badge: "Популярно",
+    featured: true,
+    icon: `<svg viewBox="0 0 28 28" fill="none" stroke="#FFF" stroke-width="1.8" width="28" height="28">
+             <circle cx="14" cy="9" r="5"/>
+             <path d="M5 24c0-5 4-9 9-9s9 4 9 9"/>
+           </svg>`,
+    features: [
+      "1 на 1 с тренером",
+      "Индивидуальный план",
+      "Гибкое расписание",
+      "Видео разбор по запросу",
+    ],
+  },
+  {
+    name: "Групповые занятия",
+    desc: "Для детей и взрослых — веселее и доступнее по стоимости.",
+    price: "По запросу",
+    unit: "· 1 занятие",
+    badge: "",
+    featured: false,
+    icon: `<svg viewBox="0 0 28 28" fill="none" stroke="#162B5B" stroke-width="1.8" width="28" height="28">
+             <circle cx="9" cy="9" r="4"/>
+             <circle cx="19" cy="9" r="4"/>
+             <path d="M2 24c0-4 3-7 7-7"/>
+             <path d="M19 17c4 0 7 3 7 7"/>
+             <path d="M10 24c0-2.76 1.79-5 4-5s4 2.24 4 5"/>
+           </svg>`,
+    features: [
+      "До 5 человек в группе",
+      "Подходит для детей от 6 лет",
+      "Фиксированное расписание",
+      "Скидка при абонементе",
+    ],
+  },
+  {
+    name: "Конкур / Соревнования",
+    desc: "Подготовка к турнирам — работа на трассе и отработка прыжков.",
+    price: "По запросу",
+    unit: "· 1 занятие",
+    badge: "",
+    featured: false,
+    icon: `<svg viewBox="0 0 28 28" fill="none" stroke="#162B5B" stroke-width="1.8" width="28" height="28">
+             <path d="M4 18 Q9 8 14 14 Q19 20 24 10"/>
+             <line x1="4" y1="22" x2="24" y2="22"/>
+             <line x1="9" y1="22" x2="9" y2="18"/>
+             <line x1="19" y1="22" x2="19" y2="12"/>
+           </svg>`,
+    features: [
+      "Трасса препятствий",
+      "Работа с тренером по конкуру",
+      "Оценка и разбор техники",
+      "Подготовка к чемпионатам",
+    ],
+  },
+];
 </script>
 
 <style scoped>
@@ -321,19 +371,14 @@ const plans = computed(() =>
 
 .prices__note {
   text-align: center;
-  font-size: 0.9rem;
-  color: var(--text-mid);
-  padding: 16px 24px;
-  margin-top: 8px;
-  background: var(--cream);
-  border: 1.5px solid var(--cream-dark);
-  border-radius: var(--radius-lg);
-  line-height: 1.6;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  padding: 0 16px;
 }
 
 .prices__note a {
   color: var(--navy);
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
