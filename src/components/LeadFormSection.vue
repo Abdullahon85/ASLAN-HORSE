@@ -278,7 +278,7 @@ const errors = reactive({
   service: "",
 });
 
-// Phone validation - international format
+// Phone validation — international format
 const PHONE_RE = /^[+]?[(]?[0-9]{1,4}[)]?[-\s./0-9]{6,14}$/;
 
 const validate = () => {
@@ -390,7 +390,7 @@ const submitForm = async () => {
   color: #fff;
 }
 
-/* Right column - form box */
+/* Right column — form box */
 .lead-form__right {
   background: var(--white);
   border-radius: var(--radius-xl);
@@ -431,7 +431,7 @@ const submitForm = async () => {
   text-underline-offset: 2px;
 }
 
-/* proweb-style inputs - lighter bg, larger border-radius */
+/* proweb-style inputs — lighter bg, larger border-radius */
 .booking-form :deep(.form-input),
 .booking-form :deep(.form-select) {
   background: #f0f2f5;

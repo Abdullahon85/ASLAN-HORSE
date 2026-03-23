@@ -222,7 +222,7 @@ const activeTab = ref("all");
 const lightboxOpen = ref(false);
 const currentIndex = ref(0);
 
-// Static gallery items - only src/category/size/id are static; label/alt come from i18n
+// Static gallery items — only src/category/size/id are static; label/alt come from i18n
 const staticItems = [
   {
     id: 1,

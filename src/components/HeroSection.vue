@@ -267,7 +267,7 @@ const scrollTo = (id) => {
   );
 }
 
-/* Trust chips - top of hero */
+/* Trust chips — top of hero */
 .hero__trust {
   position: relative;
   z-index: 1;
